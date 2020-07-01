@@ -1,2 +1,2 @@
-# c_project-rbot
-mfp&amp;hhw C Programming Course Project 
+# c_project-robot
+自动化1905孟繁鹏 黄瀚文C语言课程设计项目：家用机器人模拟系统
