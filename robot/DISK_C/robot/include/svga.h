@@ -93,13 +93,13 @@ extern unsigned int SelectPage(unsigned char page);
 	功能说明 ：画点函数
 	参数说明：x,y 所要画点位置 color 颜色
 **********************************************************/
-extern void   putpixel(int x,int y,int color);
+extern int putpixel(int x,int y,int color);
 
 /**********************************************************
   功能说明：得到某点的颜色值；
   参数说明：x,y为该点的坐标；
   返回值：color为该点的颜色值
-***********************************************************/ 
+***********************************************************/
 
 extern int getpixel(int x,int y);
 

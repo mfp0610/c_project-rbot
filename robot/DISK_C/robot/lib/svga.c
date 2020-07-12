@@ -51,7 +51,8 @@ unsigned int GetSVGA()
 	return(out.x.bx);
 }
 
-/*获取SVGA显示模式号bx。摘录常用的模式号如下：
+/*
+获取SVGA显示模式号bx。摘录常用的模式号如下：
 				模式号		分辨率		颜色数
 				0x101		640*480		256
 				0x103		800*600		256
@@ -66,7 +67,7 @@ unsigned int GetSVGA()
 				0x116		1024*768	32K
 				0x117		1024*768	64K
 				0x118		1024*768	16.8M
- ******************************************************/
+*/
 
 
 
@@ -102,9 +103,9 @@ unsigned int SelectPage(unsigned char page)
 	功能说明 ：画点函数
 	参数说明：x,y 所要画点位置 color 颜色
 **********************************************************/
-void putpixel(int x,int y,int color)
+int putpixel(int x,int y,int color)
 {
-    unsigned char far*VideoBuffer=(unsigned char far*)0xa0000000L;
+    unsigned char far *VideoBuffer=(unsigned char far*)0xa0000000L;
     unsigned long int pos;
     register int Newpage=0;
     //计算显存地址偏移量和对应的页面号，做换页操作 
@@ -122,7 +123,7 @@ void putpixel(int x,int y,int color)
 int getpixel(int x,int y)
 {
     int color;
-    unsigned char far*VideoBuffer=(unsigned char far*)0xa0000000L;
+    unsigned char far *VideoBuffer=(unsigned char far*)0xa0000000L;
     unsigned long int pos;
     register int Newpage=0;
     /*计算显存地址偏移量和对应的页面号，做换页操作 */
@@ -204,7 +205,7 @@ void Putpixel64k(int x, int y,  int color)
 	返回值说明：
 /***********************************************************/
 
-int   Readbmp256(int x,int y,char * path)
+int Readbmp256(int x,int y,char * path)
 {
     FILE *fp;                   //指向图片文件的文件指针
     RGBQUAD * pc01;       //bmp颜色表结构指针
@@ -286,8 +287,8 @@ int   Readbmp256(int x,int y,char * path)
 }
 
  
- /*读取24位图片，参数x,y为图片位置，name为路径，返回值：0失败，1成功*/
- int Putbmp64k(int x,int y,const char *path)
+/*读取24位图片，参数x,y为图片位置，name为路径，返回值：0失败，1成功*/
+int Putbmp64k(int x,int y,const char *path)
 {
 	 FILE *fpbmp;
 	 WESHEN *buffer;//行像素缓存指针
@@ -386,13 +387,11 @@ unsigned int Getpixel64k(int x, int y)
 	unsigned char new_page;
 
 	 /*对应显存地址偏移量*/
-	 unsigned long int page;
+	unsigned long int page;
 
 	 /*判断点是否在屏幕范围内，不在就退出*/
-	 if (x < 0 || x >(1024 - 1) || y < 0 || y >(768 - 1))
-	 {
-		 return 0;
-	 }
+	if (x < 0 || x >(1024 - 1) || y < 0 || y >(768 - 1))
+		return 0;
 
 	 /*计算显存地址偏移量和对应的页面号，做换页操作*/
 	 page = ((unsigned long int)y << 10) + x;
