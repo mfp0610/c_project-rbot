@@ -10,9 +10,10 @@
 
 #include "headers.h"
 
-void puthz(int x,int y,char *s,int size,int part,int color); //输出一行汉字文本
+void puthz(int x,int y,char *s,int size,int part,int form,int color); //输出一行汉字文本
 /*
-支持字号大小：16 24 32 48
+支持四种字体：F H K S
+支持四种字号：16 24 32 48
 */
 
 #endif

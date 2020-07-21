@@ -7,7 +7,7 @@
 */
 #include "headers.h"
 
-void puthz(int x,int y,char *s,int size,int part,int form,int color)
+void puthz(int x,int y,char *s,int size,int part,int color)
 {
 	FILE *hzk_p=NULL; //定义汉字库文件指针
 	unsigned char qm,wm; //汉字的区码和位码
@@ -21,10 +21,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 		{
 			char mat[32]; //16*16-32byte
 			int y0=y,x0=x;
-			if(form=='F') hzk_p=fopen("HZK\\HZK16F","rb");
-			else if(form=='H') hzk_p=fopen("HZK\\HZK16H","rb");
-			else if(form=='K') hzk_p=fopen("HZK\\HZK16K","rb");
-			else if(form=='S') hzk_p=fopen("HZK\\HZK16S","rb");
+			hzk_p=fopen("hzk\\HZK16","rb");
 			if(hzk_p==NULL)
 			{
 				/*settextjustify(LEFT_TEXT,TOP_TEXT);
@@ -35,7 +32,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			}
 			while(*s!=NULL)
 			{
-				while(x<1024-size&&(*s!=NULL))
+				while(x<640-size && (*s!=NULL))
 				{
 					y=y0;
 					qm=s[0]-0xa0,wm=s[1]-0xa0; //求区码位码
@@ -48,7 +45,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 						for(j=0;j<16;j++) //按行扫描，将1的点显示出来，每行16位
 						{
 							if((mask[j%8]&mat[pos+j/8])!=NULL) //j%8 0—8, j/8 0-1
-								Putpixel64k(x+j,y,color);
+								putpixel(x+j,y,color);
 						}
 						y++;
 					}
@@ -64,10 +61,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 		{
 			char mat[72]; //24*24-72byte
 			int y0=y,x0=x;
-			if(form=='F') hzk_p=fopen("HZK\\HZK24F","rb");
-			else if(form=='H') hzk_p=fopen("HZK\\HZK24H","rb");
-			else if(form=='K') hzk_p=fopen("HZK\\HZK24K","rb");
-			else if(form=='S') hzk_p=fopen("HZK\\HZK24S","rb");
+			hzk_p=fopen("hzk\\HZK24","rb");
 			if(hzk_p==NULL)
 			{
 				/*settextjustify(LEFT_TEXT,TOP_TEXT);
@@ -78,7 +72,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			}
 			while(*s!=NULL)
 			{
-				while(x<1024-size&&(*s!=NULL))
+				while(x<640-size && (*s!=NULL))
 				{
 					y=y0;
 					qm=s[0]-0xa0,wm=s[1]-0xa0;
@@ -91,7 +85,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 						for (j=0;j<24;j++) //每行24位
 						{
 							if ((mask[j%8]&mat[pos+j/8])!=NULL)
-								Putpixel64k(x+j,y,color);
+								putpixel(x+j,y,color);
 						}
 						y++;
 					}
@@ -107,10 +101,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 		{
 			char mat[128]; //32*32-128byte
 			int y0=y,x0=x;
-			if(form=='F') hzk_p=fopen("HZK\\HZK32F","rb");
-			else if(form=='H') hzk_p=fopen("HZK\\HZK32H","rb");
-			else if(form=='K') hzk_p=fopen("HZK\\HZK32K","rb");
-			else if(form=='S') hzk_p=fopen("HZK\\HZK32S","rb");
+			hzk_p=fopen("hzk\\HZK32","rb");
 			if(hzk_p==NULL)
 			{
 				/*settextjustify(LEFT_TEXT,TOP_TEXT);
@@ -121,7 +112,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			}
 			while(*s!=NULL)
 			{
-				while(x<1024-size&&(*s!=NULL))
+				while(x<640-size && (*s!=NULL))
 				{
 					y=y0;
 					qm=s[0]-0xa0,wm=s[1]-0xa0;
@@ -132,8 +123,10 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 					{
 						pos=4*i; //32*32矩阵每行有4个外字节
 						for(j=0;j<32;j++) //每行32位
+						{
 							if((mask[j%8]&mat[pos+j/8])!=NULL)
-								Putpixel64k(x+j,y,color);
+								putpixel(x+j,y,color);
+						}
 						y++;
 					}
 					x+=part;
@@ -148,10 +141,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 		{
 			char mat[288]; //48*48-288byte
 			int y0=y,x0=x;
-			if(form=='F') hzk_p=fopen("HZK\\HZK48F","rb");
-			else if(form=='H') hzk_p=fopen("HZK\\HZK48H","rb");
-			else if(form=='K') hzk_p=fopen("HZK\\HZK48K","rb");
-			else if(form=='S') hzk_p=fopen("HZK\\HZK48S","rb");
+			hzk_p=fopen("hzk\\HZK48","rb");
 			if(hzk_p==NULL)
 			{
 				/*settextjustify(LEFT_TEXT,TOP_TEXT);
@@ -163,7 +153,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			}
 			while(*s!=NULL)
 			{
-				while(x<1024-size&&(*s!=NULL))
+				while(x<640-size && (*s!=NULL))
 				{
 					y=y0;
 					qm=s[0]-0xa0,wm=s[1]-0xa0;
@@ -174,8 +164,10 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 					{
 						pos=6*i; //48*48矩阵每行有6个外字节
 						for(j=0;j<48;j++) //每行48位
+						{
 							if((mask[j%8]&mat[pos+j/8])!=NULL)
-								Putpixel64k(x+j,y,color);
+								putpixel(x+j,y,color);
+						}
 						y++;
 					}
 					x+=part;

@@ -4,7 +4,6 @@
     Adapted by pervious version
     Initial version: 2020.7.12
     Lastest update: 2020.7.12 
-    Author: Mengfp
 */
 #ifndef _SVGA_H_
 #define _SVGA_H_

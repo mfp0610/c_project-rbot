@@ -3,14 +3,13 @@
  
     Adapted by pervious version
     Initial version: 2020.7.12
-    Lastest update: 2020.7.12 
-    Author: Mengfp
+    Lastest update: 2020.7.12
 */
 #include "headers.h"
 
 //设置svga显示模式
 //模式1: 1024*768 256k
-void SetSVGA256()
+void SetSVGA256k()
 {
 	union REGS in;
 	in.x.ax=0x4f02;
@@ -152,15 +151,10 @@ void Xorpixel (int x, int y, int color)
 	unsigned char oldpage;
 	/*对应显存地址偏移量*/
 	unsigned long int page;
-
 	/*计算显存地址偏移量和对应的页面号，做换页操作*/
-	page = ((unsigned long int)y << 10) + x;
-	newpage = page >> 15;	                          /*32k个点一换页，除以32k的替代算法*/
-
-	
+	page=((unsigned long int)y << 10) + x;
+	newpage=page >> 15;	                          /*32k个点一换页，除以32k的替代算法*/
 		SelectPage(newpage);
-
-
 	/*向显存写入颜色，对应点画出*/
 	video_buffer[page] = video_buffer[page]^color;
 }
@@ -270,9 +264,7 @@ int Readbmp256(int x,int y,char * path)
 
 	buf=(unsigned char *)malloc(perline);
 	if(buf==NULL)  /*分配动态行像素数据储存空间*/
-	{
-	 return 0;
-	}
+		return 0;
 	
 	fseek(fp,54L+4L*clrused,0);              /*将每行的像素信息都显示出来*/
 	for(i=high;i>-1;i--)

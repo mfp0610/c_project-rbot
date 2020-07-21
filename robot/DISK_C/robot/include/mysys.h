@@ -10,6 +10,7 @@
 
 #include "headers.h"
 
-void Delaytime(int time); //延时函数
+void Delaytime(int time); //????
+void swap(int *x,int *y); //???????????
 
 #endif

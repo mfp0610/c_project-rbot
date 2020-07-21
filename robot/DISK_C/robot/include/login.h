@@ -10,6 +10,6 @@
 
 #include "headers.h"
 
-
+void start(); //开始页面的逻辑
 
 #endif

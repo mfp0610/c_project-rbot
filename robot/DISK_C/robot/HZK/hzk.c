@@ -5,7 +5,13 @@
     Lastest update: 2020.7.13
     Author: Mengfp
 */
-#include "headers.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <graphics.h>
+#include <conio.h>
+#include "hzk.h"
+#include "svga.h" //改成自己的svga头文件名字
 
 void puthz(int x,int y,char *s,int size,int part,int form,int color)
 {
@@ -27,9 +33,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			else if(form=='S') hzk_p=fopen("HZK\\HZK16S","rb");
 			if(hzk_p==NULL)
 			{
-				/*settextjustify(LEFT_TEXT,TOP_TEXT);
-				settextstyle(GOTHIC_FONT,HORIZ_DIR,1);
-				outtextxy(10,10,"Missing hzk16 file! Press any key to quit...");*/
+				printf(10,10,"Missing hzk16 file! Press any key to quit...");
 				getch();
 				exit(1);
 			}
@@ -70,9 +74,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			else if(form=='S') hzk_p=fopen("HZK\\HZK24S","rb");
 			if(hzk_p==NULL)
 			{
-				/*settextjustify(LEFT_TEXT,TOP_TEXT);
-				settextstyle(GOTHIC_FONT,HORIZ_DIR,3);
-				outtextxy(10,10,"Missing hzk24 file! Press any key to quit...");*/
+				printf(10,10,"Missing hzk24 file! Press any key to quit...");
 				getch();
 				exit(1);
 			}
@@ -113,9 +115,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			else if(form=='S') hzk_p=fopen("HZK\\HZK32S","rb");
 			if(hzk_p==NULL)
 			{
-				/*settextjustify(LEFT_TEXT,TOP_TEXT);
-				settextstyle(GOTHIC_FONT,HORIZ_DIR,3);
-				outtextxy(10,10,"Missing hzk32 file! Press any key to quit...");*/
+				printf(10,10,"Missing hzk32 file! Press any key to quit...");
 				getch();
 				exit(1);
 			}
@@ -154,9 +154,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			else if(form=='S') hzk_p=fopen("HZK\\HZK48S","rb");
 			if(hzk_p==NULL)
 			{
-				/*settextjustify(LEFT_TEXT,TOP_TEXT);
-				settextstyle(GOTHIC_FONT,HORIZ_DIR,3);
-				outtextxy(10,10,"Can't open hzk48 file!Press any key to quit...");*/
+				printf(10,10,"Can't open hzk48 file!Press any key to quit...");
 				getch();
 				exit(1);
 

@@ -9,9 +9,16 @@
 
 void start_page()
 {
-	bar(0,0,1023,767,WHITE); //界面颜色
-	Delaytime(100000);
-    //puttext(140,60,"你好",32,4,BLACK);//输入标题，黑色
+    int i;
+    setbkcol(MISTY_ROSE);
+    puthz(187,90,"��ӭʹ�þӼһ�����ģ��ϵͳ",48,50,'H',BLACK);
+    drawrobot_front(200,600,1);
+    //fill_rect(900,200,1000,400,MARINE_BLUE);
+    //fill_circle(200,200,100,MARINE_BLUE);
+    //Delaytime(10000);
+    getch();
+	//closegraph();
+	return 0;
     
 	
 }

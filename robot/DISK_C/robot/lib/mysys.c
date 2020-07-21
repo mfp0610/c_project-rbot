@@ -14,3 +14,11 @@ void Delaytime(int time)
 	{for(j=0;j<1100;j++)
 	for(k=0;k<100;k++);}
 }
+
+void swap(int *x,int *y)
+{
+	int t=0;
+	t=*x;
+	*x=*y;
+	*y=t;
+}

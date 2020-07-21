@@ -1,9 +1,8 @@
 /*
     drawbas.h
     
-    Partly adapted by pervious version
     Initial version: 2020.7.13
-    Lastest update: 2020.7.13
+    Lastest update: 2020.7.21
     Author: Mengfp
 */
 #ifndef _DRAWBAS_H_
@@ -11,35 +10,11 @@
 
 #include "headers.h"
 
-void linelevel(int x0,int y0,int x1,int y1,int thick,int color);
-void linever(int x0,int y0,int x1,int y1,int thick,int color);
-void Horizline(int x, int y, int width, int  color);
-void bar(int x0, int y0, int x1, int y1, int color);
-void Circle(int x0,int y0,int radius,int color);
-void FillCircle(/*int x, int y, int r, int color*/int xc, int yc, int radius, int color);
-
-void HER_Fillellipse(int x1,int y1,int x2,int y2,int r,int color);//濉厖妞渾锛堢珫鐩存柟鍚戯級
-void HOR_Fillellipse(int x1,int y1,int x2,int y2,int r,int color);//濉厖妞渾锛堟按骞虫柟鍚戯級
-void ellipse(int x1,int y1,int x2,int y2,int r,int color);
-void semicircle_up(int x,int y,int r,int color);
-void semicircle_down(int x,int y,int r,int color);
-void Half_Circle(int xc, int yc, int radius, unsigned int color);
-void fill_bow_right_up(int x,int y,int r,int color);
-void fill_bow_left_up(int x,int y,int r,int color);
-void fill_bow_left_down(int x,int y,int r,int color);
-void fill_bow_right_down(int x,int y,int r,int color);
-void fill_bow_down(int x,int y,int r, int color);
-void fill_bow_up(int x,int y,int r, int color);
-void fill_bow_left(int x,int y, int r, int color);
-void fill_bow_right(int x,int y,int r,int color);
-void bar_round(int x,int y,int length,int height,int r,int thick,int color);
-void bar_round_2(int x0,int y0,int x1,int y1,int r,int thick,int color);
-void bar_round_with_shadow(int x,int y,int length,int height,int r,int thick,int color);
-void bow_right_down(int x,int y,int r,int color);
-void bow_left_down(int x,int y,int r,int color);
-void bow_right_up(int x,int y,int r,int color);
-void bow_left_up(int x,int y,int r,int color);
-void lean_line(int x,int y,int length,int theta,int color);
-void lean_line_thick(int x,int y,int length,int theta,int thick,int color);
+void setbkcol(int color); //设置背景颜色
+void line(int x1,int y1,int x2,int y2,int color); //绘制直线
+void bar(int x1,int y1,int x2,int y2,int color); //绘制填充矩形
+void rect(int x1,int y1,int x2,int y2,int color); //绘制空心矩形
+void fill_rect(int x1,int y1,int x2,int y2,int color); //绘制实心矩形（带边框）
+void fill_circle(int xc,int yc,int r,int color); //绘制实心圆
 
 #endif
