@@ -10,6 +10,9 @@
 
 #include "headers.h"
 
-void start(); //开始页面的逻辑
+void start_func(); //开始页面的逻辑
+void user_register(); //注册界面逻辑
+void user_findback(); //找回界面逻辑
+void exit_pro(); //推出窗口逻辑
 
 #endif

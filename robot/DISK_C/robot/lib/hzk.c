@@ -1,8 +1,9 @@
 /*
     hzk.c
 
+	Partly adapted by pervious version
     Initial version: 2020.7.13
-    Lastest update: 2020.7.13
+    Lastest update: 2020.7.22
     Author: Mengfp
 */
 #include "headers.h"
@@ -27,9 +28,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			else if(form=='S') hzk_p=fopen("HZK\\HZK16S","rb");
 			if(hzk_p==NULL)
 			{
-				/*settextjustify(LEFT_TEXT,TOP_TEXT);
-				settextstyle(GOTHIC_FONT,HORIZ_DIR,1);
-				outtextxy(10,10,"Missing hzk16 file! Press any key to quit...");*/
+				outtextxy(10,10,"Missing hzk16 file! Press any key to quit...",20,20,20,BLACK);
 				getch();
 				exit(1);
 			}
@@ -70,9 +69,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			else if(form=='S') hzk_p=fopen("HZK\\HZK24S","rb");
 			if(hzk_p==NULL)
 			{
-				/*settextjustify(LEFT_TEXT,TOP_TEXT);
-				settextstyle(GOTHIC_FONT,HORIZ_DIR,3);
-				outtextxy(10,10,"Missing hzk24 file! Press any key to quit...");*/
+				outtextxy(10,10,"Missing hzk24 file! Press any key to quit...",20,20,20,BLACK);
 				getch();
 				exit(1);
 			}
@@ -113,9 +110,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			else if(form=='S') hzk_p=fopen("HZK\\HZK32S","rb");
 			if(hzk_p==NULL)
 			{
-				/*settextjustify(LEFT_TEXT,TOP_TEXT);
-				settextstyle(GOTHIC_FONT,HORIZ_DIR,3);
-				outtextxy(10,10,"Missing hzk32 file! Press any key to quit...");*/
+				outtextxy(10,10,"Missing hzk32 file! Press any key to quit...",20,20,20,BLACK);
 				getch();
 				exit(1);
 			}
@@ -154,9 +149,7 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 			else if(form=='S') hzk_p=fopen("HZK\\HZK48S","rb");
 			if(hzk_p==NULL)
 			{
-				/*settextjustify(LEFT_TEXT,TOP_TEXT);
-				settextstyle(GOTHIC_FONT,HORIZ_DIR,3);
-				outtextxy(10,10,"Can't open hzk48 file!Press any key to quit...");*/
+				outtextxy(10,10,"Can't open hzk48 file!Press any key to quit...",20,20,20,BLACK);
 				getch();
 				exit(1);
 
@@ -189,4 +182,67 @@ void puthz(int x,int y,char *s,int size,int part,int form,int color)
 		default:break;
 	}
 	fclose(hzk_p);
+}
+
+void putEngletter(int x1,int y1,int ascii,int mx,int my,int color)
+{
+	char *English_save;
+	int x0, y0, yt, xt, i=0, j=0, k=0;
+	unsigned char mask[]={0x80,0x40,0x20,0x10,0x08,0x04,0x02,0x01};
+	unsigned long offest;
+	FILE *fh;
+	fh=fopen("HZK\\ASC16.DZK","rb");
+   	if(fh==NULL)
+	{
+		printf("the asc can't open\n");
+		getch();
+		exit(1);
+	}
+   	English_save=(char *)malloc(32*sizeof(char));
+   	if(English_save==NULL)
+	{
+		getch();
+		exit(1);
+	}
+
+	offest=ascii*32l;
+	fseek(fh,offest,0);
+	fread(English_save,32,1,fh);
+	fclose(fh);
+	
+	x0=x1, y0=y1;
+	while(i<16) //输出英文字母
+	{
+		for(yt=0;yt<my;yt++)
+		{
+			for(j=0;j<2;j++)
+			{
+				for(k=0;k<8;k++)
+				{
+					for(xt=0;xt<mx;xt++)
+					{
+						if((English_save[2*i+j]&mask[k%8])!=0)
+							Putpixel64k(x0,y0,color);
+						x0++;
+					}
+				}
+
+			}
+			x0=x1, y0++;
+		}
+		i++;
+	}
+	free(English_save);
+}
+
+void outtextxy(int x,int y,char *c,int mx,int my,int part,int color)
+{
+	int a;
+	char *p=c;
+	while(*p!='\0')
+	{
+		a=(int)(*p);
+		putEngletter(x,y,a,mx,my,color);
+		p++, x+=part;
+	}
 }

@@ -9,6 +9,6 @@
 
 int main()
 {
+    SetSVGA64k();
     start_func();
-    return 0;
 }

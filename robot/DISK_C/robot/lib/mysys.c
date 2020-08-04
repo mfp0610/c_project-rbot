@@ -18,7 +18,5 @@ void Delaytime(int time)
 void swap(int *x,int *y)
 {
 	int t=0;
-	t=*x;
-	*x=*y;
-	*y=t;
+	t=*x, *x=*y, *y=t;
 }

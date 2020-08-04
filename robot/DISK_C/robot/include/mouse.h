@@ -11,31 +11,17 @@
 
 #include "headers.h"
 
-void setMouseShape(int mark,int mx,int my);
+extern int MouseX, MouseY, MouseS, press;
+extern union REGS regs;
+extern int mousesave[13][20];
 
-
-void cursor(int x, int y);
-
-
-void getMousebk(int x, int y);
-
-
-void mousehide(int x, int y);
-
-int init();
-void mouseInit(int *mx,int *my, int *mbutt);
-
-
-int readxy(int *mx, int *my, int *mbutt);
-
-
-void newxy(int *mx, int *my, int *mbutt);
-
-void backgroundChange(int mx, int my,int x1,int y1,int x2,int y2);
-
-void AddFrame(int mx, int my, int x1, int y1, int x2, int y2,int thick,int color);
-
-void reset_mouse(int *x,int *y);
-
+void mouseinit();
+void mouse(int x,int y);
+void mread(int *nx,int *ny,int *nbuttons);
+void newmouse(int *nx,int *ny,int *nbuttons);
+void save_bk_mou(int nx,int ny);
+void clrmous(int nx,int ny);
+void drawmous(int nx,int ny);
+int mouse_press(int x1, int y1, int x2, int y2);
 
 #endif

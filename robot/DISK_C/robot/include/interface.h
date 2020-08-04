@@ -11,5 +11,9 @@
 #include "headers.h"
 
 void start_page(); //绘制开始界面
+void login_page(); //绘制登陆界面
+void register_page(); //绘制注册界面
+void findback_page(); //绘制找回界面
+void exit_window(); //画出退出确认界面
 
 #endif

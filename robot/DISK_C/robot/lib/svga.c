@@ -405,7 +405,7 @@ Input:          x0,y0,左上角起始坐标，X1,Y2右下角坐标，save 指向
 out:              无输出
 **************************************************************/
 
-void    get_image(int x0,int y0,int x1,int y1,unsigned int far *save)
+void get_image(int x0,int y0,int x1,int y1,unsigned int far *save)
 {
 	
 	int i=0;                                   /*循环变量*/
