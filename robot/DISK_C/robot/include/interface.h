@@ -5,8 +5,8 @@
     Lastest update: 2020.7.13
     Author: 
 */
-#ifndef _LOGIN_H_
-#define _LOGIN_H_
+#ifndef _INTERFACE_H_
+#define _INTERFACE_H_
 
 #include "headers.h"
 

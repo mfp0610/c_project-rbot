@@ -2,7 +2,7 @@
     headers.h
     
     Initial version: 2020.7.12
-    Lastest update: 2020.7.22
+    Lastest update: 2020.8.8
     Author: Mengfp
 */
 #ifndef _HEADERS_H_
@@ -20,7 +20,9 @@
 #include "hzk.h" //汉字库头文件
 #include "mouse.h" //鼠标函数库头文件
 #include "drawbas.h" //基础画图头文件
+#include "mysys.h" //自己写的系统函数
 #include "drawrobot.h" //画机器人头文件
+#include "interface.h" //登陆界面绘图头文件
 #include "login.h" //登陆界面头文件
 
 

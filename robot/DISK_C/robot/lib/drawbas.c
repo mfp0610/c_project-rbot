@@ -21,14 +21,14 @@ void line(int x1,int y1,int x2,int y2,int color)
     double k;
     if(x1==x2)
     {
-        if(y1>y2) swap(y1,y2);
+        if(y1>y2) swap(&y1,&y2);
         for(i=y1;i<=y2;i++)
             Putpixel64k(x1,i,color);
         return;
     }
     if(y1==y2)
     {
-	    if(x1>x2) swap(x1,x2);
+	    if(x1>x2) swap(&x1,&x2);
         page=((unsigned long int)y1<<10)+x1;
 	    new_page=page>>15;
 		SelectPage(new_page);
@@ -51,7 +51,7 @@ void thick_line(int x1,int y1,int x2,int y2,int thick,int color)
     double k;
     if(x1==x2)
     {
-        if(y1>y2) swap(y1,y2);
+        if(y1>y2) swap(&y1,&y2);
         for(i=y1;i<=y2;i++)
         for(j=-thi;j<=thi;j++)    
             Putpixel64k(x1+j,i,color);
@@ -59,7 +59,7 @@ void thick_line(int x1,int y1,int x2,int y2,int thick,int color)
     }
     if(y1==y2)
     {
-	    if(x1>x2) swap(x1,x2);
+	    if(x1>x2) swap(&x1,&x2);
         for(j=-thi;j<=thi;j++)
         {
             page=((unsigned long int)y1<<10)+x1+j;

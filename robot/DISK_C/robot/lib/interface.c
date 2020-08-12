@@ -2,7 +2,7 @@
     interface.c
 
     Initial version: 2020.7.13
-    Lastest update: 2020.8.4
+    Lastest update: 2020.8.12
     Author: 
 */
 #include "headers.h"
@@ -53,8 +53,8 @@ void login_page()
 
     fill_rect(120,550,240,600,MARINE_BLUE,BLACK);
     fill_rect(360,550,480,600,MARINE_BLUE,BLACK);
-    puthz(130,563,"找回密码",24,25,'K',WHITE);
-    puthz(370,563,"新人注册",24,25,'K',WHITE); //画找回和注册界面
+    puthz(130,563,"新人注册",24,25,'K',WHITE);
+    puthz(370,563,"找回密码",24,25,'K',WHITE); //画找回和注册界面
 
     fill_rect(240,630,360,680,MARINE_BLUE,BLACK);
     puthz(250,643,"退出程序",24,25,'K',WHITE);
@@ -63,16 +63,57 @@ void login_page()
 
 void register_page()
 {
+    int begposi=300; 
+
     setbkcol(MISTY_ROSE);
     drawrobot_front_hello(800,500,5);
-    puthz(300,500,"注册界面",16,20,'K',BLACK);
+    puthz(187,90,"欢迎使用居家机器人模拟系统",48,50,'H',BLACK);
+    puthz(200,200,"新人注册",48,50,'K',MARINE_BLUE);
+    
+    fill_rect(100,begposi,500,begposi+50,WHITE,BLACK);
+    fill_rect(100,begposi+75,500,begposi+125,WHITE,BLACK);
+    fill_rect(100,begposi+150,500,begposi+200,WHITE,BLACK);
+    fill_rect(100,begposi+225,500,begposi+275,WHITE,BLACK);
+    fill_rect(100,begposi,180,begposi+50,MARINE_BLUE,BLACK);
+    fill_rect(100,begposi+75,180,begposi+125,MARINE_BLUE,BLACK);
+    fill_rect(100,begposi+150,220,begposi+200,MARINE_BLUE,BLACK);
+    fill_rect(100,begposi+225,220,begposi+275,MARINE_BLUE,BLACK);
+    puthz(108,begposi+9,"账号",32,35,'K',WHITE);
+    puthz(108,begposi+84,"密码",32,35,'K',WHITE);
+    puthz(108,begposi+159,"手机号",32,35,'K',WHITE); 
+    puthz(108,begposi+234,"验证码",32,35,'K',WHITE); //画注册框图
+
+    fill_rect(120,begposi+325,240,begposi+375,MARINE_BLUE,BLACK);
+    fill_rect(360,begposi+325,480,begposi+375,MARINE_BLUE,BLACK);
+    puthz(130,begposi+338,"确认注册",24,25,'K',WHITE);
+    puthz(370,begposi+338,"返回菜单",24,25,'K',WHITE); //画找回和注册界面
 }
 
 void findback_page()
 {
+    int begposi=300; 
+
     setbkcol(MISTY_ROSE);
     drawrobot_front_hello(800,500,5);
-    puthz(300,500,"找回界面",16,20,'H',BLACK);
+    puthz(187,90,"欢迎使用居家机器人模拟系统",48,50,'H',BLACK);
+    puthz(200,200,"找回密码",48,50,'K',MARINE_BLUE);
+    
+    fill_rect(100,begposi,500,begposi+50,WHITE,BLACK);
+    fill_rect(100,begposi+75,500,begposi+125,WHITE,BLACK);
+    fill_rect(100,begposi+150,500,begposi+200,WHITE,BLACK);
+    fill_rect(100,begposi,180,begposi+50,MARINE_BLUE,BLACK);
+    fill_rect(100,begposi+75,220,begposi+125,MARINE_BLUE,BLACK);
+    fill_rect(100,begposi+150,220,begposi+200,MARINE_BLUE,BLACK);
+    puthz(108,begposi+9,"账号",32,35,'K',WHITE);
+    puthz(108,begposi+84,"手机号",32,35,'K',WHITE); 
+    puthz(108,begposi+159,"验证码",32,35,'K',WHITE); //画找回密码框图
+
+    puthz(108,begposi+235,"您的密码：",24,25,'K',MARINE_BLUE);
+
+    fill_rect(120,begposi+300,240,begposi+350,MARINE_BLUE,BLACK);
+    fill_rect(360,begposi+300,480,begposi+350,MARINE_BLUE,BLACK);
+    puthz(130,begposi+313,"找回密码",24,25,'K',WHITE);
+    puthz(370,begposi+313,"返回菜单",24,25,'K',WHITE); //画找回和注册界面
 }
 
 void exit_window()

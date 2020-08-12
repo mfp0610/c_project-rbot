@@ -1,3 +1,5 @@
-引用往届代码：
+引用往届代码：svga.h
 
-mfp：hzk.h   interface.h   login.h   drawrobot.h
+部分改写：hzk.h   mouse.h
+
+mfp：interface.h   login.h   drawrobot.h
