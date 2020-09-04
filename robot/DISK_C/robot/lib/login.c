@@ -10,7 +10,7 @@
 void start_func()
 {
     int flag;
-    //start_page();//画出开始界面
+    start_page();//画出开始界面
 
     login_page(); //画出登录界面
     mouseinit();
