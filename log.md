@@ -112,6 +112,8 @@
 > >
 > > void start_func();   开始页面的逻辑
 > >
+> > void input(int x1,int x2,int y1,int y2, char *s, int max_len, int fp, int backcolor);   输入函数   
+> >
 > > hhw：
 > >
 > > void login_func();   登陆界面逻辑   *未完成，需要调试
@@ -122,7 +124,7 @@
 > >
 > > void exit_pro();   推出窗口逻辑   *未完成，需要调试
 >
-> interface.c   界面绘制文件   ---mfp编写
+> interface.c   界面绘制文件   ---mfp&hhw编写
 >
 > > mfp：
 > >
@@ -134,5 +136,7 @@
 > >
 > > void findback_page();   绘制找回界面
 > >
-> > void exit_window();   画出退出确认界面   *未完成，需要调试
+> > hhw：
+> >
+> > void exit_window();   画出退出确认界面
 

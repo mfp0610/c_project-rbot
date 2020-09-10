@@ -49,15 +49,18 @@ void login_page()
     fill_rect(100,350,180,400,MARINE_BLUE,BLACK);
     fill_rect(100,450,180,500,MARINE_BLUE,BLACK);
     puthz(108,359,"账号",32,35,'K',WHITE);
-    puthz(108,459,"密码",32,35,'K',WHITE); //画登录框图
+    puthz(108,459,"密码",32,35,'K',WHITE);
 
-    fill_rect(120,550,240,600,MARINE_BLUE,BLACK);
-    fill_rect(360,550,480,600,MARINE_BLUE,BLACK);
-    puthz(130,563,"新人注册",24,25,'K',WHITE);
-    puthz(370,563,"找回密码",24,25,'K',WHITE); //画找回和注册界面
+    fill_rect(200,550,400,600,MARINE_BLUE,BLACK);
+    puthz(254,558,"登录",32,60,'K',WHITE); //画登录框图
 
-    fill_rect(240,630,360,680,MARINE_BLUE,BLACK);
-    puthz(250,643,"退出程序",24,25,'K',WHITE);
+    fill_rect(100,615,220,655,MARINE_BLUE,BLACK);
+    fill_rect(380,615,500,655,MARINE_BLUE,BLACK);
+    puthz(110,623,"新人注册",24,25,'K',WHITE);
+    puthz(390,623,"找回密码",24,25,'K',WHITE);
+    
+    fill_rect(240,650,360,700,MARINE_BLUE,BLACK);
+    puthz(250,663,"退出程序",24,25,'K',WHITE); //画找回和注册界面
 
 }
 
@@ -118,5 +121,12 @@ void findback_page()
 
 void exit_window()
 {
-    fill_rect(200,200,500,500,MARINE_BLUE,BLACK);
+    int begposi=200;
+
+    fill_rect(200,begposi,600,begposi+300,WHITE,BLACK);
+    fill_rect(300,begposi+250,330,begposi+280,MARINE_BLUE,BLACK);
+    fill_rect(470,begposi+250,500,begposi+280,MARINE_BLUE,BLACK);
+    puthz(267,begposi+100,"确定退出本程序吗",32,35,'K',BLACK);
+    puthz(305,begposi+255,"是",24,25,'K',WHITE);
+    puthz(475,begposi+255,"否",24,25,'K',WHITE); //画退出界面
 }

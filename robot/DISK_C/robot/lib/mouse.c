@@ -188,17 +188,22 @@ void drawmous(int nx,int ny)
 //如果在框中点击，则返回1；在框中未点击，则返回2；不在框中则返回0
 int mouse_press(int x1, int y1, int x2, int y2)
 {
-	//在框中点击，则返回1
-	if(MouseX>x1 &&MouseX<x2 &&MouseY>y1 
-	&&MouseY<y2 &&press==1) return 1;
-	
-	//在框中未点击，则返回2
-	else if(MouseX>x1 &&MouseX<x2 &&MouseY>y1
-	&&MouseY<y2 &&press==0) return 2;
-	
-	//在框中点击右键，则返回3
-	else if(MouseX>x1 &&MouseX<x2 &&MouseY>y1 
-	&&MouseY<y2 &&press==2) return 3;
-	
+	/*****
+	在框中点击，则返回1
+	在框中未点击，则返回2
+	在框中点击右键，则返回3
+	*****/
+	if(MouseX>x1 &&MouseX<x2 &&MouseY>y1 &&MouseY<y2) return press;
+	else return 0;
+}
+
+int mouse_press_out(int x1, int y1, int x2, int y2)
+{
+	/*****
+	在框中点击，则返回1
+	在框中未点击，则返回2
+	在框中点击右键，则返回3
+	*****/
+	if(MouseX<x1 ||MouseX>x2 ||MouseY<y1 ||MouseY>y2) return press;
 	else return 0;
 }
