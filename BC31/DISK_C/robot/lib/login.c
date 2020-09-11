@@ -17,6 +17,7 @@ void start_func()
 
 void login_func()
 {
+    int flag;
     USER usr; //用户信息
     usr.user[0]='\0';
     usr.code[0]='\0';
@@ -27,6 +28,35 @@ void login_func()
             input(180,350,500,400,usr.user,15,0,0,WHITE);
         if(mouse_press(180,450,500,500)==1) //输入密码
             input(180,450,500,500,usr.code,15,1,0,WHITE);
+        if(mouse_press(200,550,400,600)==1)
+        {
+            bar(0,0,1024,720,MARINE_BLUE);
+            break;
+        }
+        if(mouse_press(100,615,220,655)==1)
+        {
+            clrmous(MouseX, MouseY);
+            register_page();
+            user_register();
+            break;
+        }
+        if(mouse_press(380,615,500,655)==1)
+        {
+            clrmous(MouseX, MouseY);
+            findback_page();
+            user_findback();
+            break;
+        }
+        if(mouse_press(240,650,360,700)==1)
+        {
+            clrmous(MouseX, MouseY);
+            exit_window();
+            exit_pro();
+            break;
+        }
+    }
+    switch()
+    {
         if(mouse_press(200,550,400,600)==1)
         {
             bar(0,0,1024,720,MARINE_BLUE);

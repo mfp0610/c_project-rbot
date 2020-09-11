@@ -2,8 +2,8 @@
     login.h
     
     Initial version: 2020.7.13
-    Lastest update: 2020.9.8
-    Author: hhw
+    Lastest update: 2020.9.11
+    Author: Mengfp && hhw
 */
 #ifndef _LOGIN_H_
 #define _LOGIN_H_
