@@ -2,14 +2,14 @@
     login.c
 
     Initial version: 2020.7.13
-    Lastest update: 2020.8.12
+    Lastest update: 2020.9.11 
     Author: Mengfp
 */
 #include "headers.h"
 
 void start_func()
 {
-    //start_page();//画出开始界面
+    start_page();//画出开始界面
     login_page(); //画出登录界面
     mouseinit();
     login_func(); //进入登录界面 
