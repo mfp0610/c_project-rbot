@@ -2,14 +2,14 @@
     login.c
 
     Initial version: 2020.7.13
-    Lastest update: 2020.9.11 
-    Author: Mengfp
+    Lastest update: 2020.9.12 
+    Author: hhw
 */
 #include "headers.h"
 
 void start_func()
 {
-    start_page();//画出开始界面
+    //start_page();//画出开始界面
     login_page(); //画出登录界面
     mouseinit();
     login_func(); //进入登录界面 
@@ -28,68 +28,80 @@ void login_func()
             input(180,350,500,400,usr.user,15,0,0,WHITE);
         if(mouse_press(180,450,500,500)==1) //输入密码
             input(180,450,500,500,usr.code,15,1,0,WHITE);
+        
         if(mouse_press(200,550,400,600)==1)
         {
-            bar(0,0,1024,720,MARINE_BLUE);
-            break;
+            MouseS = 0;
+            puthz(0,0,"加载中，请耐心等待。。。",48,50,'K',BLACK);
+			if (login_comp(usr.user, usr.code)) //信息正确
+            {
+                flag = 1;
+                break;
+            }    
+            else
+            {
+                puthz(220,90,"加载中，请耐心等待。。。",48,50,'K',BLACK);
+                continue;
+            }
         }
         if(mouse_press(100,615,220,655)==1)
         {
-            clrmous(MouseX, MouseY);
-            register_page();
-            user_register();
+		    flag = 2;
             break;
         }
         if(mouse_press(380,615,500,655)==1)
         {
-            clrmous(MouseX, MouseY);
-            findback_page();
-            user_findback();
+            flag = 3;
             break;
         }
         if(mouse_press(240,650,360,700)==1)
         {
-            clrmous(MouseX, MouseY);
-            exit_window();
-            exit_pro();
+            flag = 4;
             break;
         }
+        
     }
-    switch()
+    switch (flag)
     {
-        if(mouse_press(200,550,400,600)==1)
-        {
-            bar(0,0,1024,720,MARINE_BLUE);
+        case 1:
+            {
+                bar(0,0,1024,720,MARINE_BLUE);
+                    //主界面进入接口*****************
+            }
             break;
-        }
-        if(mouse_press(100,615,220,655)==1)
-        {
-            clrmous(MouseX, MouseY);
-            register_page();
-            user_register();
+        case 2:
+            {
+                clrmous(MouseX, MouseY);
+                register_page();
+                user_register();
+            }
             break;
-        }
-        if(mouse_press(380,615,500,655)==1)
-        {
-            clrmous(MouseX, MouseY);
-            findback_page();
-            user_findback();
+        case 3:
+            {
+                clrmous(MouseX, MouseY);
+                findback_page();
+                user_findback();
+            }
             break;
-        }
-        if(mouse_press(240,650,360,700)==1)
-        {
-            clrmous(MouseX, MouseY);
-            exit_window();
-            exit_pro();
+        case 4:
+            {
+                clrmous(MouseX, MouseY);
+                exit_window();
+                exit_pro();
+            }
             break;
-        }
+        default: break;
     }
+    clrmous(MouseX, MouseY);
 }
+
 
 void user_register()
 {
+    int f1=1;
     USER usr; //用户信息
-    char ver_cod[5]; //验证码
+    char ver_cod[5]; //输入验证码
+    char ver_cod1[5]; //随机验证码
     usr.user[0]='\0';
     usr.code[0]='\0';
     usr.tel[0]='\0';
@@ -103,13 +115,21 @@ void user_register()
             input(180,375,500,425,usr.code,15,1,0,WHITE);
         if(mouse_press(220,450,500,500)==1) //输入电话
             input(220,450,500,500,usr.tel,15,0,1,WHITE);
-        if(mouse_press(220,525,500,575)==1) //输入验证码
-            input(220,525,500,575,ver_cod,15,0,1,WHITE);
-        if(mouse_press(120,625,240,675)==1)
+        if(mouse_press(220,525,360,575)==1) //输入验证码
+            input(220,525,360,575,ver_cod,15,0,1,WHITE);
+        if(mouse_press(360,525,500,575)==1&&f1)
         {
-            clrmous(MouseX, MouseY);
-            bar(0,0,1024,720,MARINE_BLUE);
-            break;
+            MouseS = 0, f1=0;
+            random_vc(ver_cod1); //生成随机数
+            outtextxy(370,575,ver_cod1,2,2,32,BLACK); //输出随机数
+        }
+        if(mouse_press(120,625,240,675)==1) //注册判断
+        {
+            MouseS = 0;
+            if(register_func(usr.user,usr.code,usr.tel,ver_cod,ver_cod1))
+                return;
+            else
+                continue;     
         }
         if(mouse_press(360,625,480,675)==1)
         {
@@ -123,6 +143,7 @@ void user_register()
 
 void user_findback()
 {
+    int flag;
     USER usr; //用户信息
     char ver_cod[5]; //验证码
     usr.user[0]='\0';
@@ -151,6 +172,39 @@ void user_findback()
             break;
         }
     }
+    switch (flag)
+    {
+        case 1:
+            {
+                bar(0,0,1024,720,MARINE_BLUE);
+                    //主界面进入接口*****************
+            }
+            break;
+        case 2:
+            {
+                clrmous(MouseX, MouseY);
+                register_page();
+                user_register();
+            }
+            break;
+        case 3:
+            {
+                clrmous(MouseX, MouseY);
+                findback_page();
+                user_findback();
+            }
+            break;
+        case 4:
+            {
+                clrmous(MouseX, MouseY);
+                exit_window();
+                exit_pro();
+            }
+            break;
+        default:
+            break;
+    }
+    clrmous(MouseX, MouseY);
 }
 
 void exit_pro()
@@ -232,4 +286,112 @@ void input(int x1,int y1,int x2,int y2, char *s, int max_len, int fp, int fn,int
 		    }
         }
 	}
+}
+
+int login_comp(char *user, char *code)
+{
+	int state1 = 1;//是否输入的变量
+	int state2 = 1;
+	while (1)
+	{
+		judge(user, &state1);
+		judge(code, &state2);
+		if (state1 == 1 || state2 == 1)
+			break;
+		else if (state1 == 0 && state2 == 0)
+		{
+			if (judge_rightpassword(user, code))
+				return 1;
+			else
+				break;
+		}
+	}
+	return 0;
+}
+
+int judge_rightpassword(char *user, char *code)	
+{
+	int len;
+	int i;
+	FILE *fp;
+	USER *u;
+	if ((fp = fopen("data\\user.dat", "rb+")) == NULL)
+	{
+		printf("cannot open file UserData.dat");
+		Delaytime(3000);
+		exit(1);
+	}
+	fseek(fp, 0, SEEK_END);
+	len = ftell(fp) / sizeof(USER);//比对文件长度
+	for (i = 0; i < len; i++)
+	{
+		if ((u = (USER*)malloc(sizeof(USER))) == NULL)
+		{
+			printf("memoryallocation runs wrong in lgfunc.c");
+			Delaytime(3000);
+			exit(1);
+		}
+		fseek(fp, i * sizeof(USER), SEEK_SET);
+		fread(u, sizeof(USER), 1, fp);
+		if (strcmp(user, u->user) == 0)//用户名匹配
+		{
+			if (strcmp(code, u->code) != 0)//密码不配
+			{
+				puthz(405,558,"密码错误",24,25,'H',BLACK);
+				if (u != NULL)
+				{
+					free(u);
+					u = NULL;
+				}
+				break;
+			}
+			else if (strcmp(code, u->code) == 0)//密码匹配
+			{
+				puthz(405,558,"登录成功",24,25,'H',BLACK);
+				if (u != NULL)
+				{
+					free(u);
+					u = NULL;
+				}
+				Delaytime(1000);
+				if (fclose(fp) != 0)
+				{
+					printf("\n cannot close Database");
+					Delaytime(3000);
+					exit(1);
+				}
+				return 1;
+				//切换界面
+			}
+		}
+		if (u != NULL)
+		{
+			free(u);
+			u = NULL;
+		}
+	}
+	if (i == len)
+	{
+		puthz(405,558,"该账号不存在",24,25,'H',BLACK);//走到最后一位
+	}
+	if (u != NULL)
+	{
+		free(u);
+		u = NULL;
+	}
+	if (fclose(fp) != 0)
+	{
+		printf("\n cannot close Database");
+		Delaytime(3000);
+		exit(1);
+	}
+	return 0;
+}
+
+void judge(char *str, int *p)
+{
+    if (strlen(str) != 0)
+    {
+        *p = 0;
+    }
 }

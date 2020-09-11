@@ -2,8 +2,8 @@
     interface.c
 
     Initial version: 2020.7.13
-    Lastest update: 2020.8.12
-    Author: 
+    Lastest update: 2020.9.12
+    Author: hhw
 */
 #include "headers.h"
 
@@ -81,10 +81,12 @@ void register_page()
     fill_rect(100,begposi+75,180,begposi+125,MARINE_BLUE,BLACK);
     fill_rect(100,begposi+150,220,begposi+200,MARINE_BLUE,BLACK);
     fill_rect(100,begposi+225,220,begposi+275,MARINE_BLUE,BLACK);
+    fill_rect(360,begposi+225,500,begposi+275,MARINE_BLUE,BLACK);
     puthz(108,begposi+9,"ÕËºÅ",32,35,'K',WHITE);
     puthz(108,begposi+84,"ÃÜÂë",32,35,'K',WHITE);
     puthz(108,begposi+159,"ÊÖ»úºÅ",32,35,'K',WHITE); 
-    puthz(108,begposi+234,"ÑéÖ¤Âë",32,35,'K',WHITE); //»­×¢²á¿òÍ¼
+    puthz(108,begposi+234,"ÑéÖ¤Âë",32,35,'K',WHITE); 
+    puthz(370,begposi+234,"·¢ËÍ",32,35,'K',WHITE);//»­×¢²á¿òÍ¼
 
     fill_rect(120,begposi+325,240,begposi+375,MARINE_BLUE,BLACK);
     fill_rect(360,begposi+325,480,begposi+375,MARINE_BLUE,BLACK);

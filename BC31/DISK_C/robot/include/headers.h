@@ -15,6 +15,7 @@
 #include <conio.h>
 #include <dos.h>
 #include <bios.h>
+#include <time.h>
 
 #include "svga.h" //svga头文件
 #include "hzk.h" //汉字库头文件
@@ -24,6 +25,7 @@
 #include "drawrobot.h" //画机器人头文件
 #include "interface.h" //登陆界面绘图头文件
 #include "login.h" //登陆界面头文件
+#include "register.h" //注册界面头文件
 
 
 //定义颜色宏
