@@ -116,14 +116,29 @@
 > >
 > > hhw：
 > >
-> > void login_func();   登陆界面逻辑   *未完成，需要调试
+> > void login_func();   登陆界面逻辑   
 > >
-> > void user_register();   注册界面逻辑   *未完成，需要调试
+> > void user_register();   注册界面逻辑   
 > >
-> > void user_findback();   找回界面逻辑   *未完成，需要调试
+> > void user_findback();   找回界面逻辑   
 > >
-> > void exit_pro();   推出窗口逻辑   *未完成，需要调试
+> > void exit_pro();   退出窗口逻辑   
 >
+> register.c  注册界面逻辑文件   ---hhw编写
+>
+> > void random_vc();  生成随机验证码
+> > 
+> > int register_func();  注册信息处理
+> > 
+> > int findback_func();  找回密码
+> > 
+> > void input_database();  注册信息录入数据库
+> > 
+> > void output_database();  从数据库中找回密码
+> > 
+> > int check_data();  验证账号与电话
+> > 
+> 
 > interface.c   界面绘制文件   ---mfp&hhw编写
 >
 > > mfp：

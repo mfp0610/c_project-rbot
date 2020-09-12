@@ -109,9 +109,11 @@ void findback_page()
     fill_rect(100,begposi,180,begposi+50,MARINE_BLUE,BLACK);
     fill_rect(100,begposi+75,220,begposi+125,MARINE_BLUE,BLACK);
     fill_rect(100,begposi+150,220,begposi+200,MARINE_BLUE,BLACK);
+    fill_rect(360,begposi+150,500,begposi+200,MARINE_BLUE,BLACK);
     puthz(108,begposi+9,"账号",32,35,'K',WHITE);
     puthz(108,begposi+84,"手机号",32,35,'K',WHITE); 
-    puthz(108,begposi+159,"验证码",32,35,'K',WHITE); //画找回密码框图
+    puthz(108,begposi+159,"验证码",32,35,'K',WHITE);
+    puthz(370,begposi+159,"发送",32,35,'K',WHITE); //画找回密码框图
 
     puthz(108,begposi+235,"您的密码：",24,25,'K',MARINE_BLUE);
 
