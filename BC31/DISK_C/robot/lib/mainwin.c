@@ -40,28 +40,28 @@ void mainWindow()
         if(kbhit())
         {
             value=getch();
-            if(value==224)
+            if(value=='\224')
             {
                 value1=getch();
-                if(value1==72) //向上运动
+                if(value1=='\72') //向上运动
                 {
                     fprintf(fpde,"%d %d\n",px,py);
                     move(&px,&py,'u',mp1);
                     paintmp(mp1);
                 }    
-                else if(value1==80) //向下运动
+                else if(value1=='\80') //向下运动
                 {
                     fprintf(fpde,"%d %d\n",px,py);
                     move(&px,&py,'u',mp1);
                     paintmp(mp1);
                 }
-                else if(value1==75) //向左运动
+                else if(value1=='\75') //向左运动
                 {
                     fprintf(fpde,"%d %d\n",px,py);
                     move(&px,&py,'u',mp1);
                     paintmp(mp1);
                 }
-                else if(value1==77) //向右运动
+                else if(value1=='\77') //向右运动
                 {
                     fprintf(fpde,"%d %d\n",px,py);
                     move(&px,&py,'u',mp1);

@@ -9,7 +9,7 @@
 
 void start_func()
 {
-    start_page();//画出开始界面
+    //start_page();//画出开始界面
     login_page(); //画出登录界面
     mouseinit();
     login_func(); //进入登录界面 
