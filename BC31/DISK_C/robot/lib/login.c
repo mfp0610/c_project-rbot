@@ -9,10 +9,13 @@
 
 void start_func()
 {
-    //start_page();//画出开始界面
+    start_page();//画出开始界面
     login_page(); //画出登录界面
     mouseinit();
     login_func(); //进入登录界面 
+
+    /*****调试临时使用*****/
+    mainWindow();
 }
 
 void login_func()
@@ -32,17 +35,12 @@ void login_func()
         if(mouse_press(200,550,400,600)==1)
         {
             MouseS = 0;
-            puthz(0,0,"加载中，请耐心等待。。。",48,50,'K',BLACK);
 			if (login_comp(usr.user, usr.code)) //信息正确
             {
                 flag = 1;
                 break;
             }    
-            else
-            {
-                puthz(220,90,"加载中，请耐心等待。。。",48,50,'K',BLACK);
-                continue;
-            }
+            else continue;
         }
         if(mouse_press(100,615,220,655)==1)
         {
@@ -65,8 +63,8 @@ void login_func()
     {
         case 1:
             {
-                bar(0,0,1024,720,MARINE_BLUE);
-                    //主界面进入接口*****************
+                clrmous(MouseX, MouseY);
+                mainWindow(); //程序主界面进入接口
             }
             break;
         case 2:
@@ -92,13 +90,12 @@ void login_func()
             break;
         default: break;
     }
-    clrmous(MouseX, MouseY);
 }
 
 
 void user_register()
 {
-    int f1=1;
+    int flag, f1=1, f2=1;
     USER usr; //用户信息
     char ver_cod[5]; //输入验证码
     char ver_cod1[5]; //随机验证码
@@ -109,35 +106,41 @@ void user_register()
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        if(mouse_press(180,300,500,350)==1) //输入账号
+        if(mouse_press(180,300,500,350)==1&&f2) //输入账号
             input(180,300,500,350,usr.user,15,0,0,WHITE);
-        if(mouse_press(180,375,500,425)==1) //输入密码
+        if(mouse_press(180,375,500,425)==1&&f2) //输入密码
             input(180,375,500,425,usr.code,15,1,0,WHITE);
-        if(mouse_press(220,450,500,500)==1) //输入电话
+        if(mouse_press(220,450,500,500)==1&&f2) //输入电话
             input(220,450,500,500,usr.tel,15,0,1,WHITE);
-        if(mouse_press(220,525,360,575)==1) //输入验证码
+        if(mouse_press(220,525,360,575)==1&&f2) //输入验证码
             input(220,525,360,575,ver_cod,15,0,1,WHITE);
-        if(mouse_press(360,525,500,575)==1&&f1)
+        if(mouse_press(360,525,500,575)==1&&f1&&f2)
         {
             MouseS = 0, f1=0;
             random_vc(ver_cod1); //生成随机数
             outtextxy(370,575,ver_cod1,2,2,32,BLACK); //输出随机数
         }
-        if(mouse_press(120,625,240,675)==1) //注册判断
+        if(mouse_press(120,625,240,675)==1&&f2) //注册判断
         {
             MouseS = 0;
             if(register_func(usr.user,usr.code,usr.tel,ver_cod,ver_cod1))
-                return;
-            else
-                continue;     
+            {
+                flag = 1, f2=0;
+                break;
+            }
+            else continue;
         }
         if(mouse_press(360,625,480,675)==1)
         {
-            clrmous(MouseX, MouseY);
-            login_page();
-            login_func();
+            flag = 1;
             break;
         }
+    }
+    if(flag==1)
+    {
+        clrmous(MouseX, MouseY);
+        login_page();
+        login_func();
     }
 }
 
@@ -177,6 +180,7 @@ void user_findback()
         case 1:
             {
                 bar(0,0,1024,720,MARINE_BLUE);
+                Delaytime(1000);    
                     //主界面进入接口*****************
             }
             break;
@@ -209,6 +213,7 @@ void user_findback()
 
 void exit_pro()
 {
+    int flag;
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
@@ -219,11 +224,15 @@ void exit_pro()
         }
         if(mouse_press(470,450,500,480)==1)
         {
-            clrmous(MouseX, MouseY);
-            login_page();
-            login_func();
+            flag = 1;
             break;
         }
+    }
+    if(flag==1)
+    {
+        clrmous(MouseX, MouseY);
+        login_page();
+        login_func();
     }
 }
 

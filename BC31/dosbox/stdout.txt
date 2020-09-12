@@ -4,5 +4,6 @@ Copyright 2002-2007 DOSBox Team, published under GNU GPL.
 CONFIG:Loading primary settings from config file bc31.conf
 MIDI:Opened device:win32
 MAPPER: Loading mapper settings from bcmapper.txt
-Exit to error: DynCore: illegal option in opcode 0xff
+DYNX86:Can't run code in this page
+Exit to error: CPU:GRP5:Illegal Call  7
 

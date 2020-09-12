@@ -1,7 +1,7 @@
 /*
-    login.c
+    register.c
 
-    Initial version: 2020.7.13
+    Initial version: 2020.9.12
     Lastest update: 2020.9.12 
     Author: hhw
 */

@@ -26,6 +26,7 @@
 #include "interface.h" //登陆界面绘图头文件
 #include "login.h" //登陆界面头文件
 #include "register.h" //注册界面头文件
+#include "mainwin.h" //程序主界面头文件
 
 
 //定义颜色宏
