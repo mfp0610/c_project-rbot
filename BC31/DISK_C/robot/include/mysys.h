@@ -10,7 +10,8 @@
 
 #include "headers.h"
 
-void Delaytime(int time); //????
-void swap(int *x,int *y); //???????????
+void Delaytime(int time); //延时函数
+void swap(int *x,int *y); //交换函数
+void nocombo(); //防止连击
 
 #endif

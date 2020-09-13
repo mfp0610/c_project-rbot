@@ -10,12 +10,12 @@
 void start_func()
 {
     //start_page();//画出开始界面
-    login_page(); //画出登录界面
     mouseinit();
-    login_func(); //进入登录界面 
+    //login_page(); //画出登录界面
+    //login_func(); //进入登录界面
 
-    /*****调试临时使用*****/
-    mainWindow();
+    mainWindow(); //程序主界面进入接口
+    return;
 }
 
 void login_func()
@@ -34,72 +34,44 @@ void login_func()
         
         if(mouse_press(200,550,400,600)==1)
         {
-            MouseS = 0;
 			if (login_comp(usr.user, usr.code)) //信息正确
             {
-                flag = 1;
-                break;
+                clrmous(MouseX, MouseY);
+                return ;
             }    
             else continue;
         }
         if(mouse_press(100,615,220,655)==1)
         {
-		    flag = 2;
-            break;
+            clrmous(MouseX, MouseY);
+            register_page();
+            user_register();
+            nocombo();
+            continue;
         }
         if(mouse_press(380,615,500,655)==1)
         {
-            flag = 3;
-            break;
+            clrmous(MouseX, MouseY);
+            findback_page();
+            user_findback();
+            nocombo();
+            continue;
         }
         if(mouse_press(240,650,360,700)==1)
         {
-            flag = 4;
-            break;
-        }
-        
-    }
-    switch (flag)
-    {
-        case 1:
-            {
-                MouseS = 0;
-                clrmous(MouseX, MouseY);
-                mainWindow(); //程序主界面进入接口
-            }
-            break;
-        case 2:
-            {
-                MouseS = 0;
-                clrmous(MouseX, MouseY);
-                register_page();
-                user_register();
-            }
-            break;
-        case 3:
-            {
-                MouseS = 0;
-                clrmous(MouseX, MouseY);
-                findback_page();
-                user_findback();
-            }
-            break;
-        case 4:
-            {
-                MouseS = 0;
-                clrmous(MouseX, MouseY);
-                exit_window();
-                exit_pro();
-            }
-            break;
-        default: break;
+            clrmous(MouseX, MouseY);
+            exit_window();
+            exit_pro();
+            nocombo();
+            continue;
+        }  
     }
 }
 
 
 void user_register()
 {
-    int flag, f1=1, f2=1;
+    int f1=1, f2=1;
     USER usr; //用户信息
     char ver_cod[5]; //输入验证码
     char ver_cod1[5]; //随机验证码
@@ -120,38 +92,32 @@ void user_register()
             input(220,525,360,575,ver_cod,15,0,1,WHITE);
         if(mouse_press(360,525,500,575)==1&&f1&&f2)
         {
-            MouseS = 0, f1=0;
+            f1=0;
             random_vc(ver_cod1); //生成随机数
             outtextxy(370,575,ver_cod1,2,2,32,BLACK); //输出随机数
         }
         if(mouse_press(120,625,240,675)==1&&f2) //注册判断
         {
-            MouseS = 0;
             if(register_func(usr.user,usr.code,usr.tel,ver_cod,ver_cod1))
             {
-                flag = 1, f2=0;
-                break;
+                f2=0;
+                continue;
             }
             else continue;
         }
         if(mouse_press(360,625,480,675)==1)
         {
-            flag = 1;
-            break;
+            clrmous(MouseX, MouseY);
+            login_page();
+            nocombo();
+            return;
         }
-    }
-    if(flag==1)
-    {
-        MouseS = 0;
-        clrmous(MouseX, MouseY);
-        login_page();
-        login_func();
     }
 }
 
 void user_findback()
 {
-    int flag=0, f1=1, f2=1;
+    int f1=1, f2=1;
     USER usr; //用户信息
     char ver_cod[5]; //验证码
     char ver_cod1[5]; //随机验证码
@@ -171,21 +137,19 @@ void user_findback()
             input(220,450,360,500,ver_cod,15,0,1,WHITE);
         if(mouse_press(360,450,500,500)==1&&f1&&f2)
         {
-            MouseS = 0, f1=0;
+            f1=0;
             if (findback_func(usr.user,code,usr.tel)) //验证账号和手机号
             {
                 random_vc(ver_cod1); //生成随机数
-
                 outtextxy(510,459,ver_cod1,2,2,32,BLACK); //输出随机数
             }
         }
         if(mouse_press(120,600,240,650)==1&&f2) //找回密码判断
         {
-            MouseS = 0;
             if (strcmp(ver_cod,ver_cod1)==0) //判断验证码
             {
                 outtextxy(230,535,code,2,2,20,BLACK);
-                flag = 1, f2=0;
+                f2=0;
             }
             else 
             {
@@ -193,44 +157,29 @@ void user_findback()
                 continue;
             }
         }
-        if(mouse_press(360,625,480,675)==1)
+        if(mouse_press(360,600,480,650)==1)
         {
-            flag = 1;
-            break;
+            clrmous(MouseX, MouseY);
+            login_page();
+            nocombo();
+            return;
         }
     }
-    if(flag==1)
-    {
-        MouseS = 0;
-        clrmous(MouseX, MouseY);
-        login_page();
-        login_func();
-    }
-    clrmous(MouseX, MouseY);
 }
 
 void exit_pro()
 {
-    int flag;
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        if(mouse_press(300,450,330,480)==1) 
-        {
-            exit(0);
-            break;
-        }
+        if(mouse_press(300,450,330,480)==1) exit(0);
         if(mouse_press(470,450,500,480)==1)
         {
-            flag = 1;
-            break;
+            clrmous(MouseX, MouseY);
+            login_page();
+            nocombo();
+            return;
         }
-    }
-    if(flag==1)
-    {
-        clrmous(MouseX, MouseY);
-        login_page();
-        login_func();
     }
 }
 

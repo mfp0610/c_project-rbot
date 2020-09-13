@@ -7,15 +7,16 @@
 */
 #include "headers.h"
 #define N 18
+FILE *fpde;
 
 void mainWindow()
 {
     int mp1[N][N], px, py;
-    int value, value1;
-    FILE *fpde;
+    char value, value1;
+    
     fpde=fopen("debug\\debug.txt","w");
 
-    MouseS=0;
+    press=0;
     clrmous(MouseX, MouseY);
     
     drawbasic();
@@ -31,45 +32,43 @@ void mainWindow()
     mp1[9][0]=2;
     px=9, py=0;
 
-    paintmp(mp1);
+    paintmp(mp1,px,py);
 
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        if(mouse_press(800,200,900,300)==1) {fclose(fpde);exit(0);}
+        if(mouse_press(800,200,900,300)==1) {fclose(fpde);}
         if(kbhit())
         {
             value=getch();
-            if(value=='\224')
+            if(value=='W'||value=='w') //向上运动
             {
-                value1=getch();
-                if(value1=='\72') //向上运动
-                {
-                    fprintf(fpde,"%d %d\n",px,py);
-                    move(&px,&py,'u',mp1);
-                    paintmp(mp1);
-                }    
-                else if(value1=='\80') //向下运动
-                {
-                    fprintf(fpde,"%d %d\n",px,py);
-                    move(&px,&py,'u',mp1);
-                    paintmp(mp1);
-                }
-                else if(value1=='\75') //向左运动
-                {
-                    fprintf(fpde,"%d %d\n",px,py);
-                    move(&px,&py,'u',mp1);
-                    paintmp(mp1);
-                }
-                else if(value1=='\77') //向右运动
-                {
-                    fprintf(fpde,"%d %d\n",px,py);
-                    move(&px,&py,'u',mp1);
-                    paintmp(mp1);
-                }
+                fprintf(fpde,"1 %d %d\n",px,py);
+                move(&px,&py,'u',mp1);
+                paintmp(mp1,px,py);
+            }    
+            else if(value=='S'||value=='s') //向下运动
+            {
+                fprintf(fpde,"1 %d %d\n",px,py);
+                move(&px,&py,'d',mp1);
+                paintmp(mp1,px,py);
+            }
+            else if(value=='A'||value=='a') //向左运动
+            {
+                fprintf(fpde,"1 %d %d\n",px,py);
+                move(&px,&py,'l',mp1);
+                paintmp(mp1,px,py);
+            }
+            else if(value=='D'||value=='d') //向右运动
+            {
+                fprintf(fpde,"1 %d %d\n",px,py);
+                move(&px,&py,'r',mp1);
+                paintmp(mp1,px,py);
             }
         }
     }
+    fclose(fpde);
+    return;
 }
 
 void drawbasic()
@@ -81,10 +80,10 @@ void drawbasic()
     bar(800,200,900,300,MISTY_ROSE);
 }
 
-void paintmp(int (*mp)[N])
+void paintmp(int (*mp)[N],int px,int py)
 {
     int i,j;
-    int tx=24, ty=15, sz=40;
+    int tx=24,ty=15,sz=40;
     int cx1,cy1,cx2,cy2;
     
     for(i=0;i<N;i++)    
@@ -94,19 +93,18 @@ void paintmp(int (*mp)[N])
         cy2=cy1+sz, cx2=cx1+sz;
         switch(mp[i][j])
         {
-            case 0:
+            case 0: case 2:
                 bar(cx1,cy1,cx2,cy2,WHITE);
                 break;
             case 1:
                 bar(cx1,cy1,cx2,cy2,BLACK);
                 break;
-            case 2:
-                //bar(cx1,cy1,cx2,cy2,MARINE_BLUE);
-                drawrobot_front((cx1+cx2)/2,(cy1+cy2)/2,1);
-                break;
             default: break;
         }
     }
+    cy1=tx+px*sz, cx1=ty+py*sz;
+    cy2=cy1+sz, cx2=cx1+sz;
+    drawrobot_front((cx1+cx2)/2,(cy1+cy2)/2,1);
 }
 
 void move(int *px,int *py,char dir,int (*mp)[N])
@@ -114,17 +112,18 @@ void move(int *px,int *py,char dir,int (*mp)[N])
     int dx,dy,nx,ny;
     switch(dir) //判断移动方向
     {
-        case 'u': {dx=-1, dy=0;}break;
-        case 'd': {dx=1, dy=0;}break;
-        case 'l': {dx=0, dy=-1;}break;
-        case 'r': {dx=0, dy=1;}break;
+        case 'u': dx=-1; dy=0; break;
+        case 'd': dx=1; dy=0; break;
+        case 'l': dx=0; dy=-1; break;
+        case 'r': dx=0; dy=1; break;
         default: break;
     }
     nx=(*px)+dx, ny=(*py)+dy;
+    //fprintf(fpde,"2 %d %d\n",nx,ny);
     if(nx>0 && nx<N && ny>0 && ny<N && mp[nx][ny]!=1)
     {
         mp[*px][*py]=0;
-        (*px)+=dx, (*py)+=dy;
+        *px=nx, *py=ny;
         mp[*px][*py]=2;
     }
 }
