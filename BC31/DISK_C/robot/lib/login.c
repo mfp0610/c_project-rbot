@@ -13,6 +13,7 @@ void start_func()
     
     //login_page(); //画出登录界面
     //login_func(); //进入登录界面
+    
     /****调试使用****/
     mouseinit();
     /****调试使用****/
@@ -239,7 +240,7 @@ void input(int x1,int y1,int x2,int y2, char *s, int max_len, int fp, int fn,int
                 line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, backcolor);	//覆盖光标
 			    //判断是否为密码，如果是，则需要保密
                 if(!fp) putEngletter(x1-4+width*length, y1+8, (int)(value), 2,2,BLACK);  //显示字符
-			    else fill_circle(x1+16+width*length, (y1+y2)/2, 4,BLACK); //显示小圆点
+			    else fill_circle(x1+16+width*length, (y1+y2)/2, 4,BLACK,BLACK); //显示小圆点
 			    s[length++]=value;
 			    line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, BLACK);	//重新绘制光标
 		    }

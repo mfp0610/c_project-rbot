@@ -96,13 +96,36 @@ void rect(int x1,int y1,int x2,int y2,int color)
     line(x2,y1,x2,y2,color);
 }
 
+void drcircle(int xc,int yc,int r,int color)
+{
+    int x=0, y=r, dx=3, dy=2-2*r, d=1-r;
+	if(r<=0) return;
+	
+	//运用Bresenham算法生成空心圆。
+	while(x<=y)
+	{
+        Putpixel64k(xc-x,yc-y,color);
+        Putpixel64k(xc+x,yc-y,color);
+        Putpixel64k(xc-y,yc-x,color);
+        Putpixel64k(xc+y,yc-x,color);
+        Putpixel64k(xc-y,yc+x,color);
+        Putpixel64k(xc+y,yc+x,color);
+        Putpixel64k(xc-x,yc+y,color);
+        Putpixel64k(xc+x,yc+y,color);
+    
+        if(d<0) d+=dx, dx+=2;
+        else d+=(dx+dy), dx+=2, dy+=2, y--;
+        x++;
+	}
+}
+
 void fill_rect(int x1,int y1,int x2,int y2,int color,int edgecolor)
 {
     bar(x1,y1,x2,y2,color);
     rect(x1,y1,x2,y2,edgecolor);
 }
 
-void fill_circle(int xc,int yc,int r,int color)
+void fill_circle(int xc,int yc,int r,int color,int edgecolor)
 {
 	int x=0, y=r, dx=3, dy=2-2*r, d=1-r;
 	if(r<=0) return;
@@ -119,4 +142,6 @@ void fill_circle(int xc,int yc,int r,int color)
         else d+=(dx+dy), dx+=2, dy+=2, y--;
         x++;
 	}
- } 
+
+    drcircle(xc,yc,r,edgecolor);
+ }

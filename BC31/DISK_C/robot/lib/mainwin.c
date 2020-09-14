@@ -32,7 +32,7 @@ void mainWindow()
     mp1[9][0]=2;
     px=9, py=0;
 
-    paintmp(mp1,px,py);
+    paintmp(mp1,px,py,'d');
 
     while(1)
     {
@@ -44,26 +44,34 @@ void mainWindow()
             if(value=='W'||value=='w') //向上运动
             {
                 fprintf(fpde,"1 %d %d\n",px,py);
-                move(&px,&py,'u',mp1);
-                paintmp(mp1,px,py);
+                move(&px,&py,'u',mp1); //移动机器人
+                paintmp(mp1,px,py,'u'); //重新绘制地图
+                clrmous(MouseX, MouseY);
+                continue;
             }    
             else if(value=='S'||value=='s') //向下运动
             {
                 fprintf(fpde,"1 %d %d\n",px,py);
                 move(&px,&py,'d',mp1);
-                paintmp(mp1,px,py);
+                paintmp(mp1,px,py,'d');
+                clrmous(MouseX, MouseY);
+                continue;
             }
             else if(value=='A'||value=='a') //向左运动
             {
                 fprintf(fpde,"1 %d %d\n",px,py);
                 move(&px,&py,'l',mp1);
-                paintmp(mp1,px,py);
+                paintmp(mp1,px,py,'l');
+                clrmous(MouseX, MouseY);
+                continue;
             }
             else if(value=='D'||value=='d') //向右运动
             {
                 fprintf(fpde,"1 %d %d\n",px,py);
                 move(&px,&py,'r',mp1);
-                paintmp(mp1,px,py);
+                paintmp(mp1,px,py,'r');
+                clrmous(MouseX, MouseY);
+                continue;
             }
         }
     }
@@ -80,7 +88,7 @@ void drawbasic()
     bar(800,200,900,300,MISTY_ROSE);
 }
 
-void paintmp(int (*mp)[N],int px,int py)
+void paintmp(int (*mp)[N],int px,int py,char pdir)
 {
     int i,j;
     int tx=24,ty=15,sz=40;
@@ -102,9 +110,20 @@ void paintmp(int (*mp)[N],int px,int py)
             default: break;
         }
     }
+    bar(0,0,15,768,MISTY_ROSE);
+    bar(735,0,750,768,MISTY_ROSE);
+    bar(0,0,750,24,MISTY_ROSE);
+    bar(0,744,750,768,MISTY_ROSE);
     cy1=tx+px*sz, cx1=ty+py*sz;
     cy2=cy1+sz, cx2=cx1+sz;
-    drawrobot_front((cx1+cx2)/2,(cy1+cy2)/2,1);
+    switch(pdir)
+    {
+        case 'u': drawrobot_back((cx1+cx2)/2,(cy1+cy2)/2,1); break;
+        case 'd': drawrobot_front((cx1+cx2)/2,(cy1+cy2)/2,1); break;
+        case 'l': drawrobot_left((cx1+cx2)/2,(cy1+cy2)/2,1); break;
+        case 'r': drawrobot_right((cx1+cx2)/2,(cy1+cy2)/2,1); break;
+        default: break;
+    }
 }
 
 void move(int *px,int *py,char dir,int (*mp)[N])
@@ -120,7 +139,7 @@ void move(int *px,int *py,char dir,int (*mp)[N])
     }
     nx=(*px)+dx, ny=(*py)+dy;
     //fprintf(fpde,"2 %d %d\n",nx,ny);
-    if(nx>0 && nx<N && ny>0 && ny<N && mp[nx][ny]!=1)
+    if(nx>=0 && nx<N && ny>=0 && ny<N && mp[nx][ny]!=1)
     {
         mp[*px][*py]=0;
         *px=nx, *py=ny;
