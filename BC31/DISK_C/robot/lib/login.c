@@ -10,10 +10,12 @@
 void start_func()
 {
     //start_page();//画出开始界面
-    mouseinit();
+    
     //login_page(); //画出登录界面
     //login_func(); //进入登录界面
-
+    /****调试使用****/
+    mouseinit();
+    /****调试使用****/
     mainWindow(); //程序主界面进入接口
     return;
 }
@@ -24,6 +26,7 @@ void login_func()
     USER usr; //用户信息
     usr.user[0]='\0';
     usr.code[0]='\0';
+    mouseinit();
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
