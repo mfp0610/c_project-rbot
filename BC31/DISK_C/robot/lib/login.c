@@ -9,36 +9,36 @@
 
 void start_func()
 {
-    //start_page();//ç”»å‡ºå¼€å§‹ç•Œé¢
+    //start_page();//»­³ö¿ªÊ¼½çÃæ
     
-    //login_page(); //ç”»å‡ºç™»å½•ç•Œé¢
-    //login_func(); //è¿›å…¥ç™»å½•ç•Œé¢
+    //login_page(); //»­³öµÇÂ¼½çÃæ
+    //login_func(); //½øÈëµÇÂ¼½çÃæ
     
-    /****è°ƒè¯•ä½¿ç”¨****/
+    /****µ÷ÊÔÊ¹ÓÃ****/
     mouseinit();
-    /****è°ƒè¯•ä½¿ç”¨****/
-    mainWindow(); //ç¨‹åºä¸»ç•Œé¢è¿›å…¥æ¥å£
+    /****µ÷ÊÔÊ¹ÓÃ****/
+    mainWindow(); //³ÌĞòÖ÷½çÃæ½øÈë½Ó¿Ú
     return;
 }
 
 void login_func()
 {
     int flag;
-    USER usr; //ç”¨æˆ·ä¿¡æ¯
+    USER usr; //ÓÃ»§ĞÅÏ¢
     usr.user[0]='\0';
     usr.code[0]='\0';
     mouseinit();
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        if(mouse_press(180,350,500,400)==1) //è¾“å…¥è´¦å·
+        if(mouse_press(180,350,500,400)==1) //ÊäÈëÕËºÅ
             input(180,350,500,400,usr.user,15,0,0,WHITE);
-        if(mouse_press(180,450,500,500)==1) //è¾“å…¥å¯†ç 
+        if(mouse_press(180,450,500,500)==1) //ÊäÈëÃÜÂë
             input(180,450,500,500,usr.code,15,1,0,WHITE);
         
         if(mouse_press(200,550,400,600)==1)
         {
-			if (login_comp(usr.user, usr.code)) //ä¿¡æ¯æ­£ç¡®
+			if (login_comp(usr.user, usr.code)) //ĞÅÏ¢ÕıÈ·
             {
                 clrmous(MouseX, MouseY);
                 return ;
@@ -76,9 +76,9 @@ void login_func()
 void user_register()
 {
     int f1=1, f2=1;
-    USER usr; //ç”¨æˆ·ä¿¡æ¯
-    char ver_cod[5]; //è¾“å…¥éªŒè¯ç 
-    char ver_cod1[5]; //éšæœºéªŒè¯ç 
+    USER usr; //ÓÃ»§ĞÅÏ¢
+    char ver_cod[5]; //ÊäÈëÑéÖ¤Âë
+    char ver_cod1[5]; //Ëæ»úÑéÖ¤Âë
     usr.user[0]='\0';
     usr.code[0]='\0';
     usr.tel[0]='\0';
@@ -86,21 +86,21 @@ void user_register()
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        if(mouse_press(180,300,500,350)==1&&f2) //è¾“å…¥è´¦å·
+        if(mouse_press(180,300,500,350)==1&&f2) //ÊäÈëÕËºÅ
             input(180,300,500,350,usr.user,15,0,0,WHITE);
-        if(mouse_press(180,375,500,425)==1&&f2) //è¾“å…¥å¯†ç 
+        if(mouse_press(180,375,500,425)==1&&f2) //ÊäÈëÃÜÂë
             input(180,375,500,425,usr.code,15,1,0,WHITE);
-        if(mouse_press(220,450,500,500)==1&&f2) //è¾“å…¥ç”µè¯
+        if(mouse_press(220,450,500,500)==1&&f2) //ÊäÈëµç»°
             input(220,450,500,500,usr.tel,15,0,1,WHITE);
-        if(mouse_press(220,525,360,575)==1&&f2) //è¾“å…¥éªŒè¯ç 
+        if(mouse_press(220,525,360,575)==1&&f2) //ÊäÈëÑéÖ¤Âë
             input(220,525,360,575,ver_cod,15,0,1,WHITE);
         if(mouse_press(360,525,500,575)==1&&f1&&f2)
         {
             f1=0;
-            random_vc(ver_cod1); //ç”Ÿæˆéšæœºæ•°
-            outtextxy(370,575,ver_cod1,2,2,32,BLACK); //è¾“å‡ºéšæœºæ•°
+            random_vc(ver_cod1); //Éú³ÉËæ»úÊı
+            outtextxy(370,575,ver_cod1,2,2,32,BLACK); //Êä³öËæ»úÊı
         }
-        if(mouse_press(120,625,240,675)==1&&f2) //æ³¨å†Œåˆ¤æ–­
+        if(mouse_press(120,625,240,675)==1&&f2) //×¢²áÅĞ¶Ï
         {
             if(register_func(usr.user,usr.code,usr.tel,ver_cod,ver_cod1))
             {
@@ -122,10 +122,10 @@ void user_register()
 void user_findback()
 {
     int f1=1, f2=1;
-    USER usr; //ç”¨æˆ·ä¿¡æ¯
-    char ver_cod[5]; //éªŒè¯ç 
-    char ver_cod1[5]; //éšæœºéªŒè¯ç 
-    char code[15]; //æ‰¾å›çš„å¯†ç 
+    USER usr; //ÓÃ»§ĞÅÏ¢
+    char ver_cod[5]; //ÑéÖ¤Âë
+    char ver_cod1[5]; //Ëæ»úÑéÖ¤Âë
+    char code[15]; //ÕÒ»ØµÄÃÜÂë
     usr.user[0]='\0';
     usr.code[0]='\0';
     usr.tel[0]='\0';
@@ -133,24 +133,24 @@ void user_findback()
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        if(mouse_press(180,300,500,350)==1&&f2) //è¾“å…¥è´¦å·
+        if(mouse_press(180,300,500,350)==1&&f2) //ÊäÈëÕËºÅ
             input(180,300,500,350,usr.user,15,0,0,WHITE);
-        if(mouse_press(180,375,500,425)==1&&f2) //è¾“å…¥ç”µè¯
+        if(mouse_press(180,375,500,425)==1&&f2) //ÊäÈëµç»°
             input(180,375,500,425,usr.tel,15,0,1,WHITE);
-        if(mouse_press(220,450,360,500)==1&&f2) //è¾“å…¥éªŒè¯ç 
+        if(mouse_press(220,450,360,500)==1&&f2) //ÊäÈëÑéÖ¤Âë
             input(220,450,360,500,ver_cod,15,0,1,WHITE);
         if(mouse_press(360,450,500,500)==1&&f1&&f2)
         {
             f1=0;
-            if (findback_func(usr.user,code,usr.tel)) //éªŒè¯è´¦å·å’Œæ‰‹æœºå·
+            if (findback_func(usr.user,code,usr.tel)) //ÑéÖ¤ÕËºÅºÍÊÖ»úºÅ
             {
-                random_vc(ver_cod1); //ç”Ÿæˆéšæœºæ•°
-                outtextxy(510,459,ver_cod1,2,2,32,BLACK); //è¾“å‡ºéšæœºæ•°
+                random_vc(ver_cod1); //Éú³ÉËæ»úÊı
+                outtextxy(510,459,ver_cod1,2,2,32,BLACK); //Êä³öËæ»úÊı
             }
         }
-        if(mouse_press(120,600,240,650)==1&&f2) //æ‰¾å›å¯†ç åˆ¤æ–­
+        if(mouse_press(120,600,240,650)==1&&f2) //ÕÒ»ØÃÜÂëÅĞ¶Ï
         {
-            if (strcmp(ver_cod,ver_cod1)==0) //åˆ¤æ–­éªŒè¯ç 
+            if (strcmp(ver_cod,ver_cod1)==0) //ÅĞ¶ÏÑéÖ¤Âë
             {
                 outtextxy(230,535,code,2,2,20,BLACK);
                 f2=0;
@@ -191,9 +191,9 @@ void input(int x1,int y1,int x2,int y2, char *s, int max_len, int fp, int fn,int
 {
 	char value;
 	int length=strlen(s);
-	int width=16;  //å­—ç¬¦å®½åº¦
+	int width=16;  //×Ö·û¿í¶È
     int flag;
-	line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, BLACK);//ç»˜åˆ¶å…‰æ ‡
+	line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, BLACK);//»æÖÆ¹â±ê
 	while(1)
 	{
         int flag;
@@ -201,16 +201,16 @@ void input(int x1,int y1,int x2,int y2, char *s, int max_len, int fp, int fn,int
         if(mouse_press_out(x1,y1,x2,y2)==1)
         {
             s[length]='\0';
-			line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, backcolor);	//è¦†ç›–å…‰æ ‡
+			line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, backcolor);	//¸²¸Ç¹â±ê
 			break;
         }
         if(kbhit())
         {
             value=getch();
-            if(value=='\n'||value=='\r') //åˆ¤æ–­åˆ°æŒ‰ä¸‹å›è½¦
+            if(value=='\n'||value=='\r') //ÅĞ¶Ïµ½°´ÏÂ»Ø³µ
             {
                 s[length]='\0';
-			    line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, backcolor);	//è¦†ç›–å…‰æ ‡
+			    line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, backcolor);	//¸²¸Ç¹â±ê
 			    break;
             }
 		    else if(value=='\b')
@@ -219,12 +219,12 @@ void input(int x1,int y1,int x2,int y2, char *s, int max_len, int fp, int fn,int
                 newmouse(&MouseX, &MouseY, &press);
                 if(length==0) continue;
                 line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, BLACK);	
-			    bar(x1+5+width*(length-1), y1+3, x2, y2-3, backcolor);	//è¦†ç›–å…‰æ ‡å’Œæœ€åä¸€ä¸ªå­—ç¬¦
+			    bar(x1+5+width*(length-1), y1+3, x2, y2-3, backcolor);	//¸²¸Ç¹â±êºÍ×îºóÒ»¸ö×Ö·û
 			    s[--length]='\0';
 			    if(length+1<max_len) s[length+1]='\0';
-			    line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, BLACK);  //é‡æ–°ç»˜åˆ¶å…‰æ ‡
+			    line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, BLACK);  //ÖØĞÂ»æÖÆ¹â±ê
 		    }
-            //å°è¯•æ·»åŠ å¯é€šè¿‡æ–¹å‘é”®åŠ¨æ€ä¿®æ”¹åŠŸèƒ½ï¼Œå¾…å®Œå–„
+            //³¢ÊÔÌí¼Ó¿ÉÍ¨¹ı·½Ïò¼ü¶¯Ì¬ĞŞ¸Ä¹¦ÄÜ£¬´ıÍêÉÆ
             /*else if(value==224)
             {
                 value1=getch();
@@ -234,15 +234,15 @@ void input(int x1,int y1,int x2,int y2, char *s, int max_len, int fp, int fn,int
             }*/
 		    else if(length<max_len)
 		    {
-			    if(fn&&(value>'9'||value<'0')) continue; //åˆ¤æ–­æ˜¯å¦è¦æ±‚å…¨æ•°å­—
+			    if(fn&&(value>'9'||value<'0')) continue; //ÅĞ¶ÏÊÇ·ñÒªÇóÈ«Êı×Ö
                 clrmous(MouseX, MouseY);
                 newmouse(&MouseX, &MouseY, &press);
-                line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, backcolor);	//è¦†ç›–å…‰æ ‡
-			    //åˆ¤æ–­æ˜¯å¦ä¸ºå¯†ç ï¼Œå¦‚æœæ˜¯ï¼Œåˆ™éœ€è¦ä¿å¯†
-                if(!fp) putEngletter(x1-4+width*length, y1+8, (int)(value), 2,2,BLACK);  //æ˜¾ç¤ºå­—ç¬¦
-			    else fill_circle(x1+16+width*length, (y1+y2)/2, 4,BLACK,BLACK); //æ˜¾ç¤ºå°åœ†ç‚¹
+                line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, backcolor);	//¸²¸Ç¹â±ê
+			    //ÅĞ¶ÏÊÇ·ñÎªÃÜÂë£¬Èç¹ûÊÇ£¬ÔòĞèÒª±£ÃÜ
+                if(!fp) putEngletter(x1-4+width*length, y1+8, (int)(value), 2,2,BLACK);  //ÏÔÊ¾×Ö·û
+			    else fill_circle(x1+16+width*length, (y1+y2)/2, 4,BLACK,BLACK); //ÏÔÊ¾Ğ¡Ô²µã
 			    s[length++]=value;
-			    line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, BLACK);	//é‡æ–°ç»˜åˆ¶å…‰æ ‡
+			    line(x1+5+width*length, y1+3, x1+5+width*length, y2-3, BLACK);	//ÖØĞÂ»æÖÆ¹â±ê
 		    }
         }
 	}
@@ -250,7 +250,7 @@ void input(int x1,int y1,int x2,int y2, char *s, int max_len, int fp, int fn,int
 
 int login_comp(char *user, char *code)
 {
-	int state1 = 1;//æ˜¯å¦è¾“å…¥çš„å˜é‡
+	int state1 = 1;//ÊÇ·ñÊäÈëµÄ±äÁ¿
 	int state2 = 1;
 	while (1)
 	{
@@ -282,7 +282,7 @@ int judge_rightpassword(char *user, char *code)
 		exit(1);
 	}
 	fseek(fp, 0, SEEK_END);
-	len = ftell(fp) / sizeof(USER);//æ¯”å¯¹æ–‡ä»¶é•¿åº¦
+	len = ftell(fp) / sizeof(USER);//±È¶ÔÎÄ¼ş³¤¶È
 	for (i = 0; i < len; i++)
 	{
 		if ((u = (USER*)malloc(sizeof(USER))) == NULL)
@@ -293,11 +293,11 @@ int judge_rightpassword(char *user, char *code)
 		}
 		fseek(fp, i * sizeof(USER), SEEK_SET);
 		fread(u, sizeof(USER), 1, fp);
-		if (strcmp(user, u->user) == 0)//ç”¨æˆ·ååŒ¹é…
+		if (strcmp(user, u->user) == 0)//ÓÃ»§ÃûÆ¥Åä
 		{
-			if (strcmp(code, u->code) != 0)//å¯†ç ä¸é…
+			if (strcmp(code, u->code) != 0)//ÃÜÂë²»Åä
 			{
-				puthz(405,558,"å¯†ç é”™è¯¯",24,25,'H',BLACK);
+				puthz(405,558,"ÃÜÂë´íÎó",24,25,'H',BLACK);
 				if (u != NULL)
 				{
 					free(u);
@@ -305,9 +305,9 @@ int judge_rightpassword(char *user, char *code)
 				}
 				break;
 			}
-			else if (strcmp(code, u->code) == 0)//å¯†ç åŒ¹é…
+			else if (strcmp(code, u->code) == 0)//ÃÜÂëÆ¥Åä
 			{
-				puthz(405,558,"ç™»å½•æˆåŠŸ",24,25,'H',BLACK);
+				puthz(405,558,"µÇÂ¼³É¹¦",24,25,'H',BLACK);
 				if (u != NULL)
 				{
 					free(u);
@@ -321,7 +321,7 @@ int judge_rightpassword(char *user, char *code)
 					exit(1);
 				}
 				return 1;
-				//åˆ‡æ¢ç•Œé¢
+				//ÇĞ»»½çÃæ
 			}
 		}
 		if (u != NULL)
@@ -332,7 +332,7 @@ int judge_rightpassword(char *user, char *code)
 	}
 	if (i == len)
 	{
-		puthz(405,558,"è¯¥è´¦å·ä¸å­˜åœ¨",24,25,'H',BLACK);//èµ°åˆ°æœ€åä¸€ä½
+		puthz(405,558,"¸ÃÕËºÅ²»´æÔÚ",24,25,'H',BLACK);//×ßµ½×îºóÒ»Î»
 	}
 	if (u != NULL)
 	{
