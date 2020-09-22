@@ -7,6 +7,7 @@
 */
 #include "headers.h"
 #define N 18
+
 FILE *fpde;
 
 void mainWindow()
@@ -16,14 +17,27 @@ void mainWindow()
     
     fpde=fopen("debug\\debug.txt","w");
 
-    press=0;
     clrmous(MouseX, MouseY);
-    
+    memset(mp1,0,sizeof(mp1));
     drawbasic();
     
-    memset(mp1,0,sizeof(mp1));
+    //调试使用
+    mp1[4][1]=2;
+    mp1[4][2]=2;
+    mp1[6][3]=2;
+    mp1[6][4]=2;
+    mp1[9][11]=2;
+    mp1[9][12]=2;
+    mp1[8][13]=2;
+    mp1[8][14]=2;
+    mp1[16][6]=2;
+    mp1[16][7]=2;
+    mp1[16][8]=2;
+    mp1[16][9]=2;
     
-    mp1[N][N]={0,2,6,6,2,6,6,6,2,6,6,6,2,0,0,0,0,0,
+
+    
+    /*mp1[N][N]={0,2,6,6,2,6,6,6,2,6,6,6,2,0,0,0,0,0,
                0,3,0,0,2,6,6,6,2,6,6,6,2,5,5,0,0,0,
                0,3,0,0,3,0,0,6,2,0,0,6,2,5,5,4,0,0,
                0,2,0,0,3,0,0,6,2,0,0,6,2,5,5,4,0,0,
@@ -41,13 +55,12 @@ void mainWindow()
                6,0,0,0,0,4,4,2,6,0,0,0,0,7,7,7,7,7,
                0,0,0,4,4,0,6,2,0,0,0,0,0,0,0,0,0,6,
                0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0
-               }; 
+               }; */
                //0是地板，1是机器人，2是墙壁，3是门，4是椅子，
                //5是桌子，6是一般高度家具，7是床
     px=9, py=0;
 
     paintmp(mp1,px,py,'d');
-
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
@@ -96,9 +109,7 @@ void mainWindow()
 void drawbasic()
 {
     setbkcol(MISTY_ROSE);
-
     bar(750,0,1024,768,MARINE_BLUE);
-
     bar(800,200,900,300,MISTY_ROSE);
 }
 
@@ -115,10 +126,10 @@ void paintmp(int (*mp)[N],int px,int py,char pdir)
         cy2=cy1+sz, cx2=cx1+sz;
         switch(mp[i][j])
         {
-            case 0: case 2:
+            case 0: case 1:
                 bar(cx1,cy1,cx2,cy2,WHITE);
                 break;
-            case 1:
+            case 2:
                 bar(cx1,cy1,cx2,cy2,BLACK);
                 break;
             default: break;
@@ -153,7 +164,7 @@ void move(int *px,int *py,char dir,int (*mp)[N])
     }
     nx=(*px)+dx, ny=(*py)+dy;
     //fprintf(fpde,"2 %d %d\n",nx,ny);
-    if(nx>=0 && nx<N && ny>=0 && ny<N && mp[nx][ny]!=1)
+    if(nx>=0 && nx<N && ny>=0 && ny<N && mp[nx][ny]!=2)
     {
         mp[*px][*py]=0;
         *px=nx, *py=ny;
