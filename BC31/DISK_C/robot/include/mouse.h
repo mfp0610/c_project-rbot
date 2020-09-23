@@ -4,7 +4,7 @@
     Adapted by pervious version
     Initial version: 2020.7.19
     Lastest update: 2020.7.19
-    Author: Mengfp
+    Author: mfp
 */
 #ifndef _MOUSE_H_
 #define _MOUSE_H_

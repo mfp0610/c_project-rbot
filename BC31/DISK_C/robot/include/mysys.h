@@ -3,7 +3,7 @@
     
     Initial version: 2020.7.13
     Lastest update: 2020.7.13
-    Author: Mengfp
+    Author: mfp
 */
 #ifndef _MYSYS_H_
 #define _MYSYS_H_

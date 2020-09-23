@@ -3,7 +3,7 @@
     
     Initial version: 2020.7.13
     Lastest update: 2020.7.22
-    Author: Mengfp
+    Author: mfp
 */
 #ifndef _HZK_H_
 #define _HZK_H_
