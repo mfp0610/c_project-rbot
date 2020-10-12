@@ -22,11 +22,12 @@
 #include "mouse.h" //鼠标函数库头文件
 #include "drawbas.h" //基础画图头文件
 #include "mysys.h" //自己写的系统函数
-#include "drawrobot.h" //画机器人头文件
-#include "interface.h" //登陆界面绘图头文件
+#include "drawrob.h" //画机器人头文件
+#include "interf.h" //登陆界面绘图头文件
 #include "login.h" //登陆界面头文件
 #include "register.h" //注册界面头文件
 #include "mainwin.h" //程序主界面头文件
+#include "board.h" //绘制控制面板头文件
 #include "drawmap.h" //绘制程序主界面头文件
 
 
@@ -48,6 +49,7 @@
 #define LIGHT_CORAL 62480
 #define GREEN 26603
 #define PINK 58572
+#define BRIGHT_GREEN 26592
 
 //必要的参数
 #define ROBOT_SIZE 20 //定义基础机器人大小

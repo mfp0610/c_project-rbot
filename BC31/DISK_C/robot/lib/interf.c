@@ -9,7 +9,7 @@
 
 void start_page()
 {
-    /*int i,f1=1;
+    int i,f1=1;
     setbkcol(MISTY_ROSE);
     for(i=15;i<=80;i++)
     {
@@ -34,7 +34,7 @@ void start_page()
         if(f1) puthz(200,300,"按任意键继续",32,35,'K',BLACK), f1=0;
         else puthz(200,300,"按任意键继续",32,35,'K',STRONG_RED), f1=1;
         if(bioskey(1)) break;
-    }*/
+    }
 }
 
 void login_page()

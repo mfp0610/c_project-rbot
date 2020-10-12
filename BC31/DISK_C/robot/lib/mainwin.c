@@ -34,6 +34,7 @@ void mainWindow()
                         //1是地板，2是墙壁，3是门，4是椅子，
                         //5是桌子，6是一般高度家具，78是床，9是竖门，10是左门，11是右门
     char value, value1;
+    int lb=750,ub=0;
     
     fpde=fopen("debug\\debug.txt","w");
 
@@ -74,10 +75,30 @@ void mainWindow()
     px=9, py=0;
 
     paintmp(mp1,px,py,'d');
+    draw_control();
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        if(mouse_press(800,200,900,300)==1) {fclose(fpde);}
+        if(mouse_press(lb+37,ub+350,lb+127,ub+390)==1) //进入电量界面
+        {
+            draw_electr();
+        }
+        if(mouse_press(lb+147,ub+350,lb+237,ub+390)==1) //进入舒适度界面
+        {
+            draw_comfort();
+        }
+        if(mouse_press(lb+37,ub+410,lb+127,ub+450)==1) //进入环境界面
+        {
+            draw_move();
+        }
+        if(mouse_press(lb+147,ub+410,lb+237,ub+450)==1) //进入控制界面
+        {
+            draw_clean();
+        }
+        if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入互动界面
+        {
+
+        }
         if(kbhit())
         {
             value=getch();

@@ -11,6 +11,9 @@
 void draw_control()
 {
     int lb=750,ub=0;
+
+    bar(lb,ub,1024,768,MARINE_BLUE);
+
     //画返回主菜单
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
@@ -56,6 +59,9 @@ void draw_control()
 void draw_electr()
 {
     int lb=750,ub=0;
+
+    bar(lb,ub,1024,768,MARINE_BLUE);  
+
     //画返回主菜单
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
@@ -98,6 +104,9 @@ void draw_electr()
 void draw_comfort()
 {
     int lb=750,ub=0;
+
+    bar(lb,ub,1024,768,MARINE_BLUE);
+
     //画返回主菜单
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
@@ -143,6 +152,9 @@ void draw_comfort()
 void draw_move()
 {
     int lb=750,ub=0;
+
+    bar(lb,ub,1024,768,MARINE_BLUE);
+
     //画返回主菜单
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
@@ -185,6 +197,9 @@ void draw_move()
 void draw_clean()
 {
     int lb=750,ub=0;
+
+    bar(lb,ub,1024,768,MARINE_BLUE);
+
     //画返回主菜单
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
