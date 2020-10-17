@@ -81,23 +81,48 @@ void mainWindow()
         newmouse(&MouseX, &MouseY, &press);
         if(mouse_press(lb+37,ub+350,lb+127,ub+390)==1) //进入电量界面
         {
+            clrmous(MouseX, MouseY);
             draw_electr();
+            func_electr();
+            nocombo();
+            draw_control();
+            continue;
         }
         if(mouse_press(lb+147,ub+350,lb+237,ub+390)==1) //进入舒适度界面
         {
-            draw_comfort();
+            clrmous(MouseX, MouseY);
+            draw_electr();
+            func_electr();
+            nocombo();
+            draw_control();
+            continue;
         }
         if(mouse_press(lb+37,ub+410,lb+127,ub+450)==1) //进入环境界面
         {
-            draw_move();
+            clrmous(MouseX, MouseY);
+            draw_electr();
+            func_electr();
+            nocombo();
+            draw_control();
+            continue;
         }
         if(mouse_press(lb+147,ub+410,lb+237,ub+450)==1) //进入控制界面
         {
-            draw_clean();
+            clrmous(MouseX, MouseY);
+            draw_electr();
+            func_electr();
+            nocombo();
+            draw_control();
+            continue;
         }
         if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入互动界面
         {
-            
+            clrmous(MouseX, MouseY);
+            draw_electr();
+            func_electr();
+            nocombo();
+            draw_control();
+            continue;
         }
         if(kbhit())
         {
@@ -219,5 +244,28 @@ void move(int *px,int *py,char dir,int (*mp)[N])
         mp[*px][*py]=0;
         *px=nx, *py=ny;
         mp[*px][*py]=2;
+    }
+}
+
+void func_electr()
+{
+    int lb=750, ub=0;
+    while(1)
+    {
+        newmouse(&MouseX, &MouseY, &press);
+        if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
+        {
+            
+            continue;
+        }
+        if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //进入舒适度界面
+        {
+            
+            continue;
+        }
+        if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入环境界面
+        {
+            return;
+        }
     }
 }

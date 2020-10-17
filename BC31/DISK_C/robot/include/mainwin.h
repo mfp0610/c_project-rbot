@@ -15,5 +15,6 @@ void mainWindow(); //程序主界面
 void drawbasic(); //程序主界面画图
 void paintmp(int (*mp)[N],int px,int py,char pdir); //画出地图
 void move(int *px,int *py,char dir,int (*mp)[N]); //移动机器人
+void func_electr(); //充电功能界面
 
 #endif

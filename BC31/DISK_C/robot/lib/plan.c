@@ -7,16 +7,17 @@ int des_x,des_y;//目的地
 int st_x,st_y;//出发地
 int id;
 int path[10001];
-int val_func(int a,int x,int y)//估价函数
-{
-  return a+abs(des_x-x)+abs(des_y-y);
-}
 struct Node
 {
   int x,y,dis,val;//当前点的 x/y/bfs距离/估价函数
   int last;//记录路径
   int id;
 }node[10001];
+int val_func(int a,int x,int y)//估价函数
+{
+  return a+abs(des_x-x)+abs(des_y-y);
+}
+
 //-------------分割线------------------heap实现优先队列部分----------------//
 int heap_size,n;
 Node heap[10001];  
