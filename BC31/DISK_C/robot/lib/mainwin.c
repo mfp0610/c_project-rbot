@@ -97,7 +97,7 @@ void mainWindow()
         }
         if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入互动界面
         {
-
+            
         }
         if(kbhit())
         {
