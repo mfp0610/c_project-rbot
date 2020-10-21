@@ -5,8 +5,8 @@
     Lastest update: 2020.7.13
     Author: mfp && hhw
 */
-#ifndef _INTERFACE_H_
-#define _INTERFACE_H_
+#ifndef _INTERF_H_
+#define _INTERF_H_
 
 #include "headers.h"
 

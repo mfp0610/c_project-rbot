@@ -6,12 +6,14 @@
     Author: mfp
 */
 #include "headers.h"
-#define N 18
 
 FILE *fpde;
 
 void mainWindow()
 {
+    HOUSE *house;
+    ROBOT *robot;
+
     int px, py;
     int mp1[N][N]; /*= {{0,2,6,6,2,6,6,6,2,6,6,6,2,0,0,0,0,0},
                      {0,9,0,0,2,6,6,6,2,6,6,6,2,5,5,0,0,0},
@@ -35,6 +37,11 @@ void mainWindow()
                         //5是桌子，6是一般高度家具，78是床，9是竖门，10是左门，11是右门
     char value, value1;
     int lb=750,ub=0;
+
+    house=(HOUSE *)malloc(sizeof(HOUSE));
+    robot=(ROBOT *)malloc(sizeof(ROBOT));
+
+    maininit(house,robot);
     
     fpde=fopen("debug\\debug.txt","w");
 
@@ -79,52 +86,53 @@ void mainWindow()
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
+        timepass(house,robot);
         if(mouse_press(lb+37,ub+350,lb+127,ub+390)==1) //进入电量界面
         {
             clrmous(MouseX, MouseY);
             draw_electr();
-            func_electr();
             nocombo();
+            func_electr(house,robot);
             draw_control();
             continue;
         }
         if(mouse_press(lb+147,ub+350,lb+237,ub+390)==1) //进入舒适度界面
         {
             clrmous(MouseX, MouseY);
-            draw_electr();
-            func_electr();
             nocombo();
+            draw_comfort();
+            func_comfort(house,robot);
             draw_control();
             continue;
         }
         if(mouse_press(lb+37,ub+410,lb+127,ub+450)==1) //进入环境界面
         {
             clrmous(MouseX, MouseY);
-            draw_electr();
-            func_electr();
             nocombo();
+            draw_clean();
+            func_clean(house,robot);
             draw_control();
             continue;
         }
         if(mouse_press(lb+147,ub+410,lb+237,ub+450)==1) //进入控制界面
         {
             clrmous(MouseX, MouseY);
-            draw_electr();
-            func_electr();
             nocombo();
+            draw_move();
+            func_move(house,robot);
             draw_control();
             continue;
         }
-        if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入互动界面
+        /*if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入互动界面
         {
             clrmous(MouseX, MouseY);
             draw_electr();
-            func_electr();
             nocombo();
+            func_electr();
             draw_control();
             continue;
-        }
-        if(kbhit())
+        }*/
+        if(kbhit()) //moveupdate(value);
         {
             value=getch();
             if(value=='W'||value=='w') //向上运动
@@ -247,7 +255,67 @@ void move(int *px,int *py,char dir,int (*mp)[N])
     }
 }
 
-void func_electr()
+void maininit(HOUSE *house, ROBOT *robot)
+{
+    robot->electr=100;
+    
+    house->time=0;
+    house->temp=26;
+    house->wet=50;
+    house->pm25=100;
+}
+
+void func_electr(HOUSE *house, ROBOT *robot)
+{
+    int lb=750, ub=0;
+    while(1)
+    {
+        newmouse(&MouseX, &MouseY, &press);
+        if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
+        {
+            
+            continue;
+        }
+        if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //进入舒适度界面
+        {
+            
+            continue;
+        }
+        if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //返回主菜单
+        {
+            nocombo();
+            return;
+        }
+    }
+}
+
+
+void func_comfort(HOUSE *house, ROBOT *robot)
+{
+    int lb=750, ub=0;
+    while(1)
+    {
+        
+        newmouse(&MouseX, &MouseY, &press);
+        if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
+        {
+            
+            continue;
+        }
+        if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //进入舒适度界面
+        {
+            
+            continue;
+        }
+        if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入环境界面
+        {
+            nocombo();
+            return;
+        }
+    }
+}
+
+void func_clean(HOUSE *house, ROBOT *robot)
 {
     int lb=750, ub=0;
     while(1)
@@ -265,7 +333,43 @@ void func_electr()
         }
         if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入环境界面
         {
+            nocombo();
             return;
         }
+    }
+}
+
+void func_move(HOUSE *house, ROBOT *robot)
+{
+    int lb=750, ub=0;
+    while(1)
+    {
+        newmouse(&MouseX, &MouseY, &press);
+        if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
+        {
+            
+            continue;
+        }
+        if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //进入舒适度界面
+        {
+            
+            continue;
+        }
+        if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入环境界面
+        {
+            nocombo();
+            return;
+        }
+    }
+}
+
+void timepass(HOUSE *house, ROBOT *robot)
+{
+    (house->time)++;
+    (house->time)%=100000;
+    if((house->time)%1000==0)
+    {
+        house->pm25++;
+        robot->electr--;
     }
 }
