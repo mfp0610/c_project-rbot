@@ -29,32 +29,32 @@ void swap(Node &a,Node &b)
 }
 void put(Node d)
 {
- int now,next;
- heap[++heap_size]=d;
- now=heap_size;
- while(now>1)
- {
-  next=now>>1;
-  if(heap[now].val>=heap[next].val) return;
-  swap(heap[now],heap[next]);
-  now=next;           
- }    
+  int now,next;
+  heap[++heap_size]=d;
+  now=heap_size;
+  while(now>1)
+  {
+    next=now>>1;
+    if(heap[now].val>=heap[next].val) return;
+    swap(heap[now],heap[next]);
+    now=next;           
+  }    
 }
 Node del()
 {
- int now,next;
- Node res;
- res=heap[1];
- heap[1]=heap[heap_size--];
- now=1;
- while(now*2<=heap_size)
- {
-  next=now*2;
-  if(next<heap_size&&heap[next+1].val<heap[next].val) next++;
-  if(heap[now].val<=heap[next].val) return res;
-  swap(heap[now],heap[next]);
-  now=next;                      
- } 
+  int now,next;
+  Node res;
+  res=heap[1];
+  heap[1]=heap[heap_size--];
+  now=1;
+  while(now*2<=heap_size)
+  {
+    next=now*2;
+    if(next<heap_size&&heap[next+1].val<heap[next].val) next++;
+    if(heap[now].val<=heap[next].val) return res;
+    swap(heap[now],heap[next]);
+    now=next;                      
+  } 
 }
 Node get()
 {

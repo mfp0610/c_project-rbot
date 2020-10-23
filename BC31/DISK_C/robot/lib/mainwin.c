@@ -82,7 +82,7 @@ void mainWindow()
     px=9, py=0;
 
     paintmp(mp1,px,py,'d');
-    draw_control();
+    draw_control(house,robot);
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
@@ -90,37 +90,37 @@ void mainWindow()
         if(mouse_press(lb+37,ub+350,lb+127,ub+390)==1) //进入电量界面
         {
             clrmous(MouseX, MouseY);
-            draw_electr();
             nocombo();
+            draw_electr(house,robot);
             func_electr(house,robot);
-            draw_control();
+            draw_control(house,robot);
             continue;
         }
         if(mouse_press(lb+147,ub+350,lb+237,ub+390)==1) //进入舒适度界面
         {
             clrmous(MouseX, MouseY);
             nocombo();
-            draw_comfort();
+            draw_comfort(house,robot);
             func_comfort(house,robot);
-            draw_control();
+            draw_control(house,robot);
             continue;
         }
         if(mouse_press(lb+37,ub+410,lb+127,ub+450)==1) //进入环境界面
         {
             clrmous(MouseX, MouseY);
             nocombo();
-            draw_clean();
+            draw_clean(house,robot);
             func_clean(house,robot);
-            draw_control();
+            draw_control(house,robot);
             continue;
         }
         if(mouse_press(lb+147,ub+410,lb+237,ub+450)==1) //进入控制界面
         {
             clrmous(MouseX, MouseY);
             nocombo();
-            draw_move();
+            draw_move(house,robot);
             func_move(house,robot);
-            draw_control();
+            draw_control(house,robot);
             continue;
         }
         /*if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入互动界面
@@ -271,6 +271,7 @@ void func_electr(HOUSE *house, ROBOT *robot)
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
+        timepass(house,robot);
         if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
         {
             
@@ -297,6 +298,7 @@ void func_comfort(HOUSE *house, ROBOT *robot)
     {
         
         newmouse(&MouseX, &MouseY, &press);
+        timepass(house,robot);
         if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
         {
             
@@ -321,6 +323,7 @@ void func_clean(HOUSE *house, ROBOT *robot)
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
+        timepass(house,robot);
         if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
         {
             
@@ -345,6 +348,7 @@ void func_move(HOUSE *house, ROBOT *robot)
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
+        timepass(house,robot);
         if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
         {
             
@@ -365,11 +369,24 @@ void func_move(HOUSE *house, ROBOT *robot)
 
 void timepass(HOUSE *house, ROBOT *robot)
 {
-    (house->time)++;
-    (house->time)%=100000;
-    if((house->time)%1000==0)
+    /*******上机调试*******/
+    int timeupdate=1000; //更新界面时间
+    int timedirt=500; //污染程度更新时间
+    int timetmp=50000; //温度更新时间
+    int timeele=5000; //电量更新时间
+    int timecut=100000; //时间计数器请清零
+    char *s;
+    bar(0,0,150,60,MARINE_BLUE);
+    itoa(house->time,s,10);
+    outtextxy(0,0,s,1,2,10,WHITE);
+    if(house->time%timeupdate==0)
     {
-        house->pm25++;
-        robot->electr--;
+        draw_bactr(robot); //画电池电量
     }
+    if(house->time%timedirt==0) house->pm25++;
+    if(house->time%timetmp==0) house->temp++;
+    if(house->time%timeele==0) robot->electr--;
+    if(robot->electr==0) robot->electr=100; //触发自动充电模块
+    house->time%=timecut;
+    (house->time)++; 
 }

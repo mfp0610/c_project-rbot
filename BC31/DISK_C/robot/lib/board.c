@@ -8,7 +8,7 @@
 
 #include "headers.h"
 
-void draw_control()
+void draw_control(HOUSE *house, ROBOT *robot)
 {
     int lb=750,ub=0;
 
@@ -17,15 +17,6 @@ void draw_control()
     //画返回主菜单
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
-    
-    //画电池电量
-    fill_rect(lb+21,ub+10,lb+70,ub+40,MISTY_ROSE,MARINE_BLUE);
-    fill_rect(lb+70,ub+15,lb+75,ub+35,MISTY_ROSE,MISTY_ROSE);
-    outtextxy(lb+80,ub+10,"100%",1,2,10,WHITE);
-    fill_rect(lb+23,ub+12,lb+32,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+35,ub+12,lb+44,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+47,ub+12,lb+56,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+59,ub+12,lb+68,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
 
     //画状态显示栏
     fill_rect(lb+17,ub+60,lb+257,ub+320,MISTY_ROSE,MARINE_BLUE);
@@ -56,7 +47,7 @@ void draw_control()
     fill_circle(lb+137,ub+675,30,MISTY_ROSE,MARINE_BLUE);
 }
 
-void draw_electr()
+void draw_electr(HOUSE *house, ROBOT *robot)
 {
     int lb=750,ub=0;
 
@@ -67,13 +58,7 @@ void draw_electr()
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
     
     //画电池电量
-    fill_rect(lb+21,ub+10,lb+70,ub+40,MISTY_ROSE,MARINE_BLUE);
-    fill_rect(lb+70,ub+15,lb+75,ub+35,MISTY_ROSE,MISTY_ROSE);
-    outtextxy(lb+80,ub+10,"100%",1,2,10,WHITE);
-    fill_rect(lb+23,ub+12,lb+32,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+35,ub+12,lb+44,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+47,ub+12,lb+56,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+59,ub+12,lb+68,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
+    //draw_bactr(robot);
 
     //画状态显示栏
     fill_rect(lb+17,ub+60,lb+257,ub+320,MISTY_ROSE,MARINE_BLUE);
@@ -101,7 +86,7 @@ void draw_electr()
     fill_circle(lb+137,ub+675,30,MISTY_ROSE,MARINE_BLUE);
 }
 
-void draw_comfort()
+void draw_comfort(HOUSE *house, ROBOT *robot)
 {
     int lb=750,ub=0;
 
@@ -110,15 +95,7 @@ void draw_comfort()
     //画返回主菜单
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
-    
-    //画电池电量
-    fill_rect(lb+21,ub+10,lb+70,ub+40,MISTY_ROSE,MARINE_BLUE);
-    fill_rect(lb+70,ub+15,lb+75,ub+35,MISTY_ROSE,MISTY_ROSE);
-    outtextxy(lb+80,ub+10,"100%",1,2,10,WHITE);
-    fill_rect(lb+23,ub+12,lb+32,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+35,ub+12,lb+44,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+47,ub+12,lb+56,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+59,ub+12,lb+68,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
+
 
     //画状态显示栏
     fill_rect(lb+17,ub+60,lb+257,ub+320,MISTY_ROSE,MARINE_BLUE);
@@ -149,7 +126,7 @@ void draw_comfort()
     fill_circle(lb+137,ub+675,30,MISTY_ROSE,MARINE_BLUE);
 }
 
-void draw_move()
+void draw_move(HOUSE *house, ROBOT *robot)
 {
     int lb=750,ub=0;
 
@@ -158,15 +135,6 @@ void draw_move()
     //画返回主菜单
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
-    
-    //画电池电量
-    fill_rect(lb+21,ub+10,lb+70,ub+40,MISTY_ROSE,MARINE_BLUE);
-    fill_rect(lb+70,ub+15,lb+75,ub+35,MISTY_ROSE,MISTY_ROSE);
-    outtextxy(lb+80,ub+10,"100%",1,2,10,WHITE);
-    fill_rect(lb+23,ub+12,lb+32,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+35,ub+12,lb+44,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+47,ub+12,lb+56,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+59,ub+12,lb+68,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
 
     //画状态显示栏
     fill_rect(lb+17,ub+60,lb+257,ub+320,MISTY_ROSE,MARINE_BLUE);
@@ -194,7 +162,7 @@ void draw_move()
     fill_circle(lb+137,ub+675,30,MISTY_ROSE,MARINE_BLUE);
 }
 
-void draw_clean()
+void draw_clean(HOUSE *house, ROBOT *robot)
 {
     int lb=750,ub=0;
 
@@ -203,15 +171,6 @@ void draw_clean()
     //画返回主菜单
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
-    
-    //画电池电量
-    fill_rect(lb+21,ub+10,lb+70,ub+40,MISTY_ROSE,MARINE_BLUE);
-    fill_rect(lb+70,ub+15,lb+75,ub+35,MISTY_ROSE,MISTY_ROSE);
-    outtextxy(lb+80,ub+10,"100%",1,2,10,WHITE);
-    fill_rect(lb+23,ub+12,lb+32,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+35,ub+12,lb+44,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+47,ub+12,lb+56,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
-    fill_rect(lb+59,ub+12,lb+68,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
 
     //画状态显示栏
     fill_rect(lb+17,ub+60,lb+257,ub+320,MISTY_ROSE,MARINE_BLUE);
@@ -237,4 +196,24 @@ void draw_clean()
     fill_circle(lb+182,ub+630,30,MISTY_ROSE,MARINE_BLUE);
     fill_circle(lb+137,ub+585,30,MISTY_ROSE,MARINE_BLUE);
     fill_circle(lb+137,ub+675,30,MISTY_ROSE,MARINE_BLUE);
+}
+
+void draw_bactr(ROBOT *robot)
+{
+    int lb=750,ub=0;
+    char *s;
+    int len;
+    bar(lb,ub,lb+150,ub+60,MARINE_BLUE);
+    fill_rect(lb+21,ub+10,lb+70,ub+40,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(lb+70,ub+15,lb+75,ub+35,MISTY_ROSE,MISTY_ROSE);
+    itoa(robot->electr,s,10);
+    len=strlen(s);
+    s[len]='%';
+    s[len+1]='\0';
+    outtextxy(lb+80,ub+10,s,1,2,10,WHITE);
+    if(robot->electr<25) fill_rect(lb+23,ub+12,lb+32,ub+38,STRONG_RED,BRIGHT_GREEN);
+    else fill_rect(lb+23,ub+12,lb+32,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
+    if(robot->electr>=25) fill_rect(lb+35,ub+12,lb+44,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
+    if(robot->electr>=50) fill_rect(lb+47,ub+12,lb+56,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
+    if(robot->electr>=75) fill_rect(lb+59,ub+12,lb+68,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
 }

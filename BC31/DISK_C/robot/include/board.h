@@ -10,10 +10,11 @@
 
 #include "headers.h"
 
-void draw_control(); //画出控制主面板
-void draw_eletr();
-void draw_comfort(); //
-void draw_move();
-void draw_clean();
+void draw_control(HOUSE *house, ROBOT *robot); //画出控制主面板
+void draw_eletr(HOUSE *house, ROBOT *robot);
+void draw_comfort(HOUSE *house, ROBOT *robot); //
+void draw_move(HOUSE *house, ROBOT *robot);
+void draw_clean(HOUSE *house, ROBOT *robot);
+void draw_bactr(ROBOT *robot); //画电池函数
 
 #endif
