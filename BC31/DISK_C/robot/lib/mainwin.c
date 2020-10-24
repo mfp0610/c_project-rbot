@@ -83,6 +83,7 @@ void mainWindow()
 
     paintmp(mp1,px,py,'d');
     draw_control(house,robot);
+    draw_bactr(robot);
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
@@ -90,8 +91,8 @@ void mainWindow()
         if(mouse_press(lb+37,ub+350,lb+127,ub+390)==1) //进入电量界面
         {
             clrmous(MouseX, MouseY);
-            nocombo();
             draw_electr(house,robot);
+            nocombo();
             func_electr(house,robot);
             draw_control(house,robot);
             continue;
@@ -99,8 +100,8 @@ void mainWindow()
         if(mouse_press(lb+147,ub+350,lb+237,ub+390)==1) //进入舒适度界面
         {
             clrmous(MouseX, MouseY);
-            nocombo();
             draw_comfort(house,robot);
+            nocombo();
             func_comfort(house,robot);
             draw_control(house,robot);
             continue;
@@ -108,8 +109,8 @@ void mainWindow()
         if(mouse_press(lb+37,ub+410,lb+127,ub+450)==1) //进入环境界面
         {
             clrmous(MouseX, MouseY);
-            nocombo();
             draw_clean(house,robot);
+            nocombo();
             func_clean(house,robot);
             draw_control(house,robot);
             continue;
@@ -117,8 +118,8 @@ void mainWindow()
         if(mouse_press(lb+147,ub+410,lb+237,ub+450)==1) //进入控制界面
         {
             clrmous(MouseX, MouseY);
-            nocombo();
             draw_move(house,robot);
+            nocombo();
             func_move(house,robot);
             draw_control(house,robot);
             continue;
@@ -268,6 +269,7 @@ void maininit(HOUSE *house, ROBOT *robot)
 void func_electr(HOUSE *house, ROBOT *robot)
 {
     int lb=750, ub=0;
+    draw_bactr(robot);
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
@@ -294,6 +296,7 @@ void func_electr(HOUSE *house, ROBOT *robot)
 void func_comfort(HOUSE *house, ROBOT *robot)
 {
     int lb=750, ub=0;
+    draw_bactr(robot);
     while(1)
     {
         
@@ -320,6 +323,7 @@ void func_comfort(HOUSE *house, ROBOT *robot)
 void func_clean(HOUSE *house, ROBOT *robot)
 {
     int lb=750, ub=0;
+    draw_bactr(robot);
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
@@ -345,6 +349,7 @@ void func_clean(HOUSE *house, ROBOT *robot)
 void func_move(HOUSE *house, ROBOT *robot)
 {
     int lb=750, ub=0;
+    draw_bactr(robot);
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
@@ -370,15 +375,15 @@ void func_move(HOUSE *house, ROBOT *robot)
 void timepass(HOUSE *house, ROBOT *robot)
 {
     /*******上机调试*******/
-    int timeupdate=1000; //更新界面时间
-    int timedirt=500; //污染程度更新时间
-    int timetmp=50000; //温度更新时间
-    int timeele=5000; //电量更新时间
-    int timecut=100000; //时间计数器请清零
+    long long timeupdate=100000; //更新界面时间
+    long long timedirt=50000; //污染程度更新时间
+    long long timetmp=5000000; //温度更新时间
+    long long timeele=500000; //电量更新时间
+    long long timecut=10000000; //时间计数器请清零
     char *s;
-    bar(0,0,150,60,MARINE_BLUE);
+    /*bar(0,0,150,60,MARINE_BLUE);
     itoa(house->time,s,10);
-    outtextxy(0,0,s,1,2,10,WHITE);
+    outtextxy(0,0,s,1,2,10,WHITE);*/
     if(house->time%timeupdate==0)
     {
         draw_bactr(robot); //画电池电量

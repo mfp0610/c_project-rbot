@@ -16,7 +16,7 @@ typedef struct{
 } ROBOT;
 
 typedef struct{
-    int time; //程序运行时间
+    long long time; //程序运行时间
     int temp; //房间温度
     int wet; //房间湿度
     int pm25; //房间的pm2.5指数
