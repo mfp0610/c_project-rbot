@@ -195,7 +195,7 @@ void draw_bactr(ROBOT *robot)
 {
     char *s;
     int len;
-    bar(lb,ub,lb+140,ub+60,MARINE_BLUE);
+    bar(lb,ub,lb+120,ub+60,MARINE_BLUE);
     fill_rect(lb+21,ub+10,lb+70,ub+40,MISTY_ROSE,MARINE_BLUE);
     fill_rect(lb+70,ub+15,lb+75,ub+35,MISTY_ROSE,MISTY_ROSE);
     itoa(robot->electr,s,10);
@@ -212,7 +212,6 @@ void draw_bactr(ROBOT *robot)
 
 void write_statu(HOUSE *house, ROBOT *robot)
 {
-    
     outtextxy(lb+150,ub+160,"室外温度：",24,25,'K',BLACK);
     outtextxy(lb+150,ub+195,"室内温度：",24,25,'K',BLACK);
     outtextxy(lb+150,ub+230,"空气湿度：",24,25,'K',BLACK);
