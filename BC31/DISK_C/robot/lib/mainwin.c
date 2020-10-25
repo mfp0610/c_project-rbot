@@ -41,7 +41,7 @@ void mainWindow()
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        //timepass(house,robot,1);
+        timepass(house,robot,1);
         if(mouse_press(lb+37,ub+350,lb+127,ub+390)==1) //进入电量界面
         {
             clrmous(MouseX, MouseY);
@@ -92,7 +92,6 @@ void mainWindow()
         {
             value=getch();
             moveupdate(house,robot,value);
-            fprintf(fpde,"1 %d %d\n",(*robot).px,(*robot).py);
         }
         if(mouse_press(15,24,735,744)==1)
         {
