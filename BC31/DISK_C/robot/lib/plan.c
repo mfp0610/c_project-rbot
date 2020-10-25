@@ -1,116 +1,127 @@
 #include "headers.h"
-const int N=101;
-bool map1[N][N];//地图：0表示可走，1表示障碍物
-bool vis_map[N][N];
-int direction[4][2]={{0,1},{0,-1},{-1,0},{1,0}};//上，下，左，右
-int des_x,des_y;//目的地
-int st_x,st_y;//出发地
-int id;
-int path[10001];
-struct Node
+FILE *fpde1;
+
+/***heap实现优先队列部分***/
+void swapnode(NODE1 *a, NODE1 *b)
 {
-  int x,y,dis,val;//当前点的 x/y/bfs距离/估价函数
-  int last;//记录路径
-  int id;
-}node[10001];
-int val_func(int a,int x,int y)//估价函数
+    NODE1 x=*a;
+    *a=*b, *b=x;     
+}
+void put(NODE1 *heap, int *size, NODE1 d)
 {
-  return a+abs(des_x-x)+abs(des_y-y);
+    int now,next;
+    heap[++(*size)]=d;
+    now=(*size);
+    while(now>1)
+    {
+        next=now>>1;
+        if(heap[now].val>=heap[next].val) return;
+        swapnode(&heap[now],&heap[next]);
+        now=next;
+    }
+}
+void del(NODE1 *heap, int *size)
+{
+    int now,next;
+    heap[1]=heap[(*size)--];
+    now=1;
+    while(now*2<=(*size))
+    {
+        next=now*2;
+        if(next<(*size)&&heap[next+1].val<heap[next].val) next++;
+        if(heap[now].val<=heap[next].val) return;
+        swapnode(&heap[now],&heap[next]);
+        now=next;                      
+    }
+    return;
+}
+/***完成优先队列的实现***/
+
+int val_func(int a,NODE beg,int x,int y) //估价函数
+{
+    return a+abs(beg.x-x)+abs(beg.y-y);
 }
 
-//-------------分割线------------------heap实现优先队列部分----------------//
-int heap_size,n;
-Node heap[10001];  
-void swap(Node &a,Node &b)
+int BFS(NODE beg,NODE end,NODE1 *node,int sz,HOUSE *house)
 {
-    Node x=a;
-    a=b;
-    b=x;     
-}
-void put(Node d)
-{
-  int now,next;
-  heap[++heap_size]=d;
-  now=heap_size;
-  while(now>1)
-  {
-    next=now>>1;
-    if(heap[now].val>=heap[next].val) return;
-    swap(heap[now],heap[next]);
-    now=next;           
-  }    
-}
-Node del()
-{
-  int now,next;
-  Node res;
-  res=heap[1];
-  heap[1]=heap[heap_size--];
-  now=1;
-  while(now*2<=heap_size)
-  {
-    next=now*2;
-    if(next<heap_size&&heap[next+1].val<heap[next].val) next++;
-    if(heap[now].val<=heap[next].val) return res;
-    swap(heap[now],heap[next]);
-    now=next;                      
-  } 
-}
-Node get()
-{
- return heap[1];   
-} 
-//-------------分割线结束---------------------------------------------//
-Node BFS()
-{
-  bool flag=0;//判断结束
-  while(!flag)
-  {
-    Node hed=get();
-    del();
-    vis_map[hed.x][hed.y]=1;
-    for(int i=0;i<4;i++)
+    NODE1 heap[M];
+    int hp_sz=0; //定义优先队列
+
+    int vis_map[N][N]; //地图访问情况
+    int dir[4][2]={{0,1},{0,-1},{-1,0},{1,0}}; //方向数组
+    int i,newx,newy;
+
+    node[++sz].x=beg.x;
+    node[sz].y=beg.y;
+    node[sz].dis=0;
+    node[sz].val=val_func(node[sz].dis,beg,node[sz].x,node[sz].y);
+    node[sz].id=sz;
+    node[sz].last=-1;
+    put(heap,&hp_sz,node[sz]);
+    while(hp_sz!=0)
     {
-      int newx=direction[i][0]+hed.x;
-      int newy=direction[i][1]+hed.y;
-      if(newx>=0&&newx<=100&&newy>=0&&newy<=100&&!vis_map[newx][newy]&&!map1[newx][newy])
-      {
-        vis_map[newx][newy]=1;
-        node[++id].x=newx;
-        node[id].y=newy;
-        node[id].dis=hed.dis+1;
-        node[id].last=hed.id;
-        node[id].id=id;
-        node[id].val=val_func(node[id].dis,node[id].x,node[id].y);
-        put(node[id]);
-        if(newx==des_x&&newy==des_y)
+        NODE1 hed=heap[1];
+        del(heap,&hp_sz);
+        vis_map[hed.x][hed.y]=1;
+        for(i=0;i<4;i++)
         {
-          return node[id];
+            newx=dir[i][0]+hed.x;
+            newy=dir[i][1]+hed.y;
+            if(newx>=0&&newx<=100&&newy>=0&&newy<=100
+            &&!vis_map[newx][newy]&&pd_pass((*house).mp1[newx][newy]))
+            {
+                vis_map[newx][newy]=1;
+                node[++sz].x=newx;
+                node[sz].y=newy;
+                node[sz].dis=hed.dis+1;
+                node[sz].last=hed.id;
+                node[sz].id=sz;
+                node[sz].val=val_func(node[sz].dis,beg,node[sz].x,node[sz].y);
+                put(heap,&hp_sz,node[sz]);
+                if(newx==end.x&&newy==end.y) return sz;
+            }
         }
-      }
     }
-  }
+    return -1;
 }
-void get_path(Node x)
+
+
+void get_path(NODE *road, int *cnt, NODE1 *node, int x)
 {
-  if(x.last==-1) 
-  {
-    printf("(%d,%d)\n",x.x,x.y);
-    return;
-  }
-  get_path(node[x.last]);
-  printf("(%d,%d)\n",x.x,x.y);
+    if(node[x].last==-1) 
+    {
+        road[++(*cnt)].x=node[x].x;
+        road[(*cnt)].y=node[x].y;
+        return;
+    }
+    get_path(road,cnt,node,node[x].last);
+    road[++(*cnt)].x=node[x].x;
+    road[(*cnt)].y=node[x].y;
 }
-void()
+
+void Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
 {
-  scanf("%d%d%d%d",&st_x,&st_y,&des_x,&des_y);//输入出发地和目的地 
-  node[++id].x=st_x;
-  node[id].x=st_y;
-  node[id].dis=0;
-  node[id].val=val_func(node[id].dis,node[id].x,node[id].y);
-  node[id].id=id;
-  node[id].last=-1;
-  put(node[id]);
-  Node init=BFS();
-  get_path(init);
+    NODE1 node[M];
+    int nd_sz=0; //定义结点记录数组
+    NODE road[M];
+    int rd_sz=0; //定义路径记录数组
+    
+    char dir;
+    int i;
+    
+    fpde1=fopen("debug\\debug1.txt","w");
+
+    nd_sz=BFS(beg,end,node,0,house); //宽度优先搜索得到路径
+    get_path(road,&rd_sz,node,nd_sz); //规范化路径
+    for(i=2;i<=rd_sz;i++)
+    {
+        if(road[i].x-road[i-1].x==1) dir='s';
+        if(road[i].x-road[i-1].x==-1) dir='w';
+        if(road[i].y-road[i-1].y==1) dir='d';
+        if(road[i].y-road[i-1].y==-1) dir='a';
+        fprintf(fpde1,"1 %d %d %c\n",road[i].x,road[i].y,dir);
+        Delaytime(100);
+        moveupdate(house,robot,dir);
+    }
+    fclose(fpde1);
 }

@@ -60,3 +60,17 @@ void moveupdate(HOUSE *house,ROBOT *robot,char value) //移动更新函数
         return;
     }
 }
+
+int getposition(int x,int y)
+{
+    int by=24,bx=15,len=40,sn=18;
+    int retcode;
+    retcode=((y-by)/len)*sn+(x-bx)/len;
+    return retcode;
+}
+
+int pd_pass(int mp)
+{
+    if(mp==0) return 1;
+    else return 0;
+}

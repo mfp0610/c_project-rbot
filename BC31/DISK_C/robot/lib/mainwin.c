@@ -22,7 +22,8 @@ void mainWindow()
     ROBOT *robot;
     char value, value1;
     int i,j;
-    
+    int poscode;
+    NODE mp,mto; //鼠标点击后行动坐标
 
     drawbasic();  //画出画面底板
     clrmous(MouseX, MouseY);
@@ -92,6 +93,18 @@ void mainWindow()
             value=getch();
             moveupdate(house,robot,value);
             fprintf(fpde,"1 %d %d\n",(*robot).px,(*robot).py);
+        }
+        if(mouse_press(15,24,735,744)==1)
+        {
+            nocombo();
+            poscode=getposition(MouseX, MouseY);
+            mto.x=poscode/18;
+            mto.y=poscode%18;
+            mp.x=(*robot).px;
+            mp.y=(*robot).py;
+            fprintf(fpde,"0 %d %d\n",mp.x,mp.y);
+            fclose(fpde);
+            Astarmove(mp,mto,robot,house);
         }
     }
     return;

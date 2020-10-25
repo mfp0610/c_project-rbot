@@ -30,6 +30,8 @@
 #include "board.h" //绘制控制面板头文件
 #include "drawmap.h" //绘制程序主界面头文件
 #include "comfort.h" //舒适度功能头文件
+#include "move.h" //移动功能头文件
+#include "plan.h" //路径规划算法头文件
 
 
 //定义颜色宏
