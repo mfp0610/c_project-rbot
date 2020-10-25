@@ -20,7 +20,8 @@ void move(HOUSE *house, ROBOT *robot,char dir) //移动机器人
     }
     nx=(*robot).px+dx, ny=(*robot).py+dy;
     //fprintf(fpde,"1 %d %d\n",nx,ny);
-    if(nx>=0 && nx<N && ny>=0 && ny<N && (*house).mp1[nx][ny]==0)
+    if(nx>=0 && nx<N && ny>=0 && ny<N && 
+        pd_pass((*house).mp1[nx][ny]))
     {
         (*house).mp1[(*robot).px][(*robot).py]=0;
         (*robot).px=nx, (*robot).py=ny;
@@ -72,5 +73,9 @@ int getposition(int x,int y)
 int pd_pass(int mp)
 {
     if(mp==0) return 1;
-    else return 0;
+    if(mp==3) return 1;
+    if(mp==9) return 1;
+    if(mp==10) return 1;
+    if(mp==11) return 1;
+    return 0;
 }

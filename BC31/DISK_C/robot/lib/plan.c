@@ -47,7 +47,7 @@ int BFS(NODE beg,NODE end,NODE1 *node,int sz,HOUSE *house)
     NODE1 heap[M];
     int hp_sz=0; //定义优先队列
 
-    int vis_map[N][N]; //地图访问情况
+    int vis_map[N][N]={0}; //地图访问情况
     int dir[4][2]={{0,1},{0,-1},{-1,0},{1,0}}; //方向数组
     int i,newx,newy;
 
@@ -99,7 +99,7 @@ void get_path(NODE *road, int *cnt, NODE1 *node, int x)
     road[(*cnt)].y=node[x].y;
 }
 
-void Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
+int Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
 {
     NODE1 node[M];
     int nd_sz=0; //定义结点记录数组
@@ -112,6 +112,7 @@ void Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
     fpde1=fopen("debug\\debug1.txt","w");
 
     nd_sz=BFS(beg,end,node,0,house); //宽度优先搜索得到路径
+    if(nd_sz==-1) return 0;
     get_path(road,&rd_sz,node,nd_sz); //规范化路径
     for(i=2;i<=rd_sz;i++)
     {
@@ -124,4 +125,5 @@ void Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
         moveupdate(house,robot,dir);
     }
     fclose(fpde1);
+    return 1;
 }

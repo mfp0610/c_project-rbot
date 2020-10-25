@@ -18,6 +18,6 @@ void del(NODE1 *heap, int *size);
 int val_func(int a,NODE beg,int x,int y); //利用曼哈顿距离实现估价函数
 int BFS(NODE beg,NODE end,NODE1 *node,int sz,HOUSE *house);
 void get_path(NODE *road, int *cnt, NODE1 *node, int x);
-void Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house);
+int Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house);
 
 #endif

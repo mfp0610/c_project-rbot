@@ -102,9 +102,10 @@ void mainWindow()
             mto.y=poscode%18;
             mp.x=(*robot).px;
             mp.y=(*robot).py;
-            fprintf(fpde,"0 %d %d\n",mp.x,mp.y);
-            fclose(fpde);
-            Astarmove(mp,mto,robot,house);
+            if(!Astarmove(mp,mto,robot,house))
+            {
+                bar(1000,750,1024,768,BLACK);
+            }
         }
     }
     return;
