@@ -39,20 +39,6 @@ void draw_wall_vertical(int x,int y,int n)
     bar(x,y,x+WALL_WIDE,y+n*SIZE,WALL_GREEN);
 }
 
-void draw_bed(int x,int b)
-{
-    int y = b-32;
-    bar(x,y,x+5*SIZE,y+WIDE,BLACK);
-    bar(x,y+3*SIZE-WIDE,x+5*SIZE,y+3*SIZE,BLACK);
-    bar(x,y+WIDE,x+WIDE,y+3*SIZE-WIDE,BLACK);
-    bar(x+5*SIZE-WIDE,y+WIDE,x+5*SIZE,y+3*SIZE-WIDE,BLACK);
-    bar(x+3*SIZE,y+WIDE,x+3*SIZE+WIDE,y+3*SIZE-WIDE,BLACK);
-    bar(x+WIDE,y+WIDE,x+3*SIZE,y+3*SIZE-WIDE,PINK);
-    bar(x+3*SIZE+WIDE,y+WIDE,x+5*SIZE-WIDE,y+3*SIZE-WIDE,PINK);
-    bar(x+4*SIZE,y+8,x+4*SIZE+30,y+54,WHEAT);
-    bar(x+4*SIZE,y+66,x+4*SIZE+30,y+3*SIZE-8,WHEAT);
-}
-
 void draw_table(int x,int y)
 {
     bar(x,y,x+SIZE,y+SIZE,WHEAT);

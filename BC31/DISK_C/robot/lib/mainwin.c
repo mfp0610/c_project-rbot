@@ -116,11 +116,10 @@ void paintmp(HOUSE *house, ROBOT *robot)
     {
         cy1=tx+i*sz, cx1=ty+j*sz;
         cy2=cy1+sz, cx2=cx1+sz;
+        draw_floor_wood(cx1,cy1);
         switch((*house).mp1[i][j])
         {
-            case 0: case 1:
-                draw_floor_wood(cx1,cy1);
-                break;
+            
             case 2:
                 bar(cx1,cy1,cx2,cy2,BLACK);
                 break;
@@ -128,7 +127,7 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1,cy1,cx2,cy2,BROWN);
                 break;
             case 4:
-                bar(cx1,cy1,cx2,cy2,PEACH_PUFF);
+                fill_circle((cx1+cx2)/2,(cy1+cy2)/2,20,PEACH_PUFF,BLACK);
                 break;
             case 5:
                 bar(cx1,cy1,cx2,cy2,WHEAT);
@@ -137,7 +136,58 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1,cy1,cx2,cy2,GREEN);
                 break;
             case 7:
-                draw_bed(cx1,cx2);
+                bar(cx1,cy1,cx2,cy2,PINK);
+                break;
+            case 8:
+                bar(cx1,cy1,cx1+2,cy2,BLACK);
+                bar(cx1+2,cy1,cx2,cy2,PINK);
+                break;
+            case 12:
+                bar(cx1,cy1,cx2,cy2,PINK);
+                bar(cx1,cy1+8,cx2-8,cy2,WHEAT);
+                break;
+            case 13:
+                bar(cx1,cy1,cx2,cy2,PINK);
+                bar(cx1,cy1,cx2-8,cy1+12,WHEAT);
+                bar(cx1,cy1+28,cx2-8,cy2,WHEAT);
+                break;
+            case 14:
+                bar(cx1,cy1,cx2,cy2,PINK);
+                bar(cx1,cy1,cx2-8,cy2-8,WHEAT);
+                break;
+            case 15:
+                bar(cx1,cy1,cx2,cy2,PINK);
+                bar(cx1,cy1+19,cx2,cy2-19,BLACK);
+                bar(cx1,cy1,cx1+2,cy2,BLACK);
+                break;
+            case 16:
+                bar(cx1,cy1,cx2,cy2,PINK);
+                bar(cx1+21,cy1,cx2,cy2,WHEAT);
+                bar(cx1,cy1+19,cx2,cy2-19,BLACK);
+                bar(cx1+19,cy1,cx2-19,cy2,BLACK);
+                break;
+            case 17:
+                bar(cx1,cy1,cx2,cy2,PINK);
+                bar(cx1+19,cy1,cx2-19,cy2,BLACK);
+                bar(cx1+21,cy1,cx2,cy2,WHEAT);
+                break;
+            case 18:
+                bar(cx1,cy1,cx2,cy2,WHEAT);
+                bar(cx1,cy1+8,cx2-8,cy1+10,BLACK);
+                bar(cx2-10,cy1+10,cx2-8,cy2,BLACK);
+                bar(cx1,cy1+10,cx2-10,cy2,PINK);
+                bar(cx1,cy1,cx1+2,cy2,BLACK);
+                break;
+            case 19:
+                bar(cx1,cy1,cx2,cy2,WHEAT);
+                bar(cx2-10,cy1,cx2-8,cy2-8,BLACK);
+                bar(cx1,cy2-10,cx2-10,cy2-8,BLACK);
+                bar(cx1,cy1,cx2-10,cy2-10,PINK);
+                bar(cx1,cy1,cx1+2,cy2,BLACK);
+                break;
+            case 20:
+                bar(cx1,cy1,cx2,cy2,PINK);
+                bar(cx1,cy1,cx1+2,cy2,BLACK);
                 break;
             default: break;
         }
@@ -165,26 +215,28 @@ void maininit(HOUSE *house, ROBOT *robot)
     int mp1init[N][N]={
         {0,2,6,6,2,6,6,6,2,6,6,6,2,0,0,0,0,0},
         {0,9,0,0,2,6,6,6,2,6,6,6,2,5,5,0,0,0},
-        {0,9,0,0,9,0,0,6,2,0,0,6,2,5,5,4,0,0},
-        {0,2,0,0,9,0,0,6,2,0,0,6,2,5,5,4,0,0},
+        {0,9,0,0,9,0,0,6,2,0,0,6,2,5,5,18,0,0},
+        {0,2,0,0,9,0,0,6,2,0,0,6,2,5,5,19,0,0},
         {2,2,0,0,9,0,0,6,2,0,0,6,2,5,5,0,0,0},
         {0,0,0,0,2,6,6,6,2,0,0,6,2,0,0,0,0,0},
         {4,4,0,0,2,2,2,2,2,10,11,2,2,0,0,0,0,6},
         {5,5,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,6},
         {5,5,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,6},
-        {12,4,0,0,0,0,0,2,10,11,2,2,2,2,2,2,2,2},
-        {0,0,0,4,4,0,6,2,0,0,0,0,0,6,6,6,6,6},
-        {6,0,0,0,0,4,4,2,0,0,0,0,0,0,0,0,0,0},
-        {6,0,0,5,5,4,4,2,0,0,0,0,0,0,0,0,0,6},
-        {6,0,0,5,5,4,4,2,6,0,0,0,0,7,7,7,7,7},
-        {6,0,0,5,5,4,4,2,6,0,0,0,0,7,7,7,7,7},
-        {6,0,0,0,0,4,4,2,6,0,0,0,0,7,7,7,7,7},
+        {4,4,0,0,0,0,0,2,10,11,2,2,2,2,2,2,2,2},
+        {1,0,0,4,4,0,6,2,0,0,0,0,0,6,6,6,6,6},
+        {6,0,0,0,0,20,17,2,0,0,0,0,0,0,0,0,0,0},
+        {6,0,0,5,5,15,16,2,0,0,0,0,0,0,0,0,0,6},
+        {6,0,0,5,5,20,17,2,6,0,0,0,0,7,7,7,8,12},
+        {6,0,0,5,5,15,16,2,6,0,0,0,0,7,7,7,8,13},
+        {6,0,0,0,0,20,17,2,6,0,0,0,0,7,7,7,8,14},
         {0,0,0,4,4,0,6,2,0,0,0,0,0,0,0,0,0,6},
         {0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0},
     };
+    //0是地板，1是机器人，2是墙壁，3是门，4是椅子，
+    //5是桌子，6是一般高度家具，7 8 12 13 14是床，9是竖门，10是左门，11是右门
 
     (*robot).electr=100; //初始化机器人信息
-    (*robot).px=9, (*robot).py=0;
+    (*robot).px=10, (*robot).py=0;
     (*robot).rt='d';
     
     (*house).time=0;
@@ -195,9 +247,6 @@ void maininit(HOUSE *house, ROBOT *robot)
     for(i=0;i<N;i++)
     for(j=0;j<N;j++)
         ((*house).mp1)[i][j]=mp1init[i][j];
-    
-    //1是地板，2是墙壁，3是门，4是椅子，
-    //5是桌子，6是一般高度家具，78是床，9是竖门，10是左门，11是右门
 }
 
 void func_electr(HOUSE *house, ROBOT *robot)
