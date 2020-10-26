@@ -10,6 +10,7 @@
 
 #include "headers.h"
 
-void com_clean(HOUSE *house, ROBOT *robot);
+void com_clean(HOUSE *house, ROBOT *robot); //清洁空气功能
+void com_settemp(HOUSE *house, ROBOT *robot,int change); //更改设定温度功能
 
 #endif

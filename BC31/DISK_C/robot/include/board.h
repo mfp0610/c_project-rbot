@@ -16,5 +16,6 @@ void draw_comfort(HOUSE *house, ROBOT *robot); //
 void draw_move(HOUSE *house, ROBOT *robot);
 void draw_clean(HOUSE *house, ROBOT *robot);
 void draw_bactr(ROBOT *robot); //画电池函数
+void write_statu(HOUSE *house, ROBOT *robot, int st); //写状态函数
 
 #endif

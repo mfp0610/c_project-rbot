@@ -210,16 +210,24 @@ void draw_bactr(ROBOT *robot)
     if((*robot).electr>=75) fill_rect(lb+59,ub+12,lb+68,ub+38,BRIGHT_GREEN,BRIGHT_GREEN);
 }
 
-void write_statu(HOUSE *house, ROBOT *robot)
+void write_statu(HOUSE *house, ROBOT *robot,int st)
 {
-    char s1[5],s2[5],s3[5],s4[8];
-    itoa((*house).temp,s1,10);
-    itoa((*house).tempout,s2,10);
-    itoa((*house).wet,s3,10);
-    itoa((*house).pm25,s4,10);
-    bar(lb+150,ub+150,lb+200,ub+300,MISTY_ROSE);
-    outtextxy(lb+150,ub+155,s1,2,2,15,BLACK);
-    outtextxy(lb+150,ub+190,s2,2,2,15,BLACK);
-    outtextxy(lb+150,ub+225,s3,2,2,15,BLACK);
-    outtextxy(lb+150,ub+260,s4,2,2,15,BLACK);
+    if(st==1||st==2)
+    {
+        char s1[5],s2[5],s3[5],s4[8];
+        itoa((*house).temp,s1,10);
+        itoa((*house).tempout,s2,10);
+        itoa((*house).wet,s3,10);
+        itoa((*house).pm25,s4,10);
+        bar(lb+150,ub+150,lb+210,ub+300,MISTY_ROSE);
+        outtextxy(lb+150,ub+155,s1,2,2,15,BLACK);
+        outtextxy(lb+150,ub+190,s2,2,2,15,BLACK);
+        outtextxy(lb+150,ub+225,s3,2,2,15,BLACK);
+        outtextxy(lb+150,ub+260,s4,2,2,15,BLACK);
+        if(st==2)
+        {
+
+        }
+        return ;
+    }
 }

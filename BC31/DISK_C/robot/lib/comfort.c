@@ -7,7 +7,21 @@
 */
 #include "headers.h"
 
+void com_dry(HOUSE *house, ROBOT *robot)
+{
+    (*house).setd=1;
+    //write_statu(house,robot,1);
+}
+
 void com_clean(HOUSE *house, ROBOT *robot)
 {
-    house->pm25=20;
+    (*house).setc=1;
+    //write_statu(house,robot,1);
+}
+
+void com_settemp(HOUSE *house, ROBOT *robot,int change)
+{
+    if(change==1) (*house).tempset++;
+    else (*house).tempset--;
+    write_statu(house,robot,2);
 }

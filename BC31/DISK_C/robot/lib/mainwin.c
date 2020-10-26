@@ -9,10 +9,13 @@
 #define lb 750
 #define ub 0
 #define timeupdate 100000 //更新界面时间
-#define timedirt 50000 //污染程度更新时间
+#define time
+#define timedirt 500000 //污染，湿度程度更新时间
 #define timetmp 1000000 //温度更新时间
 #define timeele 500000 //电量更新时间
 #define timecut 10000000 //时间计数器请清零
+#define setclean 20
+#define setwet 20
 
 FILE *fpde;
 
@@ -35,10 +38,11 @@ void mainWindow()
     fpde=fopen("debug\\debug.txt","w");
     
     paintmp(house,robot);
-    draw_control(house,robot);fprintf(fpde,"\ninit\n");
+    draw_control(house,robot);
     draw_bactr(robot);
-    write_statu(house,robot);
+    write_statu(house,robot,1);
 
+    fprintf(fpde,"\ninit\n");
     fprintf(fpde,"time %lld\n",(*house).time); 
     fprintf(fpde,"pm %d\n",(*house).pm25);
     fprintf(fpde,"out %d\n",(*house).tempout);
@@ -273,7 +277,11 @@ void maininit(HOUSE *house, ROBOT *robot)
     (*robot).rt='d';
     
     (*house).time=0;
+
     (*house).set=0;
+    (*house).setd=0;
+    (*house).setc=0;
+
     (*house).tempout=20;
     (*house).temp=26;
     (*house).wet=50;
@@ -320,21 +328,19 @@ void func_electr(HOUSE *house, ROBOT *robot)
 void func_comfort(HOUSE *house, ROBOT *robot)
 {
     char value;
-    
     draw_bactr(robot);
     while(1)
     {
-        
         newmouse(&MouseX, &MouseY, &press);
         timepass(house,robot,1);
-        if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
+        if(mouse_press(lb+37,ub+410,lb+127,ub+450)==1) //进入电量界面
         {
-            
+            com_dry(house,robot);
             continue;
         }
-        if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //进入舒适度界面
+        if(mouse_press(lb+147,ub+410,lb+237,ub+450)==1) //进入舒适度界面
         {
-            
+            com_clean(house,robot);
             continue;
         }
         if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入环境界面
@@ -433,19 +439,29 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
         fprintf(fpde,"out %d\n",(*house).tempout);
         fprintf(fpde,"in %d\n",(*house).temp);
         fprintf(fpde,"dian %d\n",(*robot).electr);
-        switch(st)
-        {
-            case 1:
-                write_statu(house,robot);
-                break;
-            default: break;
-        } //写出房间环境
+        write_statu(house,robot,st);
     }
-    if((*house).time%timedirt==0) (*house).pm25++;
-    if((*house).time%timetmp==0)
+    if((*house).time%timedirt==0)
     {
-        (*house).temp-=sign((*house).temp-(*house).tempout);
+        //pm25变化
+        if((*house).pm25>=setclean&&(*house).setc)
+            (*house).pm25--;
+        else
+        {
+            (*house).setc=0;
+            (*house).pm25++;
+        }
+        //湿度变化
+        if((*house).wet>=setwet&&(*house).setd)
+            (*house).wet--;
+        else
+        {
+            (*house).setd=0;
+            (*house).wet++;
+        }
     }
+    if((*house).time%timetmp==0)
+        (*house).temp-=sign((*house).temp-(*house).tempout);
     if((*house).time%timeele==0) (*robot).electr--;
     if((*robot).electr==0) (*robot).electr=100; //触发自动充电模块
     (*house).time%=timecut;
