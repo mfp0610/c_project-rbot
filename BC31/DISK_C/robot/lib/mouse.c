@@ -207,3 +207,16 @@ int mouse_press_out(int x1, int y1, int x2, int y2)
 	if(MouseX<x1 ||MouseX>x2 ||MouseY<y1 ||MouseY>y2) return press;
 	else return 0;
 }
+
+int mouse_press_circle(int x1, int y1, int r1)
+{
+	long int sum1, sum2, sum3;
+	sum3 = MouseX - x1;
+	sum1 = sum3 * sum3;
+	sum3 = MouseY - y1;
+	sum1 = sum1 + sum3 * sum3;
+	sum3 = r1;
+	sum2 = sum3 * sum3;
+	if(sum1<=sum2 && press==1) return press;
+	return 0;
+}

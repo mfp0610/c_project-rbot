@@ -105,8 +105,8 @@ void draw_comfort(HOUSE *house, ROBOT *robot)
     puthz(lb+37,ub+265,"空气质量：",24,25,'K',BLACK);
 
     //画功能按钮
-    fill_rect(lb+37,ub+350,lb+127,ub+390,MISTY_ROSE,MARINE_BLUE);
-    puthz(lb+47,ub+354,"温度",32,35,'K',BLACK);
+    puthz(lb+47,ub+354,"温度",32,35,'K',WHITE);
+    //fill_circle()
     outtextxy(lb+157,ub+354,"-26+",2,2,16,BLACK);
     fill_rect(lb+37,ub+410,lb+127,ub+450,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+47,ub+414,"除湿",32,35,'K',BLACK);

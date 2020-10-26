@@ -23,5 +23,6 @@ void save_bk_mou(int nx,int ny);
 void clrmous(int nx,int ny);
 void drawmous(int nx,int ny);
 int mouse_press(int x1, int y1, int x2, int y2);
+int mouse_press_circle(int x1, int y1, int r1);
 
 #endif
