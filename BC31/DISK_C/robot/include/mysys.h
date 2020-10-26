@@ -13,5 +13,6 @@
 void Delaytime(int time); //延时函数
 void swap(int *x,int *y); //交换函数
 void nocombo(); //防止连击
+int sign(int x); //符号函数
 
 #endif

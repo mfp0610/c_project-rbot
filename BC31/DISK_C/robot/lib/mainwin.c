@@ -10,7 +10,7 @@
 #define ub 0
 #define timeupdate 100000 //更新界面时间
 #define timedirt 50000 //污染程度更新时间
-#define timetmp 5000000 //温度更新时间
+#define timetmp 1000000 //温度更新时间
 #define timeele 500000 //电量更新时间
 #define timecut 10000000 //时间计数器请清零
 
@@ -35,13 +35,20 @@ void mainWindow()
     fpde=fopen("debug\\debug.txt","w");
     
     paintmp(house,robot);
-    draw_control(house,robot);
+    draw_control(house,robot);fprintf(fpde,"\ninit\n");
     draw_bactr(robot);
-    
+    write_statu(house,robot);
+
+    fprintf(fpde,"time %lld\n",(*house).time); 
+    fprintf(fpde,"pm %d\n",(*house).pm25);
+    fprintf(fpde,"out %d\n",(*house).tempout);
+    fprintf(fpde,"in %d\n",(*house).temp);
+    fprintf(fpde,"dian %d\n",(*robot).electr);
+
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        /*timepass(house,robot,1);*/
+        timepass(house,robot,1);
         if(mouse_press(lb+37,ub+350,lb+127,ub+390)==1) //进入电量界面
         {
             clrmous(MouseX, MouseY);
@@ -211,7 +218,6 @@ void paintmp(HOUSE *house, ROBOT *robot)
     bar(0,744,750,768,MISTY_ROSE);
     cy1=tx+(*robot).px*sz, cx1=ty+(*robot).py*sz;
     cy2=cy1+sz, cx2=cx1+sz;
-    fprintf(fpde,"%c\n",(*robot).rt);
     switch((*robot).rt)
     {
         case 'u': drawrobot_back((cx1+cx2)/2,(cy1+cy2)/2,1); break;
@@ -253,9 +259,11 @@ void maininit(HOUSE *house, ROBOT *robot)
     (*robot).rt='d';
     
     (*house).time=0;
+    (*house).set=0;
+    (*house).tempout=20;
     (*house).temp=26;
     (*house).wet=50;
-    (*house).pm25=100; //初始化房间信息
+    (*house).pm25=50; //初始化房间信息
 
     for(i=0;i<N;i++)
     for(j=0;j<N;j++)
@@ -404,16 +412,26 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
     if((*house).time%timeupdate==0)
     {
         draw_bactr(robot); //画电池电量
-        /*switch(st)
+        fprintf(fpde,"\naaaa\n");
+        fprintf(fpde,"time %lld\n",(*house).time); 
+        
+        fprintf(fpde,"pm %d\n",(*house).pm25);
+        fprintf(fpde,"out %d\n",(*house).tempout);
+        fprintf(fpde,"in %d\n",(*house).temp);
+        fprintf(fpde,"dian %d\n",(*robot).electr);
+        switch(st)
         {
             case 1:
                 write_statu(house,robot);
                 break;
             default: break;
-        } //写出房间环境*/
+        } //写出房间环境
     }
     if((*house).time%timedirt==0) (*house).pm25++;
-    if((*house).time%timetmp==0) (*house).temp++;
+    if((*house).time%timetmp==0)
+    {
+        (*house).temp-=sign((*house).temp-(*house).tempout);
+    }
     if((*house).time%timeele==0) (*robot).electr--;
     if((*robot).electr==0) (*robot).electr=100; //触发自动充电模块
     (*house).time%=timecut;

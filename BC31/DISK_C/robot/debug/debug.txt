@@ -1,0 +1,236 @@
+
+init
+time 0
+pm 50
+out 20
+in 26
+dian 100
+
+aaaa
+time 0
+pm 50
+out 20
+in 26
+dian 100
+
+aaaa
+time 100000
+pm 52
+out 20
+in 25
+dian 99
+
+aaaa
+time 200000
+pm 54
+out 20
+in 25
+dian 99
+
+aaaa
+time 300000
+pm 56
+out 20
+in 25
+dian 99
+
+aaaa
+time 400000
+pm 58
+out 20
+in 25
+dian 99
+
+aaaa
+time 500000
+pm 60
+out 20
+in 25
+dian 99
+
+aaaa
+time 600000
+pm 62
+out 20
+in 25
+dian 98
+
+aaaa
+time 700000
+pm 64
+out 20
+in 25
+dian 98
+
+aaaa
+time 800000
+pm 66
+out 20
+in 25
+dian 98
+
+aaaa
+time 900000
+pm 68
+out 20
+in 25
+dian 98
+
+aaaa
+time 1000000
+pm 70
+out 20
+in 25
+dian 98
+
+aaaa
+time 1100000
+pm 72
+out 20
+in 24
+dian 97
+
+aaaa
+time 1200000
+pm 74
+out 20
+in 24
+dian 97
+
+aaaa
+time 1300000
+pm 76
+out 20
+in 24
+dian 97
+
+aaaa
+time 1400000
+pm 78
+out 20
+in 24
+dian 97
+
+aaaa
+time 1500000
+pm 80
+out 20
+in 24
+dian 97
+
+aaaa
+time 1600000
+pm 82
+out 20
+in 24
+dian 96
+
+aaaa
+time 1700000
+pm 84
+out 20
+in 24
+dian 96
+
+aaaa
+time 1800000
+pm 86
+out 20
+in 24
+dian 96
+
+aaaa
+time 1900000
+pm 88
+out 20
+in 24
+dian 96
+
+aaaa
+time 2000000
+pm 90
+out 20
+in 24
+dian 96
+
+aaaa
+time 2100000
+pm 92
+out 20
+in 23
+dian 95
+
+aaaa
+time 2200000
+pm 94
+out 20
+in 23
+dian 95
+
+aaaa
+time 2300000
+pm 96
+out 20
+in 23
+dian 95
+
+aaaa
+time 2400000
+pm 98
+out 20
+in 23
+dian 95
+
+aaaa
+time 2500000
+pm 100
+out 20
+in 23
+dian 95
+
+aaaa
+time 2600000
+pm 102
+out 20
+in 23
+dian 94
+
+aaaa
+time 2700000
+pm 104
+out 20
+in 23
+dian 94
+
+aaaa
+time 2800000
+pm 106
+out 20
+in 23
+dian 94
+
+aaaa
+time 2900000
+pm 108
+out 20
+in 23
+dian 94
+
+aaaa
+time 3000000
+pm 110
+out 20
+in 23
+dian 94
+
+aaaa
+time 3100000
+pm 112
+out 20
+in 22
+dian 93
+
+aaaa
+time 3200000
+pm 114
+out 

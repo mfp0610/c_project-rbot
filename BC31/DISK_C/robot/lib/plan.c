@@ -107,7 +107,7 @@ int Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
     int rd_sz=0; //定义路径记录数组
     
     char dir;
-    int i;
+    int i,j;
     
     fpde1=fopen("debug\\debug1.txt","w");
 
@@ -116,6 +116,9 @@ int Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
     get_path(road,&rd_sz,node,nd_sz); //规范化路径
     for(i=2;i<=rd_sz;i++)
     {
+        for(j=0;j<=100;j++)
+            timepass(house,robot,1);
+        if(i%3==0) (*robot).electr--;
         if(road[i].x-road[i-1].x==1) dir='s';
         if(road[i].x-road[i-1].x==-1) dir='w';
         if(road[i].y-road[i-1].y==1) dir='d';

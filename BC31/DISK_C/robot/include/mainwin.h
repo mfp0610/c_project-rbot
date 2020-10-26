@@ -19,6 +19,8 @@ typedef struct{
 
 typedef struct{
     long int time; //程序运行时间
+    int set,tempset;
+    int tempout; //室外温度
     int temp; //房间温度
     int wet; //房间湿度
     int pm25; //房间的pm2.5指数
