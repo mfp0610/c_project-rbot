@@ -41,7 +41,7 @@ void mainWindow()
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        timepass(house,robot,1);
+        /*timepass(house,robot,1);*/
         if(mouse_press(lb+37,ub+350,lb+127,ub+390)==1) //进入电量界面
         {
             clrmous(MouseX, MouseY);
