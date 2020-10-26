@@ -80,6 +80,7 @@ void mainWindow()
             clrmous(MouseX, MouseY);
             draw_clean(house,robot);
             nocombo();
+            Delaytime(1000);
             func_clean(house,robot);
             draw_control(house,robot);
             draw_bactr(robot);
@@ -392,6 +393,7 @@ void func_clean(HOUSE *house, ROBOT *robot)
             if((*pnum)>0)
             {
                 col_rub(pnum,rubbish,house,robot);
+                (*pnum)--;
             }
             continue;
         }
