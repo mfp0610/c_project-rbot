@@ -177,9 +177,9 @@ void draw_clean(HOUSE *house, ROBOT *robot)
 
     //画功能按钮
     fill_rect(lb+57,ub+350,lb+217,ub+390,MISTY_ROSE,MARINE_BLUE);
-    puthz(lb+71,ub+354,"拾取垃圾",32,32,'K',BLACK);
+    puthz(lb+71,ub+354,"生成垃圾",32,32,'K',BLACK);
     fill_rect(lb+57,ub+410,lb+217,ub+450,MISTY_ROSE,MARINE_BLUE);
-    puthz(lb+71,ub+414,"倾倒垃圾",32,32,'K',BLACK);
+    puthz(lb+71,ub+414,"拾取垃圾",32,32,'K',BLACK);
     fill_rect(lb+57,ub+470,lb+217,ub+510,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+71,ub+474,"返回主页",32,32,'K',BLACK);
 

@@ -9,7 +9,7 @@
 #define lb 750
 #define ub 0
 #define timeupdate 100000 //更新界面时间
-#define timeflag 50000 //除尘除湿条件下的更新时间
+#define time
 #define timedirt 500000 //污染，湿度程度更新时间
 #define timetmp 1000000 //温度更新时间
 #define timeele 500000 //电量更新时间
@@ -358,24 +358,33 @@ void func_comfort(HOUSE *house, ROBOT *robot)
 
 void func_clean(HOUSE *house, ROBOT *robot)
 {
+    NODE rubbish[3];
     char value;
+    int *pnum=0;
     
     draw_bactr(robot);
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
         timepass(house,robot,1);
-        if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
+        if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //生成垃圾
         {
-            
+            (*pnum)++;
+            if((*pnum)<4)
+            {
+                set_rub(pnum,rubbish,house);
+            }
             continue;
         }
-        if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //进入舒适度界面
+        if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //拾倒垃圾
         {
-            
+            if((*pnum)>0)
+            {
+                col_rub(*pnum,rubbish,house,robot);
+            }
             continue;
         }
-        if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入环境界面
+        if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //返回主界面
         {
             nocombo();
             return;
@@ -441,12 +450,12 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
         fprintf(fpde,"dian %d\n",(*robot).electr);
         write_statu(house,robot,st);
     }
-    if((*house).time%timeflag==0)
+    if((*house).time%timedirt==0)
     {
         //pm25变化
         if((*house).pm25>=setclean&&(*house).setc)
             (*house).pm25--;
-        else if((*house).time%timedirt==0)
+        else
         {
             (*house).setc=0;
             (*house).pm25++;
@@ -454,7 +463,7 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
         //湿度变化
         if((*house).wet>=setwet&&(*house).setd)
             (*house).wet--;
-        else if((*house).time%timedirt==0)
+        else
         {
             (*house).setd=0;
             (*house).wet++;
@@ -462,10 +471,8 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
     }
     if((*house).time%timetmp==0)
         (*house).temp-=sign((*house).temp-(*house).tempout);
-    if((*house).time%timeele==0) 
-        (*robot).electr--;
-    if((*robot).electr<=25)
-        (*robot).electr=100; //触发自动充电模块
+    if((*house).time%timeele==0) (*robot).electr--;
+    if((*robot).electr==0) (*robot).electr=100; //触发自动充电模块
     (*house).time%=timecut;
     ((*house).time)++; 
 }
