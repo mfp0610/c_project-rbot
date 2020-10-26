@@ -9,7 +9,7 @@
 #define lb 750
 #define ub 0
 #define timeupdate 100000 //更新界面时间
-#define time
+#define timeflag 50000 //除尘除湿条件下的更新时间
 #define timedirt 500000 //污染，湿度程度更新时间
 #define timetmp 1000000 //温度更新时间
 #define timeele 500000 //电量更新时间
@@ -441,12 +441,12 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
         fprintf(fpde,"dian %d\n",(*robot).electr);
         write_statu(house,robot,st);
     }
-    if((*house).time%timedirt==0)
+    if((*house).time%timeflag==0)
     {
         //pm25变化
         if((*house).pm25>=setclean&&(*house).setc)
             (*house).pm25--;
-        else
+        else if((*house).time%timedirt==0)
         {
             (*house).setc=0;
             (*house).pm25++;
@@ -454,7 +454,7 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
         //湿度变化
         if((*house).wet>=setwet&&(*house).setd)
             (*house).wet--;
-        else
+        else if((*house).time%timedirt==0)
         {
             (*house).setd=0;
             (*house).wet++;
@@ -462,8 +462,10 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
     }
     if((*house).time%timetmp==0)
         (*house).temp-=sign((*house).temp-(*house).tempout);
-    if((*house).time%timeele==0) (*robot).electr--;
-    if((*robot).electr==0) (*robot).electr=100; //触发自动充电模块
+    if((*house).time%timeele==0) 
+        (*robot).electr--;
+    if((*robot).electr<=25)
+        (*robot).electr=100; //触发自动充电模块
     (*house).time%=timecut;
     ((*house).time)++; 
 }
