@@ -29,16 +29,6 @@ void draw_floor_ceramic(int x,int y)
     bar(x+WIDE,y+SIZE-WIDE,x+SIZE-WIDE,y+SIZE,BULE);
 }
 
-void draw_wall_horizon(int x,int y,int n)
-{
-    bar(x,y,x+n*SIZE,y+WALL_WIDE,WALL_GREEN);
-}
-
-void draw_wall_vertical(int x,int y,int n)
-{
-    bar(x,y,x+WALL_WIDE,y+n*SIZE,WALL_GREEN);
-}
-
 void draw_table(int x,int y)
 {
     bar(x,y,x+SIZE,y+SIZE,WHEAT);
@@ -51,19 +41,19 @@ void draw_chair(int x,int y)
 
 void draw_door_left(int x,int y)
 {
-    bar(x,y,x+SIZE,y+SIZE,BROWN);
-    fill_circle(x+30,y+20,2,BLACK,BLACK);
+    fill_rect(x,y,x+SIZE,y+SIZE,PINK,BLACK);
+    fill_circle(x+30,y+20,4,BLACK,BLACK);
 }
 
 void draw_door_right(int x,int y)
 {
-    bar(x,y,x+SIZE,y+SIZE,BROWN);
-    fill_circle(x+8,y+20,2,BLACK,BLACK);
+    fill_rect(x,y,x+SIZE,y+SIZE,PINK,BLACK);
+    fill_circle(x+8,y+20,4,BLACK,BLACK);
 }
 
 void draw_door_vertical(int x,int y,int n)
 {
-    bar(x,y,x+WALL_WIDE,y+n*SIZE,BROWN);
+    fill_rect(x,y,x+2*WALL_WIDE,y+n*SIZE,PINK,BLACK);
 }
 
 void draw_else(int x,int y)

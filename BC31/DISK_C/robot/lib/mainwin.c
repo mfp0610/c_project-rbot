@@ -153,7 +153,7 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1,cy1,cx2,cy2,WHEAT);
                 break;
             case 6:
-                bar(cx1,cy1,cx2,cy2,GREEN);
+                draw_floor_ceramic(cx1,cy1);
                 break;
             case 7:
                 bar(cx1,cy1,cx2,cy2,PINK);
@@ -161,6 +161,15 @@ void paintmp(HOUSE *house, ROBOT *robot)
             case 8:
                 bar(cx1,cy1,cx1+2,cy2,BLACK);
                 bar(cx1+2,cy1,cx2,cy2,PINK);
+                break;
+            case 9:
+                draw_door_vertical(cx1,cy1,1);
+                break;
+            case 10:
+                draw_door_left(cx1,cy1);
+                break;
+            case 11:
+                draw_door_right(cx1,cy1);
                 break;
             case 12:
                 bar(cx1,cy1,cx2,cy2,PINK);
@@ -209,6 +218,11 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1,cy1,cx2,cy2,PINK);
                 bar(cx1,cy1,cx1+2,cy2,BLACK);
                 break;
+            case 21:
+                bar(cx1,cy1,cx1+130,cy1+60,MARINE_BLUE);
+                fill_rect(cx1+21,cy1+10,cx1+70,cy1+40,MISTY_ROSE,MARINE_BLUE);
+                fill_rect(cx1+70,cy1+15,cx1+75,cy1+35,MISTY_ROSE,MISTY_ROSE);
+                break;
             default: break;
         }
     }
@@ -249,7 +263,7 @@ void maininit(HOUSE *house, ROBOT *robot)
         {6,0,0,5,5,15,16,2,6,0,0,0,0,7,7,7,8,13},
         {6,0,0,0,0,20,17,2,6,0,0,0,0,7,7,7,8,14},
         {0,0,0,4,4,0,6,2,0,0,0,0,0,0,0,0,0,6},
-        {0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0},
+        {21,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0},
     };
     //0是地板，1是机器人，2是墙壁，3是门，4是椅子，
     //5是桌子，6是一般高度家具，7 8 12 13 14是床，9是竖门，10是左门，11是右门

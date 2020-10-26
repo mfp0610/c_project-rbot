@@ -12,8 +12,6 @@
 
 void draw_floor_wood(int x,int y);
 void draw_floor_ceramic(int x,int y);
-void draw_wall_horizon(int x,int y,int n);
-void draw_wall_vertical(int x,int y,int n);
 void draw_table(int x,int y);
 void draw_chair(int x,int y);
 void draw_door_left(int x,int y);
