@@ -23,9 +23,10 @@ void move(HOUSE *house, ROBOT *robot,char dir) //移动机器人
     if(nx>=0 && nx<N && ny>=0 && ny<N && 
         pd_pass((*house).mp1[nx][ny]))
     {
-        (*house).mp1[(*robot).px][(*robot).py]=0;
+        (*house).mp1[(*robot).px][(*robot).py]=
+            (*house).mpinit[(*robot).px][(*robot).py];
         (*robot).px=nx, (*robot).py=ny;
-        (*house).mp1[(*robot).px][(*robot).py]=12;
+        (*house).mp1[(*robot).px][(*robot).py]=1;
     }
     (*robot).rt=dir;
 }

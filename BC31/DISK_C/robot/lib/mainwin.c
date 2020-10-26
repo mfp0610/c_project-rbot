@@ -9,7 +9,7 @@
 #define lb 750
 #define ub 0
 #define timeupdate 100000 //更新界面时间
-#define time
+#define timeset 50000 //污染湿度按照要求更新
 #define timedirt 500000 //污染，湿度程度更新时间
 #define timetmp 1000000 //温度更新时间
 #define timeele 500000 //电量更新时间
@@ -60,6 +60,8 @@ void mainWindow()
             nocombo();
             func_electr(house,robot);
             draw_control(house,robot);
+            draw_bactr(robot);
+            write_statu(house,robot,1);
             continue;
         }
         if(mouse_press(lb+147,ub+350,lb+237,ub+390)==1) //进入舒适度界面
@@ -69,6 +71,8 @@ void mainWindow()
             nocombo();
             func_comfort(house,robot);
             draw_control(house,robot);
+            draw_bactr(robot);
+            write_statu(house,robot,1);
             continue;
         }
         if(mouse_press(lb+37,ub+410,lb+127,ub+450)==1) //进入环境界面
@@ -78,6 +82,8 @@ void mainWindow()
             nocombo();
             func_clean(house,robot);
             draw_control(house,robot);
+            draw_bactr(robot);
+            write_statu(house,robot,1);
             continue;
         }
         if(mouse_press(lb+147,ub+410,lb+237,ub+450)==1) //进入控制界面
@@ -87,6 +93,8 @@ void mainWindow()
             nocombo();
             func_move(house,robot);
             draw_control(house,robot);
+            draw_bactr(robot);
+            write_statu(house,robot,1);
             continue;
         }
         if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入互动界面
@@ -289,7 +297,10 @@ void maininit(HOUSE *house, ROBOT *robot)
 
     for(i=0;i<N;i++)
     for(j=0;j<N;j++)
-        ((*house).mp1)[i][j]=mp1init[i][j];
+    {
+        (*house).mp1[i][j]=mp1init[i][j];
+        (*house).mpinit[i][j]=mp1init[i][j];
+    }
 }
 
 void func_electr(HOUSE *house, ROBOT *robot)
@@ -380,7 +391,7 @@ void func_clean(HOUSE *house, ROBOT *robot)
         {
             if((*pnum)>0)
             {
-                col_rub(*pnum,rubbish,house,robot);
+                col_rub(pnum,rubbish,house,robot);
             }
             continue;
         }
@@ -450,12 +461,12 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
         fprintf(fpde,"dian %d\n",(*robot).electr);
         write_statu(house,robot,st);
     }
-    if((*house).time%timedirt==0)
+    if((*house).time%timeset==0)
     {
         //pm25变化
         if((*house).pm25>=setclean&&(*house).setc)
             (*house).pm25--;
-        else
+        else if((*house).time%timedirt==0)
         {
             (*house).setc=0;
             (*house).pm25++;
@@ -463,7 +474,7 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
         //湿度变化
         if((*house).wet>=setwet&&(*house).setd)
             (*house).wet--;
-        else
+        else if((*house).time%timedirt==0)
         {
             (*house).setd=0;
             (*house).wet++;

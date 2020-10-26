@@ -12,7 +12,8 @@
 
 void Delaytime(int time); //延时函数
 void swap(int *x,int *y); //交换函数
-void nocombo(); //防止连击
+void nocombo(); //防止误触
 int sign(int x); //符号函数
+int randin(int x); //随机函数
 
 #endif

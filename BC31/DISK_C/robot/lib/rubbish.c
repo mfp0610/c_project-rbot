@@ -1,5 +1,5 @@
 /*
-    rubbish.h
+    rubbish.c
     
     Initial version: 2020.10.25
     Lastest update: 2020.10.25
@@ -11,8 +11,8 @@
 void set_rub(int *pnum,NODE *rubbish,HOUSE *house)
 {
     int x,y,num=0;
-    x=rand(17);
-    y=rand(17);
+    x=randin(17);
+    y=randin(17);
     if((*house).mp1[x][y]==0)
     {
         rubbish[*pnum].x=x;
