@@ -401,15 +401,17 @@ void func_clean(HOUSE *house, ROBOT *robot)
         timepass(house,robot,1);
         if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //Éú³ÉÀ¬»ø
         {
-            (*pnum)++;
+            Delaytime(100);
             if((*pnum)<4)
             {
+                (*pnum)++;
                 set_rub(pnum,rubbish,house);
             }
             continue;
         }
         if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //Ê°µ¹À¬»ø
         {
+            Delaytime(100);
             if((*pnum)>0)
             {
                 col_rub(pnum,rubbish,house,robot);
