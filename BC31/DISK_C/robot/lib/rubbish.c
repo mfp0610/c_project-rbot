@@ -37,6 +37,9 @@ void col_rub(int *pnum,NODE *rubbish,HOUSE *house,ROBOT *robot)
 {
     int x,y;
     NODE mp;
+    NODE trash_bin;
+    trash_bin.x=1;
+    trash_bin.y=1;
     x=rubbish[*pnum].x;
     y=rubbish[*pnum].y;
     fpde2=fopen("debug\\debug2.txt","w");
@@ -45,6 +48,10 @@ void col_rub(int *pnum,NODE *rubbish,HOUSE *house,ROBOT *robot)
     Astarmove(mp,rubbish[*pnum],robot,house);
     (*house).mp1[x][y]=0;
     (*house).mpinit[x][y]=0;
+    if((*pnum)==1)
+    {
+        Astarmove(mp,trash_bin,robot,house);
+    }
     fclose(fpde2);
 }
 
