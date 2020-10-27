@@ -35,11 +35,12 @@ void set_rub(int *pnum,NODE *rubbish,HOUSE *house)
 
 void col_rub(int *pnum,NODE *rubbish,HOUSE *house,ROBOT *robot)
 {
-    int x,y;
+    int x,y,f;
+    int i,j;
     NODE mp;
     NODE trash_bin;
-    trash_bin.x=1;
-    trash_bin.y=1;
+    trash_bin.x=0;
+    trash_bin.y=0;
     x=rubbish[*pnum].x;
     y=rubbish[*pnum].y;
     fpde2=fopen("debug\\debug2.txt","w");
@@ -48,9 +49,22 @@ void col_rub(int *pnum,NODE *rubbish,HOUSE *house,ROBOT *robot)
     Astarmove(mp,rubbish[*pnum],robot,house);
     (*house).mp1[x][y]=0;
     (*house).mpinit[x][y]=0;
+    mp.x=(*robot).px;
+    mp.y=(*robot).py;
     if((*pnum)==1)
     {
-        Astarmove(mp,trash_bin,robot,house);
+        for(i=0;i<N;i++)
+        {
+            for(j=0;j<N;j++) fprintf(fpde2,"%2d ",(*house).mp1[i][j]);
+            fprintf(fpde2,"\n");
+        }
+        f=Astarmove(mp,trash_bin,robot,house);
+        fprintf(fpde2,"aaa\t%d\t%d\t%d\t%d\n",*pnum,f,trash_bin.x,trash_bin.y);
+        for(i=0;i<N;i++)
+        {
+            for(j=0;j<N;j++) fprintf(fpde2,"%2d ",(*house).mp1[i][j]);
+            fprintf(fpde2,"\n");
+        }
     }
     fclose(fpde2);
 }
