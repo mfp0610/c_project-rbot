@@ -10,7 +10,7 @@
 #define lb 750
 #define ub 0
 
-void draw_control(HOUSE *house, ROBOT *robot)
+void draw_control()
 {
 
     bar(lb,ub,1024,768,MARINE_BLUE);
@@ -48,7 +48,7 @@ void draw_control(HOUSE *house, ROBOT *robot)
     fill_circle(lb+137,ub+675,30,MISTY_ROSE,MARINE_BLUE);
 }
 
-void draw_electr(HOUSE *house, ROBOT *robot)
+void draw_electr()
 {
     bar(lb,ub,1024,768,MARINE_BLUE);  
 
@@ -85,7 +85,7 @@ void draw_electr(HOUSE *house, ROBOT *robot)
     fill_circle(lb+137,ub+675,30,MISTY_ROSE,MARINE_BLUE);
 }
 
-void draw_comfort(HOUSE *house, ROBOT *robot)
+void draw_comfort()
 {
     bar(lb,ub,1024,768,MARINE_BLUE);
 
@@ -105,9 +105,8 @@ void draw_comfort(HOUSE *house, ROBOT *robot)
     puthz(lb+37,ub+265,"空气质量：",24,25,'K',BLACK);
 
     //画功能按钮
-    puthz(lb+47,ub+354,"温度",32,35,'K',WHITE);
-    //fill_circle()
-    outtextxy(lb+157,ub+354,"-26+",2,2,16,BLACK);
+    puthz(lb+27,ub+354,"温度设定",32,32,'K',WHITE);
+    
     fill_rect(lb+37,ub+410,lb+127,ub+450,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+47,ub+414,"除湿",32,35,'K',BLACK);
     fill_rect(lb+147,ub+410,lb+237,ub+450,MISTY_ROSE,MARINE_BLUE);
@@ -123,7 +122,7 @@ void draw_comfort(HOUSE *house, ROBOT *robot)
     fill_circle(lb+137,ub+675,30,MISTY_ROSE,MARINE_BLUE);
 }
 
-void draw_move(HOUSE *house, ROBOT *robot)
+void draw_move()
 {
     bar(lb,ub,1024,768,MARINE_BLUE);
 
@@ -157,7 +156,7 @@ void draw_move(HOUSE *house, ROBOT *robot)
     fill_circle(lb+137,ub+675,30,MISTY_ROSE,MARINE_BLUE);
 }
 
-void draw_clean(HOUSE *house, ROBOT *robot)
+void draw_clean()
 {
     bar(lb,ub,1024,768,MARINE_BLUE);
 
@@ -180,6 +179,40 @@ void draw_clean(HOUSE *house, ROBOT *robot)
     puthz(lb+71,ub+354,"生成垃圾",32,32,'K',BLACK);
     fill_rect(lb+57,ub+410,lb+217,ub+450,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+71,ub+414,"拾取垃圾",32,32,'K',BLACK);
+    fill_rect(lb+57,ub+470,lb+217,ub+510,MISTY_ROSE,MARINE_BLUE);
+    puthz(lb+71,ub+474,"返回主页",32,32,'K',BLACK);
+
+    //画遥控按钮
+    //midx-137 midy-700 
+    fill_circle(lb+92,ub+630,30,MISTY_ROSE,MARINE_BLUE);
+    fill_circle(lb+182,ub+630,30,MISTY_ROSE,MARINE_BLUE);
+    fill_circle(lb+137,ub+585,30,MISTY_ROSE,MARINE_BLUE);
+    fill_circle(lb+137,ub+675,30,MISTY_ROSE,MARINE_BLUE);
+}
+
+void draw_react()
+{
+    bar(lb,ub,1024,768,MARINE_BLUE);  
+
+    //画返回主菜单
+    fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
+    puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
+    
+    //画状态显示栏
+    fill_rect(lb+17,ub+60,lb+257,ub+380,MISTY_ROSE,MARINE_BLUE);
+    puthz(lb+27,ub+95,"欢迎用户",32,32,'H',BLACK);
+    
+    outtextxy(lb+145,ub+95,"111",2,2,16,BLACK);
+    //puthz(lb+37,ub+160,"室外温度：",24,25,'K',BLACK);
+    //puthz(lb+37,ub+195,"室内温度：",24,25,'K',BLACK);
+    //puthz(lb+37,ub+230,"空气湿度：",24,25,'K',BLACK);
+    //puthz(lb+37,ub+265,"空气质量：",24,25,'K',BLACK);
+
+    //画功能按钮
+    fill_rect(lb+37,ub+410,lb+127,ub+450,MISTY_ROSE,MARINE_BLUE);
+    puthz(lb+47,ub+414,"聊天",32,35,'K',BLACK);
+    fill_rect(lb+147,ub+410,lb+237,ub+450,MISTY_ROSE,MARINE_BLUE);
+    puthz(lb+157,ub+414,"字谜",32,35,'K',BLACK);
     fill_rect(lb+57,ub+470,lb+217,ub+510,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+71,ub+474,"返回主页",32,32,'K',BLACK);
 
@@ -226,7 +259,9 @@ void write_statu(HOUSE *house, ROBOT *robot,int st)
         outtextxy(lb+150,ub+260,s4,2,2,15,BLACK);
         if(st==2)
         {
-
+            char s5[3];
+            itoa((*house).tempset,s5,10);
+            outtextxy(lb+197,ub+354,s5,2,2,16,WHITE);
         }
         return ;
     }

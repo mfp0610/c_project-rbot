@@ -27,12 +27,13 @@
 #include "login.h" //登陆界面头文件
 #include "register.h" //注册界面头文件
 #include "mainwin.h" //程序主界面头文件
+#include "drawmap.h" //绘制地图头文件
 #include "board.h" //绘制控制面板头文件
-#include "drawmap.h" //绘制程序主界面头文件
 #include "comfort.h" //舒适度功能头文件
 #include "move.h" //移动功能头文件
+#include "rubbish.h" //清洁功能头文件
 #include "plan.h" //路径规划算法头文件
-#include "rubbish.h" //捡垃圾功能头文件
+#include "pinyin.h" //输入法头文件
 
 
 //定义颜色宏

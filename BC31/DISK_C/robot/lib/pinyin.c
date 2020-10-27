@@ -1,31 +1,28 @@
 #include "headers.h"
 
 /*=======================
-/*æ±‰å­—è¾“å…¥æ³•*/
-/*è¿”å›æœ¬æ¬¡é”®å…¥å­—ç¬¦ä¸²é•¿åº¦*/
-/*=======================*/ 
-int hz_input(int x1,int y1,int x2,int y2,char *s,int len, int backcolor) 
+/*ºº×ÖÊäÈë·¨*/
+//ºº×ÖÊäÈë·¨Ö÷º¯Êı 
+void hz_input(int x1,int y1,int x2,int y2,char *s,int len, int backcolor) 
 {
 	//int btnow,mark=1,i;
 	int mark = 1, i;
-	int ST=-1;//è¾“å…¥æ³•è¿”å›æ–¹å¼ï¼š1.å®‰SPACEé”®è¿”å›è¾“å…¥æ±‰å­— 2.æŒ‰ENTERé”®è¿”å›è¾“å…¥è‹±æ–‡ 3.é€€æ ¼é”®è¿”å›ä¸è¾“å…¥ 
+	int ST=-1;//ÊäÈë·¨·µ»Ø·½Ê½£º1.°²SPACE¼ü·µ»ØÊäÈëºº×Ö 2.°´ENTER¼ü·µ»ØÊäÈëÓ¢ÎÄ 3.ÍË¸ñ¼ü·µ»Ø²»ÊäÈë 
 	char *image;
 	char *p=s+len;
 	int value=0;
 	int asc;
-	int xx1=x1+2,xx2=x2-2;//é˜²æ­¢è¾“å…¥æº¢å‡º 
+	int xx1=x1+2,xx2=x2-2;//·ÀÖ¹ÊäÈëÒç³ö 
 	int L_maxwords=(xx2-xx1)/8,maxline=(y2-y1)/30;
-	int Line=len/L_maxwords+1,L_len=len%L_maxwords,pylen;    //å½“å‰æ‰€åœ¨è¡Œæ•°Lineï¼ˆæŒ‰0è¡Œå¼€å§‹è®¡æ•°ï¼‰ è¯¥è¡Œé•¿åº¦ L_len  pylenæ‹¼éŸ³é•¿åº¦ //è¡Œå®½30åƒç´  
+	int Line=len/L_maxwords+1,L_len=len%L_maxwords,pylen;    //µ±Ç°ËùÔÚĞĞÊıLine£¨°´0ĞĞ¿ªÊ¼¼ÆÊı£© ¸ÃĞĞ³¤¶È L_len  pylenÆ´Òô³¤¶È //ĞĞ¿í30ÏñËØ 
 	int barx1,barx2,bary1,bary2;
-	char str[3]={'\0','\0','\0'};//ä¸€ä¸ªæ±‰å­—è£…å…¥ 
+	char str[3]={'\0','\0','\0'};//Ò»¸öºº×Ö×°Èë 
 	char py[20]={'\0','\0','\0','\0','\0','\0','\0','\0',
-	            '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0'};//æ‹¼éŸ³å­—ç¬¦ä¸²(è¥¿æ–‡å­—ç¬¦ä¸²)
+	            '\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0','\0'};//Æ´Òô×Ö·û´®(Î÷ÎÄ×Ö·û´®)
 	
 	MouseS = 2;
-	while(bioskey(1))//æ¸…é™¤é”®ç›˜ç¼“å†²åŒº  é˜²æ­¢è¯¯è¾“å…¥ 
-	{
-		bioskey(0);
-	}         
+	while(bioskey(1))//Çå³ı¼üÅÌ»º³åÇø  ·ÀÖ¹ÎóÊäÈë 
+		bioskey(0);        
 	//Add_frame(xnow,ynow,x1,y1,x2,y2);
 	if((image=malloc(8241))==NULL)
 	{
@@ -43,16 +40,16 @@ int hz_input(int x1,int y1,int x2,int y2,char *s,int len, int backcolor)
 			newmouse(&MouseX, &MouseY, &press);
 			mark=0;
 			value=bioskey(0);
-			/*ç‰¹æ®Šé”®å¤„ç†*/ 
+			/*ÌØÊâ¼ü´¦Àí*/ 
 		    switch(value)
 			{
 				case BACK_SPACE:
-					if(L_len==0&&Line>1)//æ¢è¡Œå¤„ç† 
+					if(L_len==0&&Line>1)//»»ĞĞ´¦Àí 
 					{
 						L_len=L_maxwords;
 						Line--;
 					}
-					else if(L_len<=0&&Line==1) break;//åˆ é™¤ç»“æŸ æ— æ³•åˆ é™¤ 
+					else if(L_len<=0&&Line==1) break;//É¾³ı½áÊø ÎŞ·¨É¾³ı 
 					if(*(p-1)>31&&*(p-1)<127)
 					{
 						
@@ -79,19 +76,19 @@ int hz_input(int x1,int y1,int x2,int y2,char *s,int len, int backcolor)
 					*p='\0';
 					free(image);
 					MouseS = 0;
-					return len;	//ç»“æŸè¾“å…¥ 
+					return;	//½áÊøÊäÈë 
 				/*case TAB:
 					//Add_frame(xnow,ynow,x1,y1,x2,y2);
 					*p='\0';
 					*tab=1;
 					free(image);
-					return len;	//ç»“æŸè¾“å…¥*/
+					return len;	//½áÊøÊäÈë*/
 			}
-			/*è¿›å…¥æ±‰å­—è¾“å…¥æ³•*/ 
+			/*½øÈëºº×ÖÊäÈë·¨*/ 
 			asc=value&0xff;
 			if(asc>=97&&asc<=122)
 			{
-				barx1=(x1+L_len*8-50>0)?(x1+L_len*8-50):0;       //è®¡ç®—è¾“å…¥æ³•ä½ç½®  ç¦»æ‰€è¾“å…¥è·ç¦»è¾ƒè¿‘ä¸”ä¸æº¢å‡ºå±å¹• 
+				barx1=(x1+L_len*8-50>0)?(x1+L_len*8-50):0;       //¼ÆËãÊäÈë·¨Î»ÖÃ  ÀëËùÊäÈë¾àÀë½Ï½üÇÒ²»Òç³öÆÁÄ» 
 	    		barx2=(barx1+200<640)?(barx1+200):(barx1=440,640);
 				bary1=y1+Line*30+10;
 				bary2=(bary1+40<480)?(bary1+40):(bary1=y1+Line*30-80,bary1+40);
@@ -102,12 +99,12 @@ int hz_input(int x1,int y1,int x2,int y2,char *s,int len, int backcolor)
 				ST=input_method(barx1,bary1,str,value,py);
 				switch(ST)
 				{
-					case 1://ç”±æ•°å­—é”®æˆ–ç©ºæ ¼é”®é€€å‡ºè¾“å…¥æ³•  è¾“å…¥æ±‰å­—
-					    if(strlen(str))//è¿”å›å­—ç¬¦ä¸²å¯èƒ½ä¸ºç©º 
+					case 1://ÓÉÊı×Ö¼ü»ò¿Õ¸ñ¼üÍË³öÊäÈë·¨  ÊäÈëºº×Ö
+					    if(strlen(str))//·µ»Ø×Ö·û´®¿ÉÄÜÎª¿Õ 
 						{
-							if(L_len+1>=L_maxwords&&Line<maxline)//æ¢è¡Œè¾“å…¥ 
+							if(L_len+1>=L_maxwords&&Line<maxline)//»»ĞĞÊäÈë 
 							{
-								/*ç”¨ç©ºæ ¼æ¥å¡«è¡¥ä¸è¶³ä½ï¼Œè·³è½¬åˆ°ä¸‹ä¸€è¡Œ*/
+								/*ÓÃ¿Õ¸ñÀ´Ìî²¹²»×ãÎ»£¬Ìø×ªµ½ÏÂÒ»ĞĞ*/
 								if(L_len+1==L_maxwords)
 								{
 									*p=' ';
@@ -117,7 +114,7 @@ int hz_input(int x1,int y1,int x2,int y2,char *s,int len, int backcolor)
 								Line++;
 								L_len=0;
 							}
-							else if((L_len+1>=L_maxwords&&Line==maxline)||Line>maxline)//æ— æ³•è¾“å…¥ 
+							else if((L_len+1>=L_maxwords&&Line==maxline)||Line>maxline)//ÎŞ·¨ÊäÈë 
 							{
 								putimage(barx1, bary1, image, COPY_PUT);//putimage(barx1,bary1,barx2,bary2,image);
 								break;
@@ -130,14 +127,14 @@ int hz_input(int x1,int y1,int x2,int y2,char *s,int len, int backcolor)
 						}
 						putimage(barx1, bary1, image, COPY_PUT);//putimage(barx1,bary1,barx2,bary2,image); 
 					    break;
-					case 2://ç”±å›è½¦é”®é€€å‡ºè¾“å…¥æ³• ï¼ˆé”®å…¥è¥¿æ–‡ï¼‰ 
+					case 2://ÓÉ»Ø³µ¼üÍË³öÊäÈë·¨ £¨¼üÈëÎ÷ÎÄ£© 
 						pylen=strlen(py); 
-					    if((L_len+pylen>L_maxwords&&Line==maxline)||(Line>maxline))//ä½ç½®å·²æ»¡ 
+					    if((L_len+pylen>L_maxwords&&Line==maxline)||(Line>maxline))//Î»ÖÃÒÑÂú 
 						{
 							putimage(barx1, bary1, image, COPY_PUT);//putimage(barx1,bary1,barx2,bary2,image);
 							break;
 						}
-						else if(L_len+pylen>L_maxwords&&Line<maxline)//è¯¥è¡Œå·²æ»¡ æ¢è¡Œ 
+						else if(L_len+pylen>L_maxwords&&Line<maxline)//¸ÃĞĞÒÑÂú »»ĞĞ 
 						{
 							for(i=0;i<L_maxwords-L_len;i++)
 							{
@@ -156,21 +153,21 @@ int hz_input(int x1,int y1,int x2,int y2,char *s,int len, int backcolor)
 						p+=pylen;
 						L_len+=pylen;
 					    break;
-					case 3://è¥¿æ–‡åˆ é™¤ä¸º0è‡ªåŠ¨é€€å‡ºè¾“å…¥æ³•  ä¸è¾“å…¥
+					case 3://Î÷ÎÄÉ¾³ıÎª0×Ô¶¯ÍË³öÊäÈë·¨  ²»ÊäÈë
 						putimage(barx1, bary1, image, COPY_PUT);//putimage(barx1,bary1,barx2,bary2,image); 
 					    break;	 
 				} 
 				value=0;
 				ST=-1;
 			}
-			else if(asc>31&&asc<127)//å­—ç¬¦è¾“å…¥ 
+			else if(asc>31&&asc<127)//×Ö·ûÊäÈë 
 			{
 				py[0]=asc;
-				if(L_len+1<=L_maxwords&&Line<=maxline)//æ­£å¸¸è¾“å…¥ 
+				if(L_len+1<=L_maxwords&&Line<=maxline)//Õı³£ÊäÈë 
 				{
 					*p=asc;
 				}
-				else if(Line+1<=maxline)//æ¢è¡Œè¾“å…¥
+				else if(Line+1<=maxline)//»»ĞĞÊäÈë
 				{
 					*p=' ';
 					Line++;
@@ -196,19 +193,19 @@ int hz_input(int x1,int y1,int x2,int y2,char *s,int len, int backcolor)
 			*p='\0';
 			free(image);
 			MouseS = 0;
-			return len;
+			return;
 		}
 	}
 }
 
-/*æ±‰å­—è¾“å…¥æ³•è°ƒå…¥å‡½æ•°*/
+/*ºº×ÖÊäÈë·¨µ÷Èëº¯Êı*/
 int input_method(int x,int y,char *str,int value,char *py) 
 {
 	FILE *fp=NULL,*oldfp=NULL;
 	//int btnow,mark,fJudge=FAIL;
 	int mark,fJudge=0;
 	char *p=py;
-	int trigger=1;//è¿›å…¥æ—¶è§¦å‘è¾“å…¥æ ‡å¿— 
+	int trigger=1;//½øÈëÊ±´¥·¢ÊäÈë±êÖ¾ 
 	char temphz[5][3]={{'\0','\0','\0'},{'\0','\0','\0'},
 	                   {'\0','\0','\0'},{'\0','\0','\0'},
 					   {'\0','\0','\0'}},temp[3];
@@ -217,20 +214,20 @@ int input_method(int x,int y,char *str,int value,char *py)
 	int asc,i;
 	int PyStartx=x+8,PyStarty=y+4;
 	int HzStartx=x+8,HzStarty=y+22;
-	char *ABpath="pinyin\\";//æ±‰è¯­æ‹¼éŸ³æ£€ç´¢æ ‡å‡†è·¯å¾„ 
-	char pypath[45]={"pinyin\\"};//æ±‰è¯­æ‹¼éŸ³æ£€ç´¢ç›¸å¯¹è·¯å¾„ 
+	char *ABpath="pinyin\\";//ººÓïÆ´Òô¼ìË÷±ê×¼Â·¾¶ 
+	char pypath[45]={"pinyin\\"};//ººÓïÆ´Òô¼ìË÷Ïà¶ÔÂ·¾¶ 
 	while(1)
 	{
 		//mouse_control(xnow,ynow,&btnow,&mark);
 		newmouse(&MouseX, &MouseY, &press);
-		if(trigger||kbhit())//ç¬¬ä¸€æ¬¡è¿›å…¥è‡ªåŠ¨è§¦å‘ ä»¥åå‡éœ€é”®ç›˜ 
+		if(trigger||kbhit())//µÚÒ»´Î½øÈë×Ô¶¯´¥·¢ ÒÔºó¾ùĞè¼üÅÌ 
 		{
 			//redraw(*xnow,*ynow); 
 			mark=0;
 			trigger=0;
 			if(kbhit()) value=bioskey(0);
 			asc=value&0xff;
-			/*ç‰¹æ®ŠæŒ‰é”®å¤„ç†*/
+			/*ÌØÊâ°´¼ü´¦Àí*/
 			switch(value)
 			{
 				case BACK_SPACE:
@@ -253,30 +250,30 @@ int input_method(int x,int y,char *str,int value,char *py)
 					if(fp) fclose(fp);
 					return 2;
 				case LASTLINE:
-					if(fposition>=8)//æ¥ä¸‹æ¥é‡å®šä½æ–‡ä»¶æŒ‡é’ˆå‰å…«ä¸ªå­—èŠ‚ï¼ˆå››ä¸ªæ±‰å­—ï¼‰ 
+					if(fposition>=8)//½ÓÏÂÀ´ÖØ¶¨Î»ÎÄ¼şÖ¸ÕëÇ°°Ë¸ö×Ö½Ú£¨ËÄ¸öºº×Ö£© 
 					{
 						fposition-=8;
 					}
 					break;
 				case NEXTLINE:
-					if(!feof(fp))//æ¥ä¸‹æ¥é‡å®šä½æ–‡ä»¶æŒ‡é’ˆåå…«ä¸ªå­—èŠ‚ï¼ˆå››ä¸ªæ±‰å­—ï¼‰
+					if(!feof(fp))//½ÓÏÂÀ´ÖØ¶¨Î»ÎÄ¼şÖ¸Õëºó°Ë¸ö×Ö½Ú£¨ËÄ¸öºº×Ö£©
 					{
 						fposition+=8;
 					} 
 					break;
-				case LEFT://å·¦ç§»åŠ¨ä¸€ä¸ª 
+				case LEFT://×óÒÆ¶¯Ò»¸ö 
 					if(hznow)
 					{ 
 						hznow--;
 					}
-					else if(fposition>=8)//éœ€è¦å·¦æ¢é¡µ 
+					else if(fposition>=8)//ĞèÒª×ó»»Ò³ 
 					{
 						fposition-=8;
 						hznow=3;
 					}
 					break;
 				case RIGHT:
-					if(hznow<hznum-1)//åŒå·¦ 
+					if(hznow<hznum-1)//Í¬×ó 
 					{
 						hznow++;
 					}
@@ -286,7 +283,7 @@ int input_method(int x,int y,char *str,int value,char *py)
 						hznow=0;
 					}
 					break;
-					/*æŒ‰æ•°å­—é”®é€‰ä¸­è¾“å…¥æ±‰å­—*/ 
+					/*°´Êı×Ö¼üÑ¡ÖĞÊäÈëºº×Ö*/ 
 				case FIRST:
 					strcpy(str,temphz[0]);
 					if(oldfp) fclose(oldfp);
@@ -308,8 +305,8 @@ int input_method(int x,int y,char *str,int value,char *py)
 					if(fp) fclose(fp);
 					return 1;
 			}
-			/*è¾“å…¥å­—ç¬¦å¤„ç†*/ 
-			if(asc>31&&asc<127&&strlen(py)<20&&asc!='['&&asc!=']')    //æœ‰æ•ˆè¾“å…¥æ—¶åˆ™å¤ä½ 
+			/*ÊäÈë×Ö·û´¦Àí*/ 
+			if(asc>31&&asc<127&&strlen(py)<20&&asc!='['&&asc!=']')    //ÓĞĞ§ÊäÈëÊ±Ôò¸´Î» 
 			{ 
 				*p=asc;
 				p++;
@@ -320,7 +317,7 @@ int input_method(int x,int y,char *str,int value,char *py)
 		    outtextxy(PyStartx,PyStarty-5,py);
 		    strcat(pypath,py);
 		    strcat(pypath,".txt");
-		    if(fJudge) //å°†å½“å‰æ–‡ä»¶æŒ‡é’ˆä¿å­˜ åŒæ—¶å…³é—­ä¸Šä¸€ä¸ªæ–‡ä»¶  ä¸ºè¾“å…¥ç‰¹æ®Šå­—ç¬¦å‡†å¤‡ 
+		    if(fJudge) //½«µ±Ç°ÎÄ¼şÖ¸Õë±£´æ Í¬Ê±¹Ø±ÕÉÏÒ»¸öÎÄ¼ş  ÎªÊäÈëÌØÊâ×Ö·û×¼±¸ 
 			{
 				if(oldfp)
 				{
@@ -328,7 +325,7 @@ int input_method(int x,int y,char *str,int value,char *py)
 				}
 				oldfp=fp;
 			}
-		    if((fp=fopen(pypath,"r"))==NULL)//ç‰¹æ®Šå­—ç¬¦å­˜åœ¨  ä¿ç•™ä¸Šä¸€ä¸ªæ–‡ä»¶æ£€ç´¢ç»“æœ 
+		    if((fp=fopen(pypath,"r"))==NULL)//ÌØÊâ×Ö·û´æÔÚ  ±£ÁôÉÏÒ»¸öÎÄ¼ş¼ìË÷½á¹û 
 		    {
 		    	fJudge=0;
 		    	fp=oldfp;
@@ -342,14 +339,14 @@ int input_method(int x,int y,char *str,int value,char *py)
 				fseek(fp,fposition,SEEK_SET);
 		  		for(i=0;i<5;i++) 
 		    	{
-		    		fread(temphz[i],2,1,fp);//è¯»å…¥ä¸€ä¸ªæ±‰å­— 
-		    		if(feof(fp))//è¯»åˆ°æ–‡ä»¶å°¾ 
+		    		fread(temphz[i],2,1,fp);//¶ÁÈëÒ»¸öºº×Ö 
+		    		if(feof(fp))//¶Áµ½ÎÄ¼şÎ² 
 		    		{
-		    			hznum=i;//æŒ‰é“ç†æ­¤å¤„æ–‡ä»¶å°¾å¤šè¯»ä¸€æ¬¡ éœ€è¦å‡ä¸€  ç„¶è€Œæ­¤å¤„ä¸å‡ä¸€çš„æ•ˆæœæ›´å¥½ 
+		    			hznum=i;//°´µÀÀí´Ë´¦ÎÄ¼şÎ²¶à¶ÁÒ»´Î ĞèÒª¼õÒ»  È»¶ø´Ë´¦²»¼õÒ»µÄĞ§¹û¸üºÃ 
 		    			break; 
 					}
 				}
-				if(!feof(fp))//æœªè¯»åˆ°æ–‡ä»¶å°¾ å…¨æ˜¾æ±‰å­— 
+				if(!feof(fp))//Î´¶Áµ½ÎÄ¼şÎ² È«ÏÔºº×Ö 
 				{
 					hznum=4;
 				}
@@ -359,15 +356,15 @@ int input_method(int x,int y,char *str,int value,char *py)
 		   		    outtextxy(HzStartx+i*50,HzStarty-5,addnum(i+1,temp));
     				puthz(HzStartx+i*50+16,HzStarty,temphz[i],16,16,WHITE);
 				} 
-				puthz(HzStartx+hznow*50+16,HzStarty,temphz[hznow],16,16,YELLOW);//æ˜¾ç¤ºé€‰ä¸­æ±‰å­— 
+				puthz(HzStartx+hznow*50+16,HzStarty,temphz[hznow],16,16,YELLOW);//ÏÔÊ¾Ñ¡ÖĞºº×Ö 
 			}			
 		}
-		strcpy(pypath,ABpath);          //ç»å¯¹è·¯å¾„å¤åŸï¼ˆä¸å¯å°‘ï¼‰ 
+		strcpy(pypath,ABpath);          //¾ø¶ÔÂ·¾¶¸´Ô­£¨²»¿ÉÉÙ£© 
 		value=0;
 	}
 }
 
-/*æ•°å­—æ ‡å·è¾“å‡º*/ 
+/*Êı×Ö±êºÅÊä³ö*/ 
 char *addnum(int a,char *s)
 {
 	switch(a)
@@ -387,13 +384,10 @@ char *addnum(int a,char *s)
 	}
 }
 
-/*è¾“å…¥æ³•å°æ¡†*/ 
+/*ÊäÈë·¨Ğ¡¿ò*/ 
 void pyFrm(int x1,int y1,int x2,int y2)
 {
-	setcolor(LIGHTBLUE);
-	bar(x1,y1,x2,y2);
-	//tcolor(_BLUE);
-	line(x1+5,y1+20,x2-5,y1+20);
-	setcolor(WHITE);
-	rectangle(x1,y1,x2,y2);
+	bar(x1,y1,x2,y2,BLACK);
+	line(x1+5,y1+20,x2-5,y1+20,BLACK);
+	rectangle(x1,y1,x2,y2,WHITE);
 }

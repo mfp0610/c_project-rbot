@@ -23,7 +23,7 @@ void swap(int *x,int *y)
 
 void nocombo()
 {
-    Delaytime(10);
+    Delaytime(100);
 }
 
 int sign(int x)
