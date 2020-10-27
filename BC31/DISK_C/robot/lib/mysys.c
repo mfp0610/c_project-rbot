@@ -35,6 +35,8 @@ int sign(int x)
 
 int randin(int x)
 {
+    int t;
     randomize();
-    return rand()%x;
+    t=rand()%x;
+    return t;
 }

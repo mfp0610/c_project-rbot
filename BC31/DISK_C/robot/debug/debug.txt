@@ -53,242 +53,107 @@ time 600000
 flag 0
 out 20
 in 25
-set 27
+set 26
 
 aaaa
 time 700000
 flag 0
 out 20
 in 25
-set 28
+set 26
 
 aaaa
 time 800000
 flag 0
 out 20
 in 25
-set 34
+set 26
 
 aaaa
 time 900000
-flag 1
+flag 0
 out 20
 in 25
-set 34
+set 26
 
 aaaa
 time 1000000
-flag 1
+flag 0
 out 20
 in 25
-set 34
+set 26
 
 aaaa
 time 1100000
-flag 1
+flag 0
 out 20
-in 26
-set 34
+in 24
+set 26
 
 aaaa
 time 1200000
-flag 1
+flag 0
 out 20
-in 26
-set 34
+in 24
+set 26
 
 aaaa
 time 1300000
-flag 1
+flag 0
 out 20
-in 26
-set 34
+in 24
+set 26
 
 aaaa
 time 1400000
-flag 1
+flag 0
 out 20
-in 26
-set 34
+in 24
+set 26
 
 aaaa
 time 1500000
-flag 1
+flag 0
 out 20
-in 26
-set 34
+in 24
+set 26
 
 aaaa
 time 1600000
-flag 1
+flag 0
 out 20
-in 27
-set 34
+in 24
+set 26
 
 aaaa
 time 1700000
-flag 1
+flag 0
 out 20
-in 27
-set 34
+in 24
+set 26
 
 aaaa
 time 1800000
-flag 1
+flag 0
 out 20
-in 27
-set 34
+in 24
+set 26
 
 aaaa
 time 1900000
 flag 0
 out 20
-in 27
-set 34
+in 24
+set 26
 
 aaaa
 time 2000000
 flag 0
 out 20
-in 27
-set 34
+in 24
+set 26
 
 aaaa
 time 2100000
 flag 0
 out 20
-in 26
-set 34
-
-aaaa
-time 2200000
-flag 0
-out 20
-in 26
-set 34
-
-aaaa
-time 2300000
-flag 0
-out 20
-in 26
-set 34
-
-aaaa
-time 2400000
-flag 0
-out 20
-in 26
-set 34
-
-aaaa
-time 2500000
-flag 0
-out 20
-in 26
-set 34
-
-aaaa
-time 2600000
-flag 0
-out 20
-in 26
-set 34
-
-aaaa
-time 2700000
-flag 0
-out 20
-in 26
-set 34
-
-aaaa
-time 2800000
-flag 0
-out 20
-in 26
-set 34
-
-aaaa
-time 2900000
-flag 0
-out 20
-in 26
-set 34
-
-aaaa
-time 3000000
-flag 0
-out 20
-in 26
-set 34
-
-aaaa
-time 3100000
-flag 0
-out 20
-in 25
-set 34
-
-aaaa
-time 3200000
-flag 0
-out 20
-in 25
-set 34
-
-aaaa
-time 3300000
-flag 0
-out 20
-in 25
-set 34
-
-aaaa
-time 3400000
-flag 0
-out 20
-in 25
-set 34
-
-aaaa
-time 3500000
-flag 0
-out 20
-in 25
-set 34
-
-aaaa
-time 3600000
-flag 0
-out 20
-in 25
-set 34
-
-aaaa
-time 3700000
-flag 0
-out 20
-in 25
-set 34
-
-aaaa
-time 3800000
-flag 0
-out 20
-in 25
-set 34
-
-aaaa
-time 3900000
-flag 0
-out 20
-in 25
-set 34
-
-aaaa
-time 4000000
-flag 0
-out 20
-in 25
-set 34

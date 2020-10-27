@@ -239,6 +239,9 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 fill_rect(cx1+21,cy1+10,cx1+70,cy1+40,MISTY_ROSE,MARINE_BLUE);
                 fill_rect(cx1+70,cy1+15,cx1+75,cy1+35,MISTY_ROSE,MISTY_ROSE);
                 break;
+            case 22:
+                bar(cx1,cy1,cx2,cy2,GREEN);
+                break;
             default: break;
         }
     }
@@ -283,6 +286,7 @@ void maininit(HOUSE *house, ROBOT *robot)
     };
     //0是地板，1是机器人，2是墙壁，3是门，4是椅子，
     //5是桌子，6是一般高度家具，7 8 12 13 14是床，9是竖门，10是左门，11是右门
+    //22是垃圾
 
     (*robot).electr=100; //初始化机器人信息
     (*robot).px=10, (*robot).py=0;
@@ -415,7 +419,7 @@ void func_comfort(HOUSE *house, ROBOT *robot)
 
 void func_clean(HOUSE *house, ROBOT *robot)
 {
-    NODE rubbish[3];
+    NODE rubbish[4];
     char value;
     int *pnum=0;
     draw_bactr(robot);
@@ -425,18 +429,24 @@ void func_clean(HOUSE *house, ROBOT *robot)
         timepass(house,robot,1);
         if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //生成垃圾
         {
-            (*pnum)++;
-            if((*pnum)<4)
+            nocombo();
+            nocombo();
+            if(*pnum<3)
             {
+                (*pnum)++;
                 set_rub(pnum,rubbish,house);
+                paintmp(house,robot);
             }
             continue;
         }
         if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //拾倒垃圾
         {
-            if((*pnum)>0)
+            nocombo();
+            nocombo();
+            if(*pnum>0)
             {
                 col_rub(pnum,rubbish,house,robot);
+                paintmp(house,robot);
                 (*pnum)--;
             }
             continue;
