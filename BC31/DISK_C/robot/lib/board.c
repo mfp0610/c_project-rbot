@@ -55,9 +55,6 @@ void draw_electr()
     //画返回主菜单
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
-    
-    //画电池电量
-    //draw_bactr(robot);
 
     //画状态显示栏
     fill_rect(lb+17,ub+60,lb+257,ub+320,MISTY_ROSE,MARINE_BLUE);
@@ -93,7 +90,6 @@ void draw_comfort()
     fill_rect(lb+140,ub+10,lb+250,ub+40,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+145,ub+12,"返回菜单",24,25,'K',BLACK);
 
-
     //画状态显示栏
     fill_rect(lb+17,ub+60,lb+257,ub+320,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+27,ub+95,"欢迎用户",32,32,'H',BLACK);
@@ -105,7 +101,14 @@ void draw_comfort()
     puthz(lb+37,ub+265,"空气质量：",24,25,'K',BLACK);
 
     //画功能按钮
-    puthz(lb+27,ub+354,"温度设定",32,32,'K',WHITE);
+    puthz(lb+27,ub+354,"温度",32,32,'K',WHITE);
+
+    fill_rect(lb+110,ub+355,lb+140,ub+385,MISTY_ROSE,MARINE_BLUE);
+
+    fill_rect(lb+167,ub+360,lb+187,ub+380,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(lb+227,ub+360,lb+247,ub+380,MISTY_ROSE,MARINE_BLUE);
+    outtextxy(lb+159,ub+353,"-",2,2,16,BLACK);
+    outtextxy(lb+219,ub+353,"+",2,2,16,BLACK);
     
     fill_rect(lb+37,ub+410,lb+127,ub+450,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+47,ub+414,"除湿",32,35,'K',BLACK);
@@ -261,7 +264,10 @@ void write_statu(HOUSE *house, ROBOT *robot,int st)
         {
             char s5[3];
             itoa((*house).tempset,s5,10);
-            outtextxy(lb+197,ub+354,s5,2,2,16,WHITE);
+            bar(lb+190,ub+360,lb+230,ub+390,MARINE_BLUE);
+            outtextxy(lb+182,ub+354,s5,2,2,16,WHITE);
+
+            //lb+110,ub+355,lb+140,ub+385,
         }
         return ;
     }

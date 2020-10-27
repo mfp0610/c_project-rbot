@@ -11,6 +11,7 @@
 #define timeupdate 100000 //更新界面时间
 #define timeset 50000 //污染湿度按照要求更新
 #define timedirt 500000 //污染，湿度程度更新时间
+#define timetmpset 500000 //设定温度更新时间
 #define timetmp 1000000 //温度更新时间
 #define timeele 500000 //电量更新时间
 #define timecut 10000000 //时间计数器请清零
@@ -339,7 +340,6 @@ void func_electr(HOUSE *house, ROBOT *robot)
     }
 }
 
-
 void func_comfort(HOUSE *house, ROBOT *robot)
 {
     char value;
@@ -353,17 +353,41 @@ void func_comfort(HOUSE *house, ROBOT *robot)
     {
         newmouse(&MouseX, &MouseY, &press);
         timepass(house,robot,2);
-        if(mouse_press(lb+37,ub+410,lb+127,ub+450)==1) //进入电量界面
+        if(mouse_press(lb+110,ub+355,lb+140,ub+385)==1) //打开关闭空调开关
+        {
+            if((*house).set) (*house).set=0;
+            else (*house).set=1;
+            nocombo();
+            write_statu(house,robot,2);
+            continue;
+        }
+        if(mouse_press(lb+167,ub+360,lb+187,ub+380)==1) //降低设定温度
+        {
+            if((*house).tempset<=10) continue;
+            com_settemp(house,robot,-1);
+            nocombo();
+            write_statu(house,robot,2);
+            continue;
+        }
+        if(mouse_press(lb+227,ub+360,lb+247,ub+380)==1) //提高设定温度
+        {
+            if((*house).tempset>=40) continue;
+            com_settemp(house,robot,1);
+            nocombo();
+            write_statu(house,robot,2);
+            continue;
+        }
+        if(mouse_press(lb+37,ub+410,lb+127,ub+450)==1) //进入干燥
         {
             com_dry(house,robot);
             continue;
         }
-        if(mouse_press(lb+147,ub+410,lb+237,ub+450)==1) //进入舒适度界面
+        if(mouse_press(lb+147,ub+410,lb+237,ub+450)==1) //进行除尘
         {
             com_clean(house,robot);
             continue;
         }
-        if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //进入环境界面
+        if(mouse_press(lb+57,ub+470,lb+217,ub+510)==1) //返回控制面板
         {
             nocombo();
             return;
@@ -401,17 +425,15 @@ void func_clean(HOUSE *house, ROBOT *robot)
         timepass(house,robot,1);
         if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //生成垃圾
         {
-            Delaytime(100);
+            (*pnum)++;
             if((*pnum)<4)
             {
-                (*pnum)++;
                 set_rub(pnum,rubbish,house);
             }
             continue;
         }
         if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //拾倒垃圾
         {
-            Delaytime(100);
             if((*pnum)>0)
             {
                 col_rub(pnum,rubbish,house,robot);
@@ -510,10 +532,10 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
         fprintf(fpde,"\naaaa\n");
         fprintf(fpde,"time %lld\n",(*house).time); 
         
-        fprintf(fpde,"pm %d\n",(*house).pm25);
+        fprintf(fpde,"flag %d\n",(*house).set);
         fprintf(fpde,"out %d\n",(*house).tempout);
         fprintf(fpde,"in %d\n",(*house).temp);
-        fprintf(fpde,"dian %d\n",(*robot).electr);
+        fprintf(fpde,"set %d\n",(*house).tempset);
         write_statu(house,robot,st);
     }
     if((*house).time%timeset==0)
@@ -535,8 +557,13 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
             (*house).wet++;
         }
     }
-    if((*house).time%timetmp==0)
-        (*house).temp-=sign((*house).temp-(*house).tempout);
+    if((*house).time%timetmpset==0)
+    {
+        if((*house).set)
+            (*house).temp-=sign((*house).temp-(*house).tempset);
+        else if((*house).time%timetmp==0)
+            (*house).temp-=sign((*house).temp-(*house).tempout);
+    }
     if((*house).time%timeele==0) (*robot).electr--;
     if((*robot).electr==0) (*robot).electr=100; //触发自动充电模块
     (*house).time%=timecut;
