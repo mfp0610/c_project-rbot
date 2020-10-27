@@ -36,19 +36,19 @@ void mainWindow()
     robot=(ROBOT *)malloc(sizeof(ROBOT));
     maininit(house,robot); //定义并初始化房间和机器人
 
-    fpde=fopen("debug\\debug.txt","w");
+    //fpde=fopen("debug\\debug.txt","w");
     
     paintmp(house,robot);
     draw_control();
     draw_bactr(robot);
     write_statu(house,robot,1);
 
-    fprintf(fpde,"\ninit\n");
+    /*fprintf(fpde,"\ninit\n");
     fprintf(fpde,"time %lld\n",(*house).time); 
     fprintf(fpde,"pm %d\n",(*house).pm25);
     fprintf(fpde,"out %d\n",(*house).tempout);
     fprintf(fpde,"in %d\n",(*house).temp);
-    fprintf(fpde,"dian %d\n",(*robot).electr);
+    fprintf(fpde,"dian %d\n",(*robot).electr);*/
 
     while(1)
     {
@@ -115,6 +115,13 @@ void mainWindow()
         {
             value=getch();
             moveupdate(house,robot,value);
+            fpde=fopen("debug\\debug.txt","w");
+            for(i=0;i<N;i++)
+            {
+            for(j=0;j<N;j++) fprintf(fpde,"%2d ",(*house).mp1[i][j]);
+            fprintf(fpde,"\n");
+            }
+            fclose(fpde);
         }
         if(mouse_press(15,24,735,744)==1)
         {
@@ -275,7 +282,7 @@ void maininit(HOUSE *house, ROBOT *robot)
         {5,5,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,6},
         {5,5,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,6},
         {4,4,0,0,0,0,0,2,10,11,2,2,2,2,2,2,2,2},
-        {1,0,0,4,4,0,6,2,0,0,0,0,0,6,6,6,6,6},
+        {0,0,0,4,4,0,6,2,0,0,0,0,0,6,6,6,6,6},
         {6,0,0,0,0,20,17,2,0,0,0,0,0,0,0,0,0,0},
         {6,0,0,5,5,15,16,2,0,0,0,0,0,0,0,0,0,6},
         {6,0,0,5,5,20,17,2,6,0,0,0,0,7,7,7,8,12},
@@ -504,9 +511,10 @@ void func_move(HOUSE *house, ROBOT *robot)
     {
         newmouse(&MouseX, &MouseY, &press);
         timepass(house,robot,1);
-        if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入电量界面
+        if(mouse_press(lb+57,ub+350,lb+217,ub+390)==1) //进入自由巡逻功能
         {
-            
+            free_hang(house,robot);
+            nocombo();
             continue;
         }
         if(mouse_press(lb+57,ub+410,lb+217,ub+450)==1) //进入舒适度界面
@@ -539,13 +547,13 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
     if((*house).time%timeupdate==0)
     {
         draw_bactr(robot); //画电池电量
-        fprintf(fpde,"\naaaa\n");
+        /*fprintf(fpde,"\naaaa\n");
         fprintf(fpde,"time %lld\n",(*house).time); 
         
         fprintf(fpde,"flag %d\n",(*house).set);
         fprintf(fpde,"out %d\n",(*house).tempout);
         fprintf(fpde,"in %d\n",(*house).temp);
-        fprintf(fpde,"set %d\n",(*house).tempset);
+        fprintf(fpde,"set %d\n",(*house).tempset);*/
         write_statu(house,robot,st);
     }
     if((*house).time%timeset==0)

@@ -23,10 +23,10 @@ void draw_control()
     fill_rect(lb+17,ub+60,lb+257,ub+320,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+27,ub+95,"欢迎用户",32,32,'S',BLACK);
     outtextxy(lb+145,ub+95,"111",2,2,16,BLACK);
-    puthz(lb+37,ub+160,"室外温度：",24,25,'K',BLACK);
-    puthz(lb+37,ub+195,"室内温度：",24,25,'K',BLACK);
+    puthz(lb+37,ub+160,"室内温度：",24,25,'K',BLACK);
+    puthz(lb+37,ub+195,"室外温度：",24,25,'K',BLACK);
     puthz(lb+37,ub+230,"空气湿度：",24,25,'K',BLACK);
-    puthz(lb+37,ub+265,"空气质量：",24,25,'K',BLACK);
+    puthz(lb+37,ub+265,"污染指数：",24,25,'K',BLACK);
 
     //画功能按钮
     fill_rect(lb+37,ub+350,lb+127,ub+390,MISTY_ROSE,MARINE_BLUE);
@@ -95,10 +95,10 @@ void draw_comfort()
     puthz(lb+27,ub+95,"欢迎用户",32,32,'H',BLACK);
     
     outtextxy(lb+145,ub+95,"111",2,2,16,BLACK);
-    puthz(lb+37,ub+160,"室外温度：",24,25,'K',BLACK);
-    puthz(lb+37,ub+195,"室内温度：",24,25,'K',BLACK);
+    puthz(lb+37,ub+160,"室内温度：",24,25,'K',BLACK);
+    puthz(lb+37,ub+195,"室外温度：",24,25,'K',BLACK);
     puthz(lb+37,ub+230,"空气湿度：",24,25,'K',BLACK);
-    puthz(lb+37,ub+265,"空气质量：",24,25,'K',BLACK);
+    puthz(lb+37,ub+265,"污染指数：",24,25,'K',BLACK);
 
     //画功能按钮
     puthz(lb+27,ub+354,"温度",32,32,'K',WHITE);
@@ -138,11 +138,7 @@ void draw_move()
     puthz(lb+27,ub+95,"欢迎用户",32,32,'H',BLACK);
     
     outtextxy(lb+145,ub+95,"111",2,2,16,BLACK);
-    //puthz(lb+37,ub+160,"室外温度：",24,25,'K',BLACK);
-    ///puthz(lb+37,ub+195,"室内温度：",24,25,'K',BLACK);
-    //puthz(lb+37,ub+230,"空气湿度：",24,25,'K',BLACK);
-    //puthz(lb+37,ub+265,"空气质量：",24,25,'K',BLACK);
-
+    
     //画功能按钮
     fill_rect(lb+57,ub+350,lb+217,ub+390,MISTY_ROSE,MARINE_BLUE);
     puthz(lb+71,ub+354,"定向巡逻",32,32,'K',BLACK);
@@ -248,6 +244,8 @@ void draw_bactr(ROBOT *robot)
 
 void write_statu(HOUSE *house, ROBOT *robot,int st)
 {
+    int lbx=lb+110, lby=ub+355;
+    int color;
     if(st==1||st==2)
     {
         char s1[5],s2[5],s3[5],s4[8];
@@ -255,19 +253,35 @@ void write_statu(HOUSE *house, ROBOT *robot,int st)
         itoa((*house).tempout,s2,10);
         itoa((*house).wet,s3,10);
         itoa((*house).pm25,s4,10);
+        
         bar(lb+150,ub+150,lb+210,ub+300,MISTY_ROSE);
-        outtextxy(lb+150,ub+155,s1,2,2,15,BLACK);
-        outtextxy(lb+150,ub+190,s2,2,2,15,BLACK);
-        outtextxy(lb+150,ub+225,s3,2,2,15,BLACK);
-        outtextxy(lb+150,ub+260,s4,2,2,15,BLACK);
+        outtextxy(lb+150,ub+155,s1,2,2,16,BLACK);
+        outtextxy(lb+150,ub+190,s2,2,2,16,BLACK);
+        outtextxy(lb+150,ub+225,s3,2,2,16,BLACK);
+        outtextxy(lb+150,ub+260,s4,2,2,16,BLACK);
+        outtextxy(lb+190,ub+155,"C",2,2,16,BLACK);
+        outtextxy(lb+190,ub+190,"C",2,2,16,BLACK);
+        outtextxy(lb+190,ub+225,"%",2,2,16,BLACK);
+        outtextxy(lb+190,ub+260,"%",2,2,16,BLACK);
+        drcircle(lb+197,ub+155,3,BLACK);
+        drcircle(lb+197,ub+190,3,BLACK);
         if(st==2)
         {
             char s5[3];
             itoa((*house).tempset,s5,10);
             bar(lb+190,ub+360,lb+230,ub+390,MARINE_BLUE);
-            outtextxy(lb+182,ub+354,s5,2,2,16,WHITE);
-
+            
+            if((*house).set==1) color=STRONG_RED;
+            else color=BLACK;
             //lb+110,ub+355,lb+140,ub+385,
+            bar(lbx+14,lby+2,lbx+16,lby+15,color);
+            bar(lbx+5,lby+5,lbx+12,lby+7,color);
+            bar(lbx+18,lby+5,lbx+25,lby+7,color);
+            bar(lbx+5,lby+5,lbx+7,lby+25,color);
+            bar(lbx+23,lby+5,lbx+25,lby+25,color);
+            bar(lbx+5,lby+23,lbx+25,lby+25,color);
+            
+            outtextxy(lb+182,ub+354,s5,2,2,16,WHITE);
         }
         return ;
     }

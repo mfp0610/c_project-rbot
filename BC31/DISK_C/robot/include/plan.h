@@ -9,6 +9,9 @@
 #define _PLAN_H_
 
 #include "headers.h"
+
+#define M 1010
+
 //heap实现优先队列部分
 void swapnode(NODE1 *a, NODE1 *b);
 void put(NODE1 *heap, int *size, NODE1 d);

@@ -81,3 +81,9 @@ int pd_pass(int mp)
     if(mp==22) return 1;
     return 0;
 }
+
+void free_hang(HOUSE *house, ROBOT *robot)
+{
+    NODE pos1, pos2, pos3, pos4;
+    
+}

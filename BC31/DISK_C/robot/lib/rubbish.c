@@ -58,8 +58,10 @@ void col_rub(int *pnum,NODE *rubbish,HOUSE *house,ROBOT *robot)
             for(j=0;j<N;j++) fprintf(fpde2,"%2d ",(*house).mp1[i][j]);
             fprintf(fpde2,"\n");
         }
+        fprintf(fpde2,"aaa\nnum %d\nbeg %d %d\nend %d %d\n",*pnum,mp.x,mp.y,trash_bin.x,trash_bin.y);
         f=Astarmove(mp,trash_bin,robot,house);
-        fprintf(fpde2,"aaa\t%d\t%d\t%d\t%d\n",*pnum,f,trash_bin.x,trash_bin.y);
+        fprintf(fpde2,"flag %d\n",f);
+        
         for(i=0;i<N;i++)
         {
             for(j=0;j<N;j++) fprintf(fpde2,"%2d ",(*house).mp1[i][j]);
