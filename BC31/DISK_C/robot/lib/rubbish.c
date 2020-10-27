@@ -17,7 +17,6 @@ void set_rub(int *pnum,NODE *rubbish,HOUSE *house)
     while(1)
     {
         x=randin(17);
-        randomize();
         y=randin(17);
         fprintf(fpde2,"%d\t%d\t%d\n",x,y,*pnum);
 
@@ -26,6 +25,7 @@ void set_rub(int *pnum,NODE *rubbish,HOUSE *house)
             rubbish[*pnum].x=x;
             rubbish[*pnum].y=y;
             (*house).mp1[x][y]=22;
+            (*house).mpinit[x][y]=22;
             /*draw_rub(pnum,rubbish);*/
             break;
         }
@@ -44,6 +44,7 @@ void col_rub(int *pnum,NODE *rubbish,HOUSE *house,ROBOT *robot)
     mp.y=(*robot).py;
     Astarmove(mp,rubbish[*pnum],robot,house);
     (*house).mp1[x][y]=0;
+    (*house).mpinit[x][y]=0;
     fclose(fpde2);
 }
 
