@@ -36,7 +36,7 @@ int sign(int x)
 int randin(int x)
 {
     int t;
-    randomize();
+    srand((unsigned)time(NULL));
     t=rand()%x;
     return t;
 }

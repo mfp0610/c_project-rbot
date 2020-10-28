@@ -26,7 +26,9 @@ typedef struct{
     int wet; //房间湿度
     int pm25; //房间的pm2.5指数
     int mp1[N][N]; //储存地图
-    int mpinit[N][N]; //储存初始地图    
+    int mpinit[N][N]; //储存初始地图 
+    int dor[5];
+    int win[5];
 } HOUSE;
 
 void mainWindow(); //程序主界面

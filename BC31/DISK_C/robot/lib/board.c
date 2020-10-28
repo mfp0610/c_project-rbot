@@ -61,6 +61,8 @@ void draw_electr()
     puthz(LB+71,UB+354,"自动充电",32,32,'K',BLACK);
     fill_rect(LB+57,UB+410,LB+217,UB+450,MISTY_ROSE,MARINE_BLUE);
     puthz(LB+71,UB+414,"手动充电",32,32,'K',BLACK);
+    
+    //画返回按钮
     fill_rect(LB+57,UB+470,LB+217,UB+510,MISTY_ROSE,MARINE_BLUE);
     puthz(LB+71,UB+474,"返回主页",32,32,'K',BLACK);
 
@@ -79,8 +81,8 @@ void draw_comfort()
     //画状态显示栏
     fill_rect(LB+17,UB+60,LB+257,UB+320,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
-    
     outtextxy(LB+145,UB+95,"111",2,2,16,BLACK);
+    
     puthz(LB+37,UB+160,"室内温度：",24,25,'K',BLACK);
     puthz(LB+37,UB+195,"室外温度：",24,25,'K',BLACK);
     puthz(LB+37,UB+230,"空气湿度：",24,25,'K',BLACK);
@@ -89,17 +91,22 @@ void draw_comfort()
     //画功能按钮
     puthz(LB+27,UB+354,"温度",32,32,'K',WHITE);
 
+    //画开关方框
     fill_rect(LB+110,UB+355,LB+140,UB+385,MISTY_ROSE,MARINE_BLUE);
 
+    //画温度加减按钮
     fill_rect(LB+167,UB+360,LB+187,UB+380,MISTY_ROSE,MARINE_BLUE);
     fill_rect(LB+227,UB+360,LB+247,UB+380,MISTY_ROSE,MARINE_BLUE);
     outtextxy(LB+159,UB+353,"-",2,2,16,BLACK);
     outtextxy(LB+219,UB+353,"+",2,2,16,BLACK);
     
+    //画功能按钮
     fill_rect(LB+37,UB+410,LB+127,UB+450,MISTY_ROSE,MARINE_BLUE);
     puthz(LB+47,UB+414,"除湿",32,35,'K',BLACK);
     fill_rect(LB+147,UB+410,LB+237,UB+450,MISTY_ROSE,MARINE_BLUE);
     puthz(LB+157,UB+414,"除尘",32,35,'K',BLACK);
+    
+    //画返回按钮
     fill_rect(LB+57,UB+470,LB+217,UB+510,MISTY_ROSE,MARINE_BLUE);
     puthz(LB+71,UB+474,"返回主页",32,32,'K',BLACK);
 
@@ -122,9 +129,24 @@ void draw_move()
     
     //画功能按钮
     fill_rect(LB+57,UB+350,LB+217,UB+390,MISTY_ROSE,MARINE_BLUE);
-    puthz(LB+71,UB+354,"定向巡逻",32,32,'K',BLACK);
-    fill_rect(LB+57,UB+410,LB+217,UB+450,MISTY_ROSE,MARINE_BLUE);
-    puthz(LB+71,UB+414,"自动巡逻",32,32,'K',BLACK);
+    puthz(LB+71,UB+354,"自动巡逻",32,32,'K',BLACK);
+    
+    puthz(LB+47,UB+400,"门",24,24,'K',BLACK);
+    puthz(LB+47,UB+430,"窗",24,24,'K',BLACK);
+    
+    fill_rect(LB+80,UB+400,LB+100,UB+420,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(LB+110,UB+400,LB+130,UB+420,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(LB+140,UB+400,LB+160,UB+420,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(LB+170,UB+400,LB+190,UB+420,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(LB+200,UB+400,LB+220,UB+420,MISTY_ROSE,MARINE_BLUE);
+
+    fill_rect(LB+80,UB+435,LB+100,UB+455,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(LB+110,UB+435,LB+130,UB+455,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(LB+140,UB+435,LB+160,UB+455,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(LB+170,UB+435,LB+190,UB+455,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(LB+200,UB+435,LB+220,UB+455,MISTY_ROSE,MARINE_BLUE);
+    
+    //画返回按钮
     fill_rect(LB+57,UB+470,LB+217,UB+510,MISTY_ROSE,MARINE_BLUE);
     puthz(LB+71,UB+474,"返回主页",32,32,'K',BLACK);
 
@@ -143,8 +165,8 @@ void draw_clean()
     //画状态显示栏
     fill_rect(LB+17,UB+60,LB+257,UB+320,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
-    
     outtextxy(LB+145,UB+95,"111",2,2,16,BLACK);
+    
     puthz(LB+37,UB+160,"地面垃圾：",24,25,'K',BLACK);
     puthz(LB+37,UB+195,"桶内垃圾：",24,25,'K',BLACK);
 
@@ -171,12 +193,7 @@ void draw_react()
     //画状态显示栏
     fill_rect(LB+17,UB+60,LB+257,UB+380,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
-    
     outtextxy(LB+145,UB+95,"111",2,2,16,BLACK);
-    //puthz(LB+37,UB+160,"室外温度：",24,25,'K',BLACK);
-    //puthz(LB+37,UB+195,"室内温度：",24,25,'K',BLACK);
-    //puthz(LB+37,UB+230,"空气湿度：",24,25,'K',BLACK);
-    //puthz(LB+37,UB+265,"空气质量：",24,25,'K',BLACK);
 
     //画功能按钮
     fill_rect(LB+37,UB+410,LB+127,UB+450,MISTY_ROSE,MARINE_BLUE);
@@ -299,5 +316,24 @@ void write_statu(HOUSE *house, ROBOT *robot,int st)
             outtextxy(LB+182,UB+354,s5,2,2,16,WHITE);
         }
         return ;
+    }
+    if(st==4)
+    {
+        fill_rect(LB+80,UB+400,LB+100,UB+420,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+110,UB+400,LB+130,UB+420,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+140,UB+400,LB+160,UB+420,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+170,UB+400,LB+190,UB+420,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+200,UB+400,LB+220,UB+420,MISTY_ROSE,MARINE_BLUE);
+
+        if((*house).dor[0]) puthz(LB+82,UB+402,"开",16,16,'K',BLACK);
+        else puthz(LB+82,UB+402,"关",16,16,'K',BLACK);
+        if((*house).dor[1]) puthz(LB+112,UB+402,"开",16,16,'K',BLACK);
+        else puthz(LB+112,UB+402,"关",16,16,'K',BLACK);
+        if((*house).dor[2]) puthz(LB+142,UB+402,"开",16,16,'K',BLACK);
+        else puthz(LB+142,UB+402,"关",16,16,'K',BLACK);
+        if((*house).dor[3]) puthz(LB+172,UB+402,"开",16,16,'K',BLACK);
+        else puthz(LB+172,UB+402,"关",16,16,'K',BLACK);
+        if((*house).dor[4]) puthz(LB+202,UB+402,"开",16,16,'K',BLACK);
+        else puthz(LB+202,UB+402,"关",16,16,'K',BLACK);
     }
 }

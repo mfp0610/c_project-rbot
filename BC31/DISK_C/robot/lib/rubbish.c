@@ -8,30 +8,35 @@
 
 #include "headers.h"
 
-
+FILE *fpde4;
 
 void set_rub(int *pnum,NODE *rubbish,HOUSE *house)
 {
     int x,y;
+    fpde4=fopen("debug\\debug4.txt","w");
+    
     while(1)
     {
         x=randin(17);
-        y=randin(17);
+        y=(randin(17)+23451)%17;
         if((*house).mp1[x][y]==0)
         {
             rubbish[*pnum].x=x;
             rubbish[*pnum].y=y;
             (*house).mp1[x][y]=22;
             (*house).mpinit[x][y]=22;
+            fprintf(fpde4,"%d %d\n",x,y);
             /*draw_rub(pnum,rubbish);*/
             break;
         }
     }
+    fclose(fpde4);
 }
 
 void col_rub(int *pnum,NODE *rubbish,HOUSE *house,ROBOT *robot)
 {
     int x,y,f;
+    int i,j;
     NODE mp;
     NODE trash_bin;
     trash_bin.x=0;
@@ -43,6 +48,10 @@ void col_rub(int *pnum,NODE *rubbish,HOUSE *house,ROBOT *robot)
     Astarmove(mp,rubbish[*pnum],robot,house);
     (*house).mp1[x][y]=0;
     (*house).mpinit[x][y]=0;
+    mp.x=(*robot).px;
+    mp.y=(*robot).py;
+    if((*pnum)==1)
+        f=Astarmove(mp,trash_bin,robot,house);
 }
 
 void draw_rub(int *pnum,NODE *rubbish)

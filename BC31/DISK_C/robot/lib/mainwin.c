@@ -305,7 +305,14 @@ void maininit(HOUSE *house, ROBOT *robot)
     (*house).tempout=20;
     (*house).temp=26;
     (*house).wet=50;
-    (*house).pm25=50; //初始化房间信息
+    (*house).pm25=50; 
+    
+    for(i=0;i<5;i++)
+    {
+        (*house).dor[i]=1;
+        (*house).win[i]=1;
+    }   
+    //初始化房间信息
 
     for(i=0;i<N;i++)
     for(j=0;j<N;j++)
@@ -325,15 +332,9 @@ void func_electr(HOUSE *house, ROBOT *robot)
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        timepass(house,robot,1);
-        if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //自动充电
+        timepass(house,robot,3);
+        if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //手动充电
         {
-            
-            continue;
-        }
-        if(mouse_press(LB+57,UB+410,LB+217,UB+450)==1) //手动充电
-        {
-            nocombo();
             nocombo();
             charge(house,robot);
             continue;
@@ -570,23 +571,15 @@ void func_move(HOUSE *house, ROBOT *robot)
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        timepass(house,robot,3);
+        timepass(house,robot,4);
         if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //进入自由巡逻功能
         {
             free_hang(house,robot);
             nocombo();
             continue;
         }
-        if(mouse_press(LB+57,UB+410,LB+217,UB+450)==1) //进入舒适度界面
-        {
-            
-            continue;
-        }
-        if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //进入环境界面
-        {
-            nocombo();
-            return;
-        }
+        ope_door(house,robot);
+        ope_wins(house,robot);
         if(kbhit())
         {
             Delaytime(50);

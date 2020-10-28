@@ -151,3 +151,57 @@ void get_conbot(HOUSE *house, ROBOT *robot)
     }
     return ;
 }
+
+void ope_door(HOUSE *house, ROBOT *robot)
+{
+    if(mouse_press(LB+80,UB+400,LB+100,UB+420)==1)
+    {
+        nocombo();
+        if((*house).dor[0]) (*house).dor[0]=0;
+        else (*house).dor[0]=1;
+        clrmous(MouseX, MouseY);
+        write_statu(house,robot,4);
+    }
+    if(mouse_press(LB+110,UB+400,LB+130,UB+420)==1)
+    {
+        nocombo();
+        if((*house).dor[1]) (*house).dor[1]=0;
+        else (*house).dor[1]=1;
+        clrmous(MouseX, MouseY);
+        write_statu(house,robot,4);
+    }
+    if(mouse_press(LB+140,UB+400,LB+160,UB+420)==1)
+    {
+        nocombo();
+        if((*house).dor[2]) (*house).dor[2]=0;
+        else (*house).dor[2]=1;
+        clrmous(MouseX, MouseY);
+        write_statu(house,robot,4);
+    }
+    if(mouse_press(LB+170,UB+400,LB+190,UB+420)==1)
+    {
+        nocombo();
+        if((*house).dor[3]) (*house).dor[3]=0;
+        else (*house).dor[3]=1;
+        clrmous(MouseX, MouseY);
+        write_statu(house,robot,4);
+    }
+    if(mouse_press(LB+200,UB+400,LB+220,UB+420)==1)
+    {
+        nocombo();
+        if((*house).dor[4]) (*house).dor[4]=0;
+        else (*house).dor[4]=1;
+        clrmous(MouseX, MouseY);
+        write_statu(house,robot,4);
+    } 
+}
+void ope_wins(HOUSE *house, ROBOT *robot)
+{
+/*fill_rect(LB+80,UB+435,LB+100,UB+455,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+110,UB+435,LB+130,UB+455,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+140,UB+435,LB+160,UB+455,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+170,UB+435,LB+190,UB+455,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+200,UB+435,LB+220,UB+455,MISTY_ROSE,MARINE_BLUE);
+*/
+}
+        
