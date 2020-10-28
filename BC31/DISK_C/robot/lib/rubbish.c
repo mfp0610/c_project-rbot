@@ -8,18 +8,15 @@
 
 #include "headers.h"
 
-FILE *fpde2;
+
 
 void set_rub(int *pnum,NODE *rubbish,HOUSE *house)
 {
     int x,y;
-    fpde2=fopen("debug\\debug2.txt","w");
     while(1)
     {
         x=randin(17);
         y=randin(17);
-        fprintf(fpde2,"%d\t%d\t%d\n",x,y,*pnum);
-
         if((*house).mp1[x][y]==0)
         {
             rubbish[*pnum].x=x;
@@ -30,45 +27,22 @@ void set_rub(int *pnum,NODE *rubbish,HOUSE *house)
             break;
         }
     }
-    fclose(fpde2);
 }
 
 void col_rub(int *pnum,NODE *rubbish,HOUSE *house,ROBOT *robot)
 {
     int x,y,f;
-    int i,j;
     NODE mp;
     NODE trash_bin;
     trash_bin.x=0;
     trash_bin.y=0;
     x=rubbish[*pnum].x;
     y=rubbish[*pnum].y;
-    fpde2=fopen("debug\\debug2.txt","w");
     mp.x=(*robot).px;
     mp.y=(*robot).py;
     Astarmove(mp,rubbish[*pnum],robot,house);
     (*house).mp1[x][y]=0;
     (*house).mpinit[x][y]=0;
-    mp.x=(*robot).px;
-    mp.y=(*robot).py;
-    if((*pnum)==1)
-    {
-        for(i=0;i<N;i++)
-        {
-            for(j=0;j<N;j++) fprintf(fpde2,"%2d ",(*house).mp1[i][j]);
-            fprintf(fpde2,"\n");
-        }
-        fprintf(fpde2,"aaa\nnum %d\nbeg %d %d\nend %d %d\n",*pnum,mp.x,mp.y,trash_bin.x,trash_bin.y);
-        f=Astarmove(mp,trash_bin,robot,house);
-        fprintf(fpde2,"flag %d\n",f);
-        
-        for(i=0;i<N;i++)
-        {
-            for(j=0;j<N;j++) fprintf(fpde2,"%2d ",(*house).mp1[i][j]);
-            fprintf(fpde2,"\n");
-        }
-    }
-    fclose(fpde2);
 }
 
 void draw_rub(int *pnum,NODE *rubbish)

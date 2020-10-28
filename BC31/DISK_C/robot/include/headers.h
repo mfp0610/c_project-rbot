@@ -34,6 +34,7 @@
 #include "rubbish.h" //清洁功能头文件
 #include "plan.h" //路径规划算法头文件
 #include "pinyin.h" //输入法头文件
+#include "electr.h" //充电功能头文件
 
 
 //定义颜色宏
@@ -55,6 +56,7 @@
 #define GREEN 26603
 #define PINK 58572
 #define BRIGHT_GREEN 26592
+#define YELLOW 65504
 
 //必要的参数
 #define ROBOT_SIZE 20 //定义基础机器人大小

@@ -118,8 +118,8 @@ int Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
     get_path(road,&rd_sz,node,nd_sz); //规范化路径
     for(i=2;i<=rd_sz;i++)
     {
-        for(j=0;j<=100;j++)
-            timepass(house,robot,1);
+        /*for(j=0;j<=100;j++)
+            timepass(house,robot,1);*/
         if(i%3==0) (*robot).electr--;
         if(road[i].x-road[i-1].x==1) dir='s';
         if(road[i].x-road[i-1].x==-1) dir='w';

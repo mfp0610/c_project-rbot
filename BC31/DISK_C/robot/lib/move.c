@@ -78,6 +78,7 @@ int pd_pass(int mp)
     if(mp==9) return 1;
     if(mp==10) return 1;
     if(mp==11) return 1;
+    if(mp==21) return 1;
     if(mp==22) return 1;
     return 0;
 }

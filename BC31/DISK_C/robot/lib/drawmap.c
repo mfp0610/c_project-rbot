@@ -13,11 +13,7 @@
 
 void draw_floor_wood(int x,int y)
 {
-    bar(x+WIDE,y+WIDE,x+SIZE-WIDE,y+SIZE-WIDE,BROWN);
-    bar(x,y,x+SIZE,y+WIDE,BLACK);
-    bar(x,y+WIDE,x+WIDE,y+SIZE,BLACK);
-    bar(x+SIZE-WIDE,y+WIDE,x+SIZE,y+SIZE,BLACK);
-    bar(x+WIDE,y+SIZE-WIDE,x+SIZE-WIDE,y+SIZE,BLACK);
+    fill_rect(x,y,x+SIZE,y+SIZE,BROWN,BLACK);
 }
 
 void draw_floor_ceramic(int x,int y)

@@ -236,9 +236,7 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1,cy1,cx1+2,cy2,BLACK);
                 break;
             case 21:
-                bar(cx1,cy1,cx1+130,cy1+60,MARINE_BLUE);
-                fill_rect(cx1+21,cy1+10,cx1+70,cy1+40,MISTY_ROSE,MARINE_BLUE);
-                fill_rect(cx1+70,cy1+15,cx1+75,cy1+35,MISTY_ROSE,MISTY_ROSE);
+                bar(cx1,cy1,cx2,cy2,YELLOW);     
                 break;
             case 22:
                 bar(cx1,cy1,cx2,cy2,GREEN);
@@ -266,7 +264,7 @@ void maininit(HOUSE *house, ROBOT *robot)
 {
     int i,j;
     int mp1init[N][N]={
-        {0,2,6,6,2,6,6,6,2,6,6,6,2,0,0,0,0,0},
+        {3,2,6,6,2,6,6,6,2,6,6,6,2,0,0,0,0,0},
         {0,9,0,0,2,6,6,6,2,6,6,6,2,5,5,0,0,0},
         {0,9,0,0,9,0,0,6,2,0,0,6,2,5,5,18,0,0},
         {0,2,0,0,9,0,0,6,2,0,0,6,2,5,5,19,0,0},
@@ -324,14 +322,16 @@ void func_electr(HOUSE *house, ROBOT *robot)
     {
         newmouse(&MouseX, &MouseY, &press);
         timepass(house,robot,1);
-        if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //进入电量界面
+        if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //自动充电
         {
             
             continue;
         }
-        if(mouse_press(LB+57,UB+410,LB+217,UB+450)==1) //进入舒适度界面
+        if(mouse_press(LB+57,UB+410,LB+217,UB+450)==1) //手动充电
         {
-            
+            nocombo();
+            nocombo();
+            charge(house,robot);
             continue;
         }
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回主菜单
@@ -466,11 +466,16 @@ void func_clean(HOUSE *house, ROBOT *robot)
         {
             nocombo();
             nocombo();
-            if(*pnum>0)
+            while(1)
             {
-                col_rub(pnum,rubbish,house,robot);
-                paintmp(house,robot);
-                (*pnum)--;
+                if(*pnum>0)
+                {
+                    col_rub(pnum,rubbish,house,robot);
+                    paintmp(house,robot);
+                    (*pnum)--;
+                }
+                else
+                    break;
             }
             continue;
         }
@@ -605,11 +610,9 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
 {
     /*******上机调试*******/
     char *s;
-
     /*bar(0,0,150,60,MARINE_BLUE);
     itoa(house).time,s,10);
     outtextxy(0,0,s,1,2,10,WHITE);*/
-
     if((*house).time%timeupdate==0)
     {
         draw_bactr(robot); //画电池电量
@@ -649,8 +652,12 @@ void timepass(HOUSE *house, ROBOT *robot,int st)
         else if((*house).time%timetmp==0)
             (*house).temp-=sign((*house).temp-(*house).tempout);
     }
-    if((*house).time%timeele==0) (*robot).electr--;
-    if((*robot).electr==0) (*robot).electr=100; //触发自动充电模块
+    if((*house).time%timeele==0) 
+        (*robot).electr--;
+    if((*robot).electr<=10) //触发自动充电模块
+    {
+        charge(house,robot);
+    }
     (*house).time%=timecut;
     ((*house).time)++; 
 }
