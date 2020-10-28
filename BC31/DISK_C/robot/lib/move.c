@@ -75,11 +75,15 @@ int pd_pass(int mp)
 {
     if(mp==0) return 1;
     if(mp==3) return 1;
-    if(mp==9) return 1;
+    /*if(mp==9) return 1;
     if(mp==10) return 1;
-    if(mp==11) return 1;
+    if(mp==11) return 1;*/
     if(mp==21) return 1;
     if(mp==22) return 1;
+    if(mp==23) return 1;
+    if(mp==24) return 1;
+    if(mp==25) return 1;
+    if(mp==26) return 1;
     return 0;
 }
 
@@ -157,40 +161,120 @@ void ope_door(HOUSE *house, ROBOT *robot)
     if(mouse_press(LB+80,UB+400,LB+100,UB+420)==1)
     {
         nocombo();
-        if((*house).dor[0]) (*house).dor[0]=0;
-        else (*house).dor[0]=1;
+        if((*house).dor[0]) 
+        {
+            (*house).dor[0]=0;
+            house->mp1[1][1]=23;
+            house->mpinit[1][1]=23;
+            house->mp1[2][1]=24;
+            house->mpinit[2][1]=24;
+            paintmp(house,robot);
+        }
+        else 
+        {
+            (*house).dor[0]=1;
+            house->mp1[1][1]=9;
+            house->mpinit[1][1]=9;
+            house->mp1[2][1]=9;
+            house->mpinit[2][1]=9;
+            paintmp(house,robot);
+        }
         clrmous(MouseX, MouseY);
         write_statu(house,robot,4);
     }
     if(mouse_press(LB+110,UB+400,LB+130,UB+420)==1)
     {
         nocombo();
-        if((*house).dor[1]) (*house).dor[1]=0;
-        else (*house).dor[1]=1;
+        if((*house).dor[1]) 
+        {
+            (*house).dor[1]=0;
+            house->mp1[2][4]=23;
+            house->mpinit[2][4]=23;
+            house->mp1[3][4]=24;
+            house->mpinit[3][4]=24;
+            paintmp(house,robot);
+        }
+        else 
+        {
+            (*house).dor[1]=1;
+            house->mp1[2][4]=9;
+            house->mpinit[2][4]=9;
+            house->mp1[3][4]=9;
+            house->mpinit[3][4]=9;
+            paintmp(house,robot);
+        }
         clrmous(MouseX, MouseY);
         write_statu(house,robot,4);
     }
     if(mouse_press(LB+140,UB+400,LB+160,UB+420)==1)
     {
         nocombo();
-        if((*house).dor[2]) (*house).dor[2]=0;
-        else (*house).dor[2]=1;
+        if((*house).dor[2]) 
+        {
+            (*house).dor[2]=0;
+            house->mp1[6][9]=25;
+            house->mpinit[6][9]=25;
+            house->mp1[6][10]=26;
+            house->mpinit[6][10]=26;
+            paintmp(house,robot);
+        }
+        else 
+        {
+            (*house).dor[2]=1;
+            house->mp1[6][9]=10;
+            house->mpinit[6][9]=10;
+            house->mp1[6][10]=11;
+            house->mpinit[6][10]=11;
+            paintmp(house,robot);
+        }
         clrmous(MouseX, MouseY);
         write_statu(house,robot,4);
     }
     if(mouse_press(LB+170,UB+400,LB+190,UB+420)==1)
     {
         nocombo();
-        if((*house).dor[3]) (*house).dor[3]=0;
-        else (*house).dor[3]=1;
+        if((*house).dor[3]) 
+        {
+            (*house).dor[3]=0;
+            house->mp1[7][13]=23;
+            house->mpinit[7][13]=23;
+            house->mp1[8][13]=24;
+            house->mpinit[8][13]=24;
+            paintmp(house,robot);
+        }
+        else 
+        {
+            (*house).dor[3]=1;
+            house->mp1[7][13]=9;
+            house->mpinit[7][13]=9;
+            house->mp1[8][13]=9;
+            house->mpinit[8][13]=9;
+            paintmp(house,robot);
+        }
         clrmous(MouseX, MouseY);
         write_statu(house,robot,4);
     }
     if(mouse_press(LB+200,UB+400,LB+220,UB+420)==1)
     {
         nocombo();
-        if((*house).dor[4]) (*house).dor[4]=0;
-        else (*house).dor[4]=1;
+        if((*house).dor[4]) 
+        {
+            (*house).dor[4]=0;
+            house->mp1[9][8]=25;
+            house->mpinit[9][8]=25;
+            house->mp1[9][9]=26;
+            house->mpinit[9][9]=26;
+            paintmp(house,robot);
+        }
+        else 
+        {
+            (*house).dor[4]=1;
+            house->mp1[9][8]=10;
+            house->mpinit[9][8]=10;
+            house->mp1[9][9]=11;
+            house->mpinit[9][9]=11;
+            paintmp(house,robot);
+        }
         clrmous(MouseX, MouseY);
         write_statu(house,robot,4);
     } 

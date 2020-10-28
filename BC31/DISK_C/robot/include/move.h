@@ -10,9 +10,7 @@
 
 #include "headers.h"
 
-typedef struct {
-    int x,y;
-} NODE;
+
 
 typedef struct {
     int x,y;

@@ -10,10 +10,10 @@
 
 FILE *fpde4;
 
-void set_rub(int *pnum,NODE *rubbish,HOUSE *house)
+void set_rub(NODE *rubbish,HOUSE *house)
 {
     int x,y;
-    fpde4=fopen("debug\\debug4.txt","w");
+    
     
     while(1)
     {
@@ -21,44 +21,53 @@ void set_rub(int *pnum,NODE *rubbish,HOUSE *house)
         y=(randin(17)+23451)%17;
         if((*house).mp1[x][y]==0)
         {
-            rubbish[*pnum].x=x;
-            rubbish[*pnum].y=y;
+            rubbish[house->rubnum].x=x;
+            rubbish[house->rubnum].y=y;
             (*house).mp1[x][y]=22;
             (*house).mpinit[x][y]=22;
-            fprintf(fpde4,"%d %d\n",x,y);
+            
             /*draw_rub(pnum,rubbish);*/
             break;
         }
     }
-    fclose(fpde4);
+    
 }
 
-void col_rub(int *pnum,NODE *rubbish,HOUSE *house,ROBOT *robot)
+void col_rub(int *f,NODE *rubbish,HOUSE *house,ROBOT *robot)
 {
-    int x,y,f;
+    int x,y;
     int i,j;
     NODE mp;
     NODE trash_bin;
+    fpde4=fopen("debug\\debug4.txt","w");
     trash_bin.x=0;
     trash_bin.y=0;
-    x=rubbish[*pnum].x;
-    y=rubbish[*pnum].y;
+    x=rubbish[house->rubnum].x;
+    y=rubbish[house->rubnum].y;
     mp.x=(*robot).px;
     mp.y=(*robot).py;
-    Astarmove(mp,rubbish[*pnum],robot,house);
-    (*house).mp1[x][y]=0;
-    (*house).mpinit[x][y]=0;
-    mp.x=(*robot).px;
-    mp.y=(*robot).py;
-    if((*pnum)==1)
-        f=Astarmove(mp,trash_bin,robot,house);
+    *f=Astarmove(mp,rubbish[house->rubnum],robot,house);
+    fprintf(fpde4,"%d %d %d %d %d",mp.x,mp.y,x,y,*f);
+    if(*f==1)
+    {
+        (*house).mp1[x][y]=0;
+        (*house).mpinit[x][y]=0;
+        mp.x=(*robot).px;
+        mp.y=(*robot).py;
+        if((house->rubnum)==1)
+        {
+            Astarmove(mp,trash_bin,robot,house);
+        }
+        (house->rubnum)--;
+    }
+    fclose(fpde4);
 }
 
-void draw_rub(int *pnum,NODE *rubbish)
+/*void draw_rub(int *pnum,NODE *rubbish)
 {
     int x,y;
-    x=15+(rubbish[*pnum].y)*40;
-    y=24+(rubbish[*pnum].x)*40;
+    x=15+(rubbish[house->rubnum].y)*40;
+    y=24+(rubbish[house->rubnum].x)*40;
     bar(x,y,x+5,y+5,BLACK);
     bar(x+10,y,x+15,y+5,BLACK);
     bar(x+20,y,x+25,y+5,BLACK);
@@ -91,4 +100,4 @@ void draw_rub(int *pnum,NODE *rubbish)
     bar(x+15,y+35,x+20,y+40,BLACK);
     bar(x+25,y+35,x+30,y+40,BLACK);
     bar(x+35,y+35,x+40,y+40,BLACK);
-}
+}*/

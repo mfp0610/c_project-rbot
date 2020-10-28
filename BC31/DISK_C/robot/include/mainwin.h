@@ -29,7 +29,12 @@ typedef struct{
     int mpinit[N][N]; //储存初始地图 
     int dor[5];
     int win[5];
+    int rubnum;
 } HOUSE;
+
+typedef struct {
+    int x,y;
+} NODE;
 
 void mainWindow(); //程序主界面
 void drawbasic(); //程序主界面画图
@@ -37,7 +42,7 @@ void paintmp(HOUSE *house, ROBOT *robot); //画出地图
 void maininit(HOUSE *house, ROBOT *robot);
 void func_electr(HOUSE *house, ROBOT *robot); //充电界面函数
 void func_comfort(HOUSE *house, ROBOT *robot); //舒适度界面函数
-void func_clean(HOUSE *house, ROBOT *robot); //情节界面函数
+void func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot); //情节界面函数
 void func_move(HOUSE *house, ROBOT *robot); //控制界面函数
 void func_react(HOUSE *house, ROBOT *robot); //互动界面函数
 void timepass(HOUSE *house, ROBOT *robot,int st); //时间流逝函数

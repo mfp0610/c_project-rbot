@@ -18,11 +18,13 @@
 #define setwet 20
 
 FILE *fpde;
+FILE *fpde5;
 
 void mainWindow()
 {
     HOUSE *house;
     ROBOT *robot;
+    NODE rubbish[4];
     char value, value1;
     int i,j;
     int poscode;
@@ -41,6 +43,7 @@ void mainWindow()
     draw_control();
     draw_bactr(robot);
     write_statu(house,robot,1);
+    house->rubnum=0;
 
     /*fprintf(fpde,"\ninit\n");
     fprintf(fpde,"time %lld\n",(*house).time); 
@@ -80,7 +83,7 @@ void mainWindow()
             clrmous(MouseX, MouseY);
             draw_clean();
             nocombo();
-            func_clean(house,robot);
+            func_clean(rubbish,house,robot);
             draw_control();
             draw_bactr(robot);
             write_statu(house,robot,1);
@@ -163,7 +166,7 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1,cy1,cx2,cy2,BLACK);
                 break;
             case 3:
-                bar(cx1,cy1,cx2,cy2,BROWN);
+                draw_bin(cx1,cy1);
                 break;
             case 4:
                 draw_floor_wood(cx1,cy1);
@@ -240,10 +243,22 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1,cy1,cx1+2,cy2,BLACK);
                 break;
             case 21:
-                bar(cx1,cy1,cx2,cy2,YELLOW);     
+                draw_charge(cx1,cy1);    
                 break;
             case 22:
                 bar(cx1,cy1,cx2,cy2,GREEN);
+                break;
+            case 23:
+                open_up_door(cx1,cy1);
+                break;
+            case 24:
+                open_down_door(cx1,cy1);
+                break;
+            case 25:
+                open_left_door(cx1,cy1);
+                break;
+            case 26:
+                open_right_door(cx1,cy1);
                 break;
             default: break;
         }
@@ -272,7 +287,7 @@ void maininit(HOUSE *house, ROBOT *robot)
         {0,9,0,0,2,6,6,6,2,6,6,6,2,5,5,0,0,0},
         {0,9,0,0,9,0,0,6,2,0,0,6,2,5,5,18,0,0},
         {0,2,0,0,9,0,0,6,2,0,0,6,2,5,5,19,0,0},
-        {2,2,0,0,9,0,0,6,2,0,0,6,2,5,5,0,0,0},
+        {2,2,0,0,2,0,0,6,2,0,0,6,2,5,5,0,0,0},
         {0,0,0,0,2,6,6,6,2,0,0,6,2,0,0,0,0,0},
         {4,4,0,0,2,2,2,2,2,10,11,2,2,0,0,0,0,6},
         {5,5,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,6},
@@ -289,7 +304,7 @@ void maininit(HOUSE *house, ROBOT *robot)
     };
     //0是地板，1是机器人，2是墙壁，3是垃圾桶，4是椅子，
     //5是桌子，6是一般高度家具，7 8 12 13 14是床，9是竖门，10是左门，11是右门
-    //21是充电桩，22是垃圾
+    //21是充电桩，22是垃圾,23 24 25 26是开门状态
 
     (*robot).electr=100; //初始化机器人信息
     (*robot).px=10, (*robot).py=0;
@@ -442,14 +457,15 @@ void func_comfort(HOUSE *house, ROBOT *robot)
     }
 }
 
-void func_clean(HOUSE *house, ROBOT *robot)
+void func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot)
 {
-    NODE rubbish[4];
     char value;
-    int *pnum=0;
+    int *f;
     int poscode;
     NODE mp,mto; //鼠标点击后行动坐标
+    *f=1;
 
+    fpde5=fopen("debug\\debug5.txt","w");
     draw_bactr(robot);
     while(1)
     {
@@ -459,10 +475,10 @@ void func_clean(HOUSE *house, ROBOT *robot)
         {
             nocombo();
             nocombo();
-            if(*pnum<3)
+            if(house->rubnum<3)
             {
-                (*pnum)++;
-                set_rub(pnum,rubbish,house);
+                (house->rubnum)++;
+                set_rub(rubbish,house);
                 paintmp(house,robot);
             }
             continue;
@@ -473,15 +489,17 @@ void func_clean(HOUSE *house, ROBOT *robot)
             nocombo();
             while(1)
             {
-                if(*pnum>0)
+                if(house->rubnum>0&&(*f)==1)
                 {
-                    col_rub(pnum,rubbish,house,robot);
+                    fprintf(fpde5,"%d %d\n",*f,house->rubnum);
+                    col_rub(f,rubbish,house,robot);
                     paintmp(house,robot);
-                    (*pnum)--;
+                    fprintf(fpde5,"%d %d\n",*f,house->rubnum);
                 }
                 else
                     break;
             }
+            fclose(fpde5);
             continue;
         }
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回主界面
@@ -599,6 +617,11 @@ void func_move(HOUSE *house, ROBOT *robot)
             {
                 bar(1000,750,1024,768,BLACK);
             }
+        }
+        if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回主界面
+        {
+            nocombo();
+            return;
         }
     }
 }
