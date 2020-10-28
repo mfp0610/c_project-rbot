@@ -153,10 +153,12 @@ void paintmp(HOUSE *house, ROBOT *robot)
     {
         cy1=tx+i*sz, cx1=ty+j*sz;
         cy2=cy1+sz, cx2=cx1+sz;
-        draw_floor_wood(cx1,cy1);
+        
         switch((*house).mp1[i][j])
         {
-            
+            case 0:
+                draw_floor_wood(cx1,cy1);
+                break;
             case 2:
                 bar(cx1,cy1,cx2,cy2,BLACK);
                 break;
@@ -164,6 +166,7 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1,cy1,cx2,cy2,BROWN);
                 break;
             case 4:
+                draw_floor_wood(cx1,cy1);
                 fill_circle((cx1+cx2)/2,(cy1+cy2)/2,20,PEACH_PUFF,BLACK);
                 break;
             case 5:
@@ -180,6 +183,7 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1+2,cy1,cx2,cy2,PINK);
                 break;
             case 9:
+                draw_floor_wood(cx1,cy1);
                 draw_door_vertical(cx1,cy1,1);
                 break;
             case 10:
