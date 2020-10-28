@@ -20,7 +20,7 @@
 FILE *fpde;
 FILE *fpde5;
 
-void mainWindow()
+void mainWindow(USER *usr)
 {
     HOUSE *house;
     ROBOT *robot;
@@ -40,7 +40,7 @@ void mainWindow()
     //fpde=fopen("debug\\debug.txt","w");
     
     paintmp(house,robot);
-    draw_control();
+    draw_control(usr);
     draw_bactr(robot);
     write_statu(house,robot,1);
     house->rubnum=0;
@@ -59,10 +59,11 @@ void mainWindow()
         if(mouse_press(LB+37,UB+350,LB+127,UB+390)==1) //进入电量界面
         {
             clrmous(MouseX, MouseY);
-            draw_electr();
+            draw_electr(usr);
             nocombo();
-            func_electr(house,robot);
-            draw_control();
+            if(func_electr(house,robot))
+                return ;
+            draw_control(usr);
             draw_bactr(robot);
             write_statu(house,robot,1);
             continue;
@@ -70,10 +71,11 @@ void mainWindow()
         if(mouse_press(LB+147,UB+350,LB+237,UB+390)==1) //进入舒适度界面
         {
             clrmous(MouseX, MouseY);
-            draw_comfort();
+            draw_comfort(usr);
             nocombo();
-            func_comfort(house,robot);
-            draw_control();
+            if(func_comfort(house,robot))
+                return ;
+            draw_control(usr);
             draw_bactr(robot);
             write_statu(house,robot,1);
             continue;
@@ -81,10 +83,11 @@ void mainWindow()
         if(mouse_press(LB+37,UB+410,LB+127,UB+450)==1) //进入环境界面
         {
             clrmous(MouseX, MouseY);
-            draw_clean();
+            draw_clean(usr);
             nocombo();
-            func_clean(rubbish,house,robot);
-            draw_control();
+            if(func_clean(rubbish,house,robot))
+                return ;
+            draw_control(usr);
             draw_bactr(robot);
             write_statu(house,robot,1);
             continue;
@@ -92,10 +95,11 @@ void mainWindow()
         if(mouse_press(LB+147,UB+410,LB+237,UB+450)==1) //进入控制界面
         {
             clrmous(MouseX, MouseY);
-            draw_move();
+            draw_move(usr);
             nocombo();
-            func_move(house,robot);
-            draw_control();
+            if(func_move(house,robot))
+                return ;
+            draw_control(usr);
             draw_bactr(robot);
             write_statu(house,robot,1);
             continue;
@@ -103,10 +107,11 @@ void mainWindow()
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //进入互动界面
         {
             clrmous(MouseX, MouseY);
-            draw_react();
+            draw_react(usr);
             nocombo();
-            func_react(house,robot);
-            draw_control();
+            if(func_react(house,robot))
+                return ;
+            draw_control(usr);
             nocombo();
             draw_bactr(robot);
             write_statu(house,robot,1);
@@ -133,6 +138,8 @@ void mainWindow()
                 bar(1000,750,1024,768,BLACK);
             }
         }
+        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
+            return ;
     }
     return;
 }
@@ -337,7 +344,7 @@ void maininit(HOUSE *house, ROBOT *robot)
     }
 }
 
-void func_electr(HOUSE *house, ROBOT *robot)
+int func_electr(HOUSE *house, ROBOT *robot)
 {
     char value;
     int poscode;
@@ -357,7 +364,7 @@ void func_electr(HOUSE *house, ROBOT *robot)
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回主菜单
         {
             nocombo();
-            return;
+            return 0;
         }
         if(kbhit())
         {
@@ -379,10 +386,12 @@ void func_electr(HOUSE *house, ROBOT *robot)
                 bar(1000,750,1024,768,BLACK);
             }
         }
+        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
+            return 1;
     }
 }
 
-void func_comfort(HOUSE *house, ROBOT *robot)
+int func_comfort(HOUSE *house, ROBOT *robot)
 {
     char value;
     int poscode;
@@ -432,7 +441,7 @@ void func_comfort(HOUSE *house, ROBOT *robot)
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回控制面板
         {
             nocombo();
-            return;
+            return 0;
         }
         if(kbhit())
         {
@@ -454,10 +463,12 @@ void func_comfort(HOUSE *house, ROBOT *robot)
                 bar(1000,750,1024,768,BLACK);
             }
         }
+        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
+            return 1;
     }
 }
 
-void func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot)
+int func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot)
 {
     char value;
     int *f;
@@ -467,10 +478,12 @@ void func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot)
 
     fpde5=fopen("debug\\debug5.txt","w");
     draw_bactr(robot);
+    write_statu(house,robot,3);
+
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        timepass(house,robot,1);
+        timepass(house,robot,3);
         if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //生成垃圾
         {
             nocombo();
@@ -505,7 +518,7 @@ void func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot)
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回主界面
         {
             nocombo();
-            return;
+            return 0;
         }
         if(kbhit())
         {
@@ -527,65 +540,20 @@ void func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot)
                 bar(1000,750,1024,768,BLACK);
             }
         }
+        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
+            return 1;
     }
 }
 
-void func_react(HOUSE *house, ROBOT *robot)
-{
-    char value;
-    int poscode;
-    NODE mp,mto; //鼠标点击后行动坐标
-
-    draw_bactr(robot);
-    while(1)
-    {
-        newmouse(&MouseX, &MouseY, &press);
-        timepass(house,robot,3);
-        if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //进入电量界面
-        {
-            
-            continue;
-        }
-        if(mouse_press(LB+57,UB+410,LB+217,UB+450)==1) //进入舒适度界面
-        {
-            
-            continue;
-        }
-        if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回控制面板
-        {
-            nocombo();
-            return;
-        }
-        if(kbhit())
-        {
-            Delaytime(50);
-            value=getch();
-            moveupdate(house,robot,value);   
-        }
-        get_conbot(house,robot);
-        if(mouse_press(15,24,735,744)==1)
-        {
-            nocombo();
-            poscode=getposition(MouseX, MouseY);
-            mto.x=poscode/18;
-            mto.y=poscode%18;
-            mp.x=(*robot).px;
-            mp.y=(*robot).py;
-            if(!Astarmove(mp,mto,robot,house))
-            {
-                bar(1000,750,1024,768,BLACK);
-            }
-        }
-    }
-}
-
-void func_move(HOUSE *house, ROBOT *robot)
+int func_move(HOUSE *house, ROBOT *robot)
 {
     char value;
     int poscode;
     NODE mp,mto; //鼠标点击后行动坐标
     
     draw_bactr(robot);
+    write_statu(house,robot,4);
+
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
@@ -621,8 +589,63 @@ void func_move(HOUSE *house, ROBOT *robot)
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回主界面
         {
             nocombo();
-            return;
+            return ;
         }
+        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
+            return 1;
+    }
+}
+
+int func_react(HOUSE *house, ROBOT *robot)
+{
+    char value;
+    int poscode;
+    NODE mp,mto; //鼠标点击后行动坐标
+
+    draw_bactr(robot);
+    write_statu(house,robot,3);
+
+    while(1)
+    {
+        newmouse(&MouseX, &MouseY, &press);
+        timepass(house,robot,3);
+        if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //进入电量界面
+        {
+            
+            continue;
+        }
+        if(mouse_press(LB+57,UB+410,LB+217,UB+450)==1) //进入舒适度界面
+        {
+            
+            continue;
+        }
+        if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回控制面板
+        {
+            nocombo();
+            return 0;
+        }
+        if(kbhit())
+        {
+            Delaytime(50);
+            value=getch();
+            moveupdate(house,robot,value);   
+        }
+        get_conbot(house,robot);
+        if(mouse_press(15,24,735,744)==1)
+        {
+            nocombo();
+            poscode=getposition(MouseX, MouseY);
+            mto.x=poscode/18;
+            mto.y=poscode%18;
+            mp.x=(*robot).px;
+            mp.y=(*robot).py;
+            if(!Astarmove(mp,mto,robot,house))
+            {
+                bar(1000,750,1024,768,BLACK);
+            }
+        }
+        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
+            return 1;
     }
 }
 

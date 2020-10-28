@@ -9,19 +9,20 @@
 
 void start_func()
 {
+    USER *usr;
     //start_page();//画出开始界面
     
-    //login_page(); //画出登录界面
-    //login_func(); //进入登录界面
-    
-    /****调试使用****/
-    mouseinit();
-    /****调试使用****/
-    mainWindow(); //程序主界面进入接口
+    while(1)
+    {
+        login_page(); //画出登录界面
+        if(login_func(usr)) //进入登录界面
+            mainWindow(usr); //程序主界面进入接
+        else return;
+    }
     return;
 }
 
-void login_func()
+int login_func(USER *us)
 {
     int flag;
     USER usr; //用户信息
@@ -41,7 +42,8 @@ void login_func()
 			if (login_comp(usr.user, usr.code)) //信息正确
             {
                 clrmous(MouseX, MouseY);
-                return ;
+                strcpy((*us).user,usr.user);
+                return 1;
             }    
             else continue;
         }
@@ -49,6 +51,7 @@ void login_func()
         {
             clrmous(MouseX, MouseY);
             register_page();
+            nocombo();
             user_register();
             nocombo();
             continue;
@@ -57,6 +60,7 @@ void login_func()
         {
             clrmous(MouseX, MouseY);
             findback_page();
+            nocombo();
             user_findback();
             nocombo();
             continue;
@@ -65,7 +69,7 @@ void login_func()
         {
             clrmous(MouseX, MouseY);
             exit_window();
-            exit_pro();
+            if(exit_pro()==1) return 0;
             nocombo();
             continue;
         }  
@@ -171,18 +175,19 @@ void user_findback()
     }
 }
 
-void exit_pro()
+int exit_pro()
 {
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        if(mouse_press(300,450,330,480)==1) exit(0);
+        if(mouse_press(300,450,330,480)==1)
+            return 1;
         if(mouse_press(470,450,500,480)==1)
         {
             clrmous(MouseX, MouseY);
             login_page();
             nocombo();
-            return;
+            return 0;
         }
     }
 }

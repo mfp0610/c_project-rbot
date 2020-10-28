@@ -8,7 +8,7 @@
 
 #include "headers.h"
 
-void draw_control()
+void draw_control(USER *usr)
 {
 
     bar(LB,UB,1024,768,MARINE_BLUE);
@@ -20,7 +20,7 @@ void draw_control()
     //画状态显示栏
     fill_rect(LB+17,UB+60,LB+257,UB+320,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+27,UB+95,"欢迎用户",32,32,'S',BLACK);
-    outtextxy(LB+145,UB+95,"111",2,2,16,BLACK);
+    outtextxy(LB+145,UB+95,(*usr).user,2,2,16,BLACK);
     puthz(LB+37,UB+160,"室内温度：",24,25,'K',BLACK);
     puthz(LB+37,UB+195,"室外温度：",24,25,'K',BLACK);
     puthz(LB+37,UB+230,"空气湿度：",24,25,'K',BLACK);
@@ -42,7 +42,7 @@ void draw_control()
     draw_conbot();
 }
 
-void draw_electr()
+void draw_electr(USER *usr)
 {
     bar(LB,UB,1024,768,MARINE_BLUE);  
 
@@ -54,7 +54,7 @@ void draw_electr()
     fill_rect(LB+17,UB+60,LB+257,UB+320,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
     
-    outtextxy(LB+145,UB+95,"111",2,2,16,BLACK);
+    outtextxy(LB+145,UB+95,(*usr).user,2,2,16,BLACK);
 
     //画功能按钮
     fill_rect(LB+57,UB+350,LB+217,UB+390,MISTY_ROSE,MARINE_BLUE);
@@ -70,7 +70,7 @@ void draw_electr()
     draw_conbot();
 }
 
-void draw_comfort()
+void draw_comfort(USER *usr)
 {
     bar(LB,UB,1024,768,MARINE_BLUE);
 
@@ -81,7 +81,7 @@ void draw_comfort()
     //画状态显示栏
     fill_rect(LB+17,UB+60,LB+257,UB+320,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
-    outtextxy(LB+145,UB+95,"111",2,2,16,BLACK);
+    outtextxy(LB+145,UB+95,(*usr).user,2,2,16,BLACK);
     
     puthz(LB+37,UB+160,"室内温度：",24,25,'K',BLACK);
     puthz(LB+37,UB+195,"室外温度：",24,25,'K',BLACK);
@@ -114,7 +114,7 @@ void draw_comfort()
     draw_conbot();
 }
 
-void draw_move()
+void draw_move(USER *usr)
 {
     bar(LB,UB,1024,768,MARINE_BLUE);
 
@@ -125,7 +125,7 @@ void draw_move()
     //画状态显示栏
     fill_rect(LB+17,UB+60,LB+257,UB+320,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
-    outtextxy(LB+145,UB+95,"111",2,2,16,BLACK);
+    outtextxy(LB+145,UB+95,(*usr).user,2,2,16,BLACK);
     
     //画功能按钮
     fill_rect(LB+57,UB+350,LB+217,UB+390,MISTY_ROSE,MARINE_BLUE);
@@ -154,7 +154,7 @@ void draw_move()
     draw_conbot();
 }
 
-void draw_clean()
+void draw_clean(USER *usr)
 {
     bar(LB,UB,1024,768,MARINE_BLUE);
 
@@ -165,7 +165,7 @@ void draw_clean()
     //画状态显示栏
     fill_rect(LB+17,UB+60,LB+257,UB+320,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
-    outtextxy(LB+145,UB+95,"111",2,2,16,BLACK);
+    outtextxy(LB+145,UB+95,(*usr).user,2,2,16,BLACK);
     
     puthz(LB+37,UB+160,"地面垃圾：",24,25,'K',BLACK);
     puthz(LB+37,UB+195,"桶内垃圾：",24,25,'K',BLACK);
@@ -182,7 +182,7 @@ void draw_clean()
     draw_conbot();
 }
 
-void draw_react()
+void draw_react(USER *usr)
 {
     bar(LB,UB,1024,768,MARINE_BLUE);  
 
@@ -193,7 +193,7 @@ void draw_react()
     //画状态显示栏
     fill_rect(LB+17,UB+60,LB+257,UB+380,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
-    outtextxy(LB+145,UB+95,"111",2,2,16,BLACK);
+    outtextxy(LB+145,UB+95,(*usr).user,2,2,16,BLACK);
 
     //画功能按钮
     fill_rect(LB+37,UB+410,LB+127,UB+450,MISTY_ROSE,MARINE_BLUE);
@@ -325,15 +325,15 @@ void write_statu(HOUSE *house, ROBOT *robot,int st)
         fill_rect(LB+170,UB+400,LB+190,UB+420,MISTY_ROSE,MARINE_BLUE);
         fill_rect(LB+200,UB+400,LB+220,UB+420,MISTY_ROSE,MARINE_BLUE);
 
-        if((*house).dor[0]) puthz(LB+82,UB+402,"开",16,16,'K',BLACK);
+        if(!(*house).dor[0]) puthz(LB+82,UB+402,"开",16,16,'K',BLACK);
         else puthz(LB+82,UB+402,"关",16,16,'K',BLACK);
-        if((*house).dor[1]) puthz(LB+112,UB+402,"开",16,16,'K',BLACK);
+        if(!(*house).dor[1]) puthz(LB+112,UB+402,"开",16,16,'K',BLACK);
         else puthz(LB+112,UB+402,"关",16,16,'K',BLACK);
-        if((*house).dor[2]) puthz(LB+142,UB+402,"开",16,16,'K',BLACK);
+        if(!(*house).dor[2]) puthz(LB+142,UB+402,"开",16,16,'K',BLACK);
         else puthz(LB+142,UB+402,"关",16,16,'K',BLACK);
-        if((*house).dor[3]) puthz(LB+172,UB+402,"开",16,16,'K',BLACK);
+        if(!(*house).dor[3]) puthz(LB+172,UB+402,"开",16,16,'K',BLACK);
         else puthz(LB+172,UB+402,"关",16,16,'K',BLACK);
-        if((*house).dor[4]) puthz(LB+202,UB+402,"开",16,16,'K',BLACK);
+        if(!(*house).dor[4]) puthz(LB+202,UB+402,"开",16,16,'K',BLACK);
         else puthz(LB+202,UB+402,"关",16,16,'K',BLACK);
     }
 }

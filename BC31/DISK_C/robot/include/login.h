@@ -17,10 +17,10 @@ typedef struct userinfo{
 }USER;
 
 void start_func(); //开始页面的逻辑
-void login_func(); //登陆界面逻辑
+int login_func(USER *usr); //登陆界面逻辑
 void user_register(); //注册界面逻辑
 void user_findback(); //找回界面逻辑
-void exit_pro(); //推出窗口逻辑
+int exit_pro(); //推出窗口逻辑
 
 int login_comp(char *user, char *cod); 
 int judge_rightpassword(char *user, char *code);
