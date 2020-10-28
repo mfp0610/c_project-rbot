@@ -17,7 +17,7 @@ void line(int x1,int y1,int x2,int y2,int color)
     unsigned int  far *const video_buffer=(unsigned int  far *)0xa0000000L;
 	unsigned char new_page = 0;
 	unsigned long int page;
-	int i,wid;
+	int i,wid,yt;
     double k;
     if(x1==x2)
     {
@@ -36,9 +36,14 @@ void line(int x1,int y1,int x2,int y2,int color)
             *(video_buffer+page+i)=color;
         return;
     }
-    k=(y2-y1)/(x2-x1);
+    if(x1>x2)
+    {
+        swap(&x1,&x2);
+        swap(&y1,&y2);
+    }
+    k=(y2-y1)*1.00/(x2-x1);
     for(i=x1;i<=x2;i++)
-        Putpixel64k(i,y1+(i-x1)*k,color);
+        Putpixel64k(i,(int) y1+(i-x1)*k,color);
     return;
 }
 
@@ -60,20 +65,20 @@ void thick_line(int x1,int y1,int x2,int y2,int thick,int color)
     if(y1==y2)
     {
 	    if(x1>x2) swap(&x1,&x2);
-        for(j=-thi;j<=thi;j++)
-        {
-            page=((unsigned long int)y1<<10)+x1+j;
-	        new_page=page>>15;
-		    SelectPage(new_page);
-	        for(i=0;i<x2-x1;i++)
-            *(video_buffer+page+i)=color;
-        }
+        for(i=x1;i<=x2;i++)
+        for(j=-thi;j<=thi;j++)    
+            Putpixel64k(i,y1+j,color);
         return;
     }
-    k=(y2-y1)/(x2-x1);
+    if(x1>x2)
+    {
+        swap(&x1,&x2);
+        swap(&y1,&y2);
+    }
+    k=(y2-y1)*1.00/(x2-x1);
     for(j=-thi;j<=thi;j++)
     for(i=x1;i<=x2;i++)
-        Putpixel64k(i,y1+(i-x1)*k+j,color);
+        Putpixel64k(i,(int)y1+(i-x1)*k+j,color);
     return;
 }
 

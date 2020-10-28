@@ -51,8 +51,6 @@ int BFS(NODE beg,NODE end,NODE1 *node,int sz,HOUSE *house)
     int dir[4][2]={{0,1},{0,-1},{-1,0},{1,0}}; //方向数组
     int i,newx,newy;
 
-fpde1=fopen("debug\\debug1.txt","w");
-
     node[++sz].x=beg.x;
     node[sz].y=beg.y;
     node[sz].dis=0;
@@ -111,12 +109,12 @@ int Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
     char dir;
     int i,j;
     
-    //fpde1=fopen("debug\\debug1.txt","w");
-
+    fpde1=fopen("debug\\debug1.txt","w");
+    fprintf(fpde1,"aaaa\n");
     nd_sz=BFS(beg,end,node,0,house); //宽度优先搜索得到路径
-    /*fprintf(fpde1,"%d\n",nd_sz);
-    fclose(fpde1);*/
     if(nd_sz==-1) return 0;
+    fprintf(fpde1,"%d\n",nd_sz);
+    fclose(fpde1);
     get_path(road,&rd_sz,node,nd_sz); //规范化路径
     for(i=2;i<=rd_sz;i++)
     {
@@ -131,6 +129,6 @@ int Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
         Delaytime(100);
         moveupdate(house,robot,dir);
     }
-    //fclose(fpde1);
+    
     return 1;
 }

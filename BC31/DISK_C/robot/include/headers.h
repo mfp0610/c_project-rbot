@@ -58,5 +58,7 @@
 
 //必要的参数
 #define ROBOT_SIZE 20 //定义基础机器人大小
+#define LB 750 //控制面板左上角横坐标 
+#define UB 0 //控制面板左上角纵坐标
 
 #endif
