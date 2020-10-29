@@ -53,7 +53,6 @@ void draw_electr(USER *usr)
     //画状态显示栏
     fill_rect(LB+17,UB+60,LB+257,UB+320,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
-    
     outtextxy(LB+145,UB+95,(*usr).user,2,2,16,BLACK);
 
     //画功能按钮

@@ -32,6 +32,7 @@
 #include "comfort.h" //舒适度功能头文件
 #include "move.h" //移动功能头文件
 #include "rubbish.h" //清洁功能头文件
+#include "chat.h" //聊天功能头文件
 #include "plan.h" //路径规划算法头文件
 #include "pinyin.h" //输入法头文件
 #include "electr.h" //充电功能头文件

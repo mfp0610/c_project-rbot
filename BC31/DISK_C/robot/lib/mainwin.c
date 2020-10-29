@@ -351,6 +351,8 @@ int func_electr(HOUSE *house, ROBOT *robot)
     NODE mp,mto; //鼠标点击后行动坐标
     
     draw_bactr(robot);
+    write_statu(house,robot,3);
+
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
@@ -589,7 +591,7 @@ int func_move(HOUSE *house, ROBOT *robot)
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回主界面
         {
             nocombo();
-            return ;
+            return 0;
         }
         if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
             return 1;
@@ -609,12 +611,13 @@ int func_react(HOUSE *house, ROBOT *robot)
     {
         newmouse(&MouseX, &MouseY, &press);
         timepass(house,robot,3);
-        if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //进入电量界面
+        if(mouse_press(LB+37,UB+410,LB+127,UB+450)==1) //进入电量界面
         {
-            
+            //bar(0,0,100,100,STRONG_RED);
+            c_chat1();
             continue;
         }
-        if(mouse_press(LB+57,UB+410,LB+217,UB+450)==1) //进入舒适度界面
+        if(mouse_press(LB+147,UB+410,LB+237,UB+450)==1) //进入舒适度界面
         {
             
             continue;
