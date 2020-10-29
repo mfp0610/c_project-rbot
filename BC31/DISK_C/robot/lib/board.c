@@ -57,9 +57,9 @@ void draw_electr(USER *usr)
 
     //画功能按钮
     fill_rect(LB+57,UB+350,LB+217,UB+390,MISTY_ROSE,MARINE_BLUE);
-    puthz(LB+71,UB+354,"自动充电",32,32,'K',BLACK);
+    puthz(LB+71,UB+354,"手动充电",32,32,'K',BLACK);
     fill_rect(LB+57,UB+410,LB+217,UB+450,MISTY_ROSE,MARINE_BLUE);
-    puthz(LB+71,UB+414,"手动充电",32,32,'K',BLACK);
+    puthz(LB+71,UB+414,"停止充电",32,32,'K',BLACK);
     
     //画返回按钮
     fill_rect(LB+57,UB+470,LB+217,UB+510,MISTY_ROSE,MARINE_BLUE);
@@ -130,14 +130,19 @@ void draw_move(USER *usr)
     fill_rect(LB+57,UB+350,LB+217,UB+390,MISTY_ROSE,MARINE_BLUE);
     puthz(LB+71,UB+354,"自动巡逻",32,32,'K',BLACK);
     
-    puthz(LB+47,UB+400,"门",24,24,'K',BLACK);
-    puthz(LB+47,UB+430,"窗",24,24,'K',BLACK);
+    //puthz(LB+47,UB+400,"门",24,24,'K',BLACK);
+    puthz(LB+47,UB+430,"门",24,24,'K',BLACK);
     
-    fill_rect(LB+80,UB+400,LB+100,UB+420,MISTY_ROSE,MARINE_BLUE);
+    /*fill_rect(LB+80,UB+400,LB+100,UB+420,MISTY_ROSE,MARINE_BLUE);
     fill_rect(LB+110,UB+400,LB+130,UB+420,MISTY_ROSE,MARINE_BLUE);
     fill_rect(LB+140,UB+400,LB+160,UB+420,MISTY_ROSE,MARINE_BLUE);
     fill_rect(LB+170,UB+400,LB+190,UB+420,MISTY_ROSE,MARINE_BLUE);
-    fill_rect(LB+200,UB+400,LB+220,UB+420,MISTY_ROSE,MARINE_BLUE);
+    fill_rect(LB+200,UB+400,LB+220,UB+420,MISTY_ROSE,MARINE_BLUE);*/
+    outtextxy(LB+82,UB+410,"1",1,1,16,WHITE);
+    outtextxy(LB+112,UB+410,"2",1,1,16,WHITE);
+    outtextxy(LB+142,UB+410,"3",1,1,16,WHITE);
+    outtextxy(LB+172,UB+410,"4",1,1,16,WHITE);
+    outtextxy(LB+202,UB+410,"5",1,1,16,WHITE);
 
     fill_rect(LB+80,UB+435,LB+100,UB+455,MISTY_ROSE,MARINE_BLUE);
     fill_rect(LB+110,UB+435,LB+130,UB+455,MISTY_ROSE,MARINE_BLUE);
@@ -320,21 +325,32 @@ void write_statu(HOUSE *house, ROBOT *robot,int st)
     }
     if(st==4)
     {
-        fill_rect(LB+80,UB+400,LB+100,UB+420,MISTY_ROSE,MARINE_BLUE);
-        fill_rect(LB+110,UB+400,LB+130,UB+420,MISTY_ROSE,MARINE_BLUE);
-        fill_rect(LB+140,UB+400,LB+160,UB+420,MISTY_ROSE,MARINE_BLUE);
-        fill_rect(LB+170,UB+400,LB+190,UB+420,MISTY_ROSE,MARINE_BLUE);
-        fill_rect(LB+200,UB+400,LB+220,UB+420,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+80,UB+435,LB+100,UB+455,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+110,UB+435,LB+130,UB+455,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+140,UB+435,LB+160,UB+455,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+170,UB+435,LB+190,UB+455,MISTY_ROSE,MARINE_BLUE);
+        fill_rect(LB+200,UB+435,LB+220,UB+455,MISTY_ROSE,MARINE_BLUE);
 
-        if(!(*house).dor[0]) puthz(LB+82,UB+402,"开",16,16,'K',BLACK);
-        else puthz(LB+82,UB+402,"关",16,16,'K',BLACK);
-        if(!(*house).dor[1]) puthz(LB+112,UB+402,"开",16,16,'K',BLACK);
-        else puthz(LB+112,UB+402,"关",16,16,'K',BLACK);
-        if(!(*house).dor[2]) puthz(LB+142,UB+402,"开",16,16,'K',BLACK);
-        else puthz(LB+142,UB+402,"关",16,16,'K',BLACK);
-        if(!(*house).dor[3]) puthz(LB+172,UB+402,"开",16,16,'K',BLACK);
-        else puthz(LB+172,UB+402,"关",16,16,'K',BLACK);
-        if(!(*house).dor[4]) puthz(LB+202,UB+402,"开",16,16,'K',BLACK);
-        else puthz(LB+202,UB+402,"关",16,16,'K',BLACK);
+        if(!(*house).dor[0]) puthz(LB+82,UB+437,"开",16,16,'K',BLACK);
+        else puthz(LB+82,UB+437,"关",16,16,'K',BLACK);
+        if(!(*house).dor[1]) puthz(LB+112,UB+437,"开",16,16,'K',BLACK);
+        else puthz(LB+112,UB+437,"关",16,16,'K',BLACK);
+        if(!(*house).dor[2]) puthz(LB+142,UB+437,"开",16,16,'K',BLACK);
+        else puthz(LB+142,UB+437,"关",16,16,'K',BLACK);
+        if(!(*house).dor[3]) puthz(LB+172,UB+437,"开",16,16,'K',BLACK);
+        else puthz(LB+172,UB+437,"关",16,16,'K',BLACK);
+        if(!(*house).dor[4]) puthz(LB+202,UB+437,"开",16,16,'K',BLACK);
+        else puthz(LB+202,UB+437,"关",16,16,'K',BLACK);
+    }
+    if(st==5)
+    {
+        bar(LB+17,UB+180,LB+257,UB+320,MISTY_ROSE);
+        bar(LB+77,UB+200,LB+197,UB+300,WHITE);
+        bar(LB+107,UB+180,LB+167,UB+200,WHITE);
+        if((*robot).electr<25) fill_rect(LB+87,UB+204,LB+187,UB+224,STRONG_RED,WHITE);
+        else fill_rect(LB+87,UB+204,LB+187,UB+224,BRIGHT_GREEN,WHITE);
+        if((*robot).electr>=25) fill_rect(LB+87,UB+228,LB+187,UB+248,BRIGHT_GREEN,WHITE);
+        if((*robot).electr>=50) fill_rect(LB+87,UB+252,LB+187,UB+272,BRIGHT_GREEN,WHITE);
+        if((*robot).electr>=75) fill_rect(LB+87,UB+276,LB+187,UB+296,BRIGHT_GREEN,WHITE);
     }
 }

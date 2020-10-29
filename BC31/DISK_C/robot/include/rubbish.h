@@ -10,7 +10,7 @@
 
 #include "headers.h"
 
-
+int func_clean(NODE *rubbish, HOUSE *house, ROBOT *robot, USER *usr); //清洁界面函数
 void set_rub(NODE *rubbish,HOUSE *house);
 void col_rub(int *f,NODE *rubbish,HOUSE *house,ROBOT *robot);
 void draw_rub(int *pnum,NODE *rubbish);

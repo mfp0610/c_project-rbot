@@ -12,7 +12,6 @@
 #include "headers.h"
 
 int func_react(HOUSE *house, ROBOT *robot, USER *usr); //互动界面函数
-int c_chat1();
 void c_reply1(int *qhwh);
 void show_incode(char *incode,int *y);
 void show_reply(char *reply,int y);

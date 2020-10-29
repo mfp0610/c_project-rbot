@@ -19,15 +19,18 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
 	Area txt_area={{IX+5,IY+WIDTH1+WIDTH2+5},{IX+LENGTH-5,IY+WIDTH1+WIDTH2+WIDTH3-5}}; //文本输出的区域
 	int *qhwh=(int*)malloc(sizeof(int)*MAXTXT); //区号位号
     int flag;
+    
+    FILE *fpde5;
 
     draw_bactr(robot);
     write_statu(house,robot,3);
+    fpde5=fopen("debug\\debug5.txt","w");
 
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        timepass(house,robot,3);
-        
+        timepass(house,robot,usr,3);
+        fprintf(fpde5,"bbbb\n");
         if(mode==0)
         {
             
@@ -39,13 +42,17 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
             bar(IX,IY+WIDTH1,IX+LENGTH,IY+WIDTH1+WIDTH2,LIGHT_GRAY); //输入法汉字显示框
             bar(IX,IY+WIDTH1+WIDTH2,IX+LENGTH,IY+WIDTH1+WIDTH2+WIDTH3,LIGHT_GRAY); //文本输出框
             Init_qhwh(qhwh);
-            flag=ShowChTab(txt_area,currentlu,16,qhwh);
+            flag=ShowChTab(txt_area,currentlu,16,qhwh,usr,&mode);
+            if(flag==0) return 1;
             if(flag==1) c_reply1(qhwh);
+            if(flag==2) continue ;
+            fprintf(fpde5,"aaaa\n");
+            fclose(fpde5);
             //bar(IX,IY+WIDTH1+WIDTH2,IX+LENGTH,IY+WIDTH1+WIDTH2+WIDTH3,LIGHT_GRAY);
         }
         else if(mode==2)
         {
-
+            
         }
         if(mouse_press(LB+37,UB+410,LB+127,UB+450)==1) //进入电量界面
         {
@@ -94,45 +101,6 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
             return 1;
     }
 }
-
-
-int c_chat1()
-{
-	Coordinate currentlu={IX+5,IY+WIDTH1+WIDTH2+5};	//文本输出的左上角坐标
-	Area txt_area={{IX+5,IY+WIDTH1+WIDTH2+5},{IX+LENGTH-5,IY+WIDTH1+WIDTH2+WIDTH3-5}};	//文本输出的区域
-	int *qhwh=(int*)malloc(sizeof(int)*MAXTXT);		//区号位号
-    int flag=0;
-
-	bar(IX,IY,IX+LENGTH,IY+WIDTH1,LIGHT_GRAY);	//拼音显示框
-	bar(IX,IY+WIDTH1,IX+LENGTH,IY+WIDTH1+WIDTH2,LIGHT_GRAY);	//输入法汉字显示框
-	bar(IX,IY+WIDTH1+WIDTH2,IX+LENGTH,IY+WIDTH1+WIDTH2+WIDTH3,LIGHT_GRAY);	//文本输出框
-	
-	if(qhwh==NULL)
-	{
-		puthz(0,0,"区号位号内存获取失败",16,16,'H',STRONG_RED);
-		getch();
-		exit(1);
-	}
-	
-	while(flag!=3)
-	{
-		newmouse(&MouseX, &MouseY, &press);
-        flag=0;
-		Init_qhwh(qhwh);
-		flag=ShowChTab(txt_area,currentlu,16,qhwh);
-		bar(IX,IY+WIDTH1+WIDTH2,IX+LENGTH,IY+WIDTH1+WIDTH2+WIDTH3,LIGHT_GRAY);
-		if(flag==0) return 1;
-        if(flag==1)
-		{
-			c_reply1(qhwh);
-			
-		}
-        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
-            return 1;
-	}
-}
-
-
 
 void c_reply1(int *qhwh)
 {

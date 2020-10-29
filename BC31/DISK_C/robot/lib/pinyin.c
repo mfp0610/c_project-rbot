@@ -267,7 +267,7 @@ void DeleteTab(Coordinate * current_en_position,CH* ch,EN* en,char *temp ,int * 
 }
 
 int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»ÖÃµÄ×óÉÏ½Ç*/, 
-    int show_size/*ÓÐ48£¬36£¬28*/,int *qhwh)//7
+    int show_size/*ÓÐ48£¬36£¬28*/,int *qhwh, USER *usr, int *mode)//7
 {
     union
     {
@@ -585,6 +585,25 @@ int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»Ö
 		{
 			bar(IX,IY+WIDTH1,IX+LENGTH,IY+WIDTH1+WIDTH2,LIGHT_GRAY);
 		}
+
+        if(mouse_press(LB+37,UB+410,LB+127,UB+450)==1) //½øÈëµçÁ¿½çÃæ
+        {
+            nocombo();
+            if(*mode!=1) *mode=1;
+            else *mode=0;
+            clrmous(MouseX, MouseY);
+            draw_react(usr,*mode);
+            return 2;
+        }
+        if(mouse_press(LB+147,UB+410,LB+237,UB+450)==1) //½øÈëÊæÊÊ¶È½çÃæ
+        {
+            nocombo();
+            if(*mode!=2) *mode=2;
+            else *mode=0;
+            clrmous(MouseX, MouseY);
+            draw_react(usr,*mode);
+            return 2;
+        }
 
         if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
             return 0;

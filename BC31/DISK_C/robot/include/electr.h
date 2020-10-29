@@ -10,6 +10,7 @@
 
 #include "headers.h"
 
-void charge(HOUSE *house, ROBOT *robot);
+int func_electr(HOUSE *house, ROBOT *robot, USER *usr); //充电界面函数
+void charge(HOUSE *house, ROBOT *robot, USER *usr);
 
 #endif

@@ -10,6 +10,83 @@
 
 FILE *fpde4;
 
+int func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot, USER *usr)
+{
+    char value;
+    int *f;
+    int poscode;
+    NODE mp,mto; //鼠标点击后行动坐标
+    *f=1;
+
+    //fpde4=fopen("debug\\debug5.txt","w");
+    draw_bactr(robot);
+    write_statu(house,robot,3);
+
+    while(1)
+    {
+        newmouse(&MouseX, &MouseY, &press);
+        timepass(house,robot,usr,3);
+        if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //生成垃圾
+        {
+            nocombo();
+            nocombo();
+            if(house->rubnum<3)
+            {
+                (house->rubnum)++;
+                set_rub(rubbish,house);
+                paintmp(house,robot);
+            }
+            continue;
+        }
+        if(mouse_press(LB+57,UB+410,LB+217,UB+450)==1) //拾倒垃圾
+        {
+            nocombo();
+            nocombo();
+            while(1)
+            {
+                if(house->rubnum>0&&(*f)==1)
+                {
+                    //fprintf(fpde4,"%d %d\n",*f,house->rubnum);
+                    col_rub(f,rubbish,house,robot);
+                    paintmp(house,robot);
+                    //fprintf(fpde4,"%d %d\n",*f,house->rubnum);
+                }
+                else
+                    break;
+            }
+            //fclose(fpde4);
+            continue;
+        }
+        if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回主界面
+        {
+            nocombo();
+            return 0;
+        }
+        if(kbhit())
+        {
+            Delaytime(50);
+            value=getch();
+            moveupdate(house,robot,value);   
+        }
+        get_conbot(house,robot);
+        if(mouse_press(15,24,735,744)==1)
+        {
+            nocombo();
+            poscode=getposition(MouseX, MouseY);
+            mto.x=poscode/18;
+            mto.y=poscode%18;
+            mp.x=(*robot).px;
+            mp.y=(*robot).py;
+            if(!Astarmove(mp,mto,robot,house))
+            {
+                bar(1000,750,1024,768,BLACK);
+            }
+        }
+        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
+            return 1;
+    }
+}
+
 void set_rub(NODE *rubbish,HOUSE *house)
 {
     int x,y;
