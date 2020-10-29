@@ -139,16 +139,18 @@ void user_findback()
         newmouse(&MouseX, &MouseY, &press);
         if(mouse_press(180,300,500,350)==1&&f2) //输入账号
             input(180,300,500,350,usr.user,15,0,0,WHITE);
-        if(mouse_press(180,375,500,425)==1&&f2) //输入电话
-            input(180,375,500,425,usr.tel,15,0,1,WHITE);
+        if(mouse_press(220,375,500,425)==1&&f2) //输入电话
+            input(220,375,500,425,usr.tel,15,0,1,WHITE);
         if(mouse_press(220,450,360,500)==1&&f2) //输入验证码
             input(220,450,360,500,ver_cod,15,0,1,WHITE);
         if(mouse_press(360,450,500,500)==1&&f1&&f2)
         {
-            f1=0;
             if (findback_func(usr.user,code,usr.tel)) //验证账号和手机号
             {
+                f1=0;
                 random_vc(ver_cod1); //生成随机数
+                bar(510,459,650,509,MISTY_ROSE);
+                bar(230,510,450,590,MISTY_ROSE);
                 outtextxy(510,459,ver_cod1,2,2,32,BLACK); //输出随机数
             }
         }
@@ -156,12 +158,16 @@ void user_findback()
         {
             if (strcmp(ver_cod,ver_cod1)==0) //判断验证码
             {
+                bar(230,510,450,590,MISTY_ROSE);
                 outtextxy(230,535,code,2,2,20,BLACK);
                 f2=0;
+                continue;
             }
             else 
             {
-                outtextxy(230,535,"error",2,2,20,BLACK);
+                bar(230,510,450,590,MISTY_ROSE);
+                puthz(230,535,"输入的验证码错误",24,25,'H',BLACK);   
+                /*outtextxy(230,535,"error",2,2,20,BLACK);*/
                 continue;
             }
         }
@@ -302,7 +308,8 @@ int judge_rightpassword(char *user, char *code)
 		{
 			if (strcmp(code, u->code) != 0)//密码不配
 			{
-				puthz(405,558,"密码错误",24,25,'H',BLACK);
+				bar(405,558,505,608,MISTY_ROSE);
+                puthz(405,558,"密码错误",24,25,'H',BLACK);
 				if (u != NULL)
 				{
 					free(u);
@@ -312,7 +319,8 @@ int judge_rightpassword(char *user, char *code)
 			}
 			else if (strcmp(code, u->code) == 0)//密码匹配
 			{
-				puthz(405,558,"登录成功",24,25,'H',BLACK);
+				bar(405,558,505,608,MISTY_ROSE);
+                puthz(405,558,"登录成功",24,25,'H',BLACK);
 				if (u != NULL)
 				{
 					free(u);

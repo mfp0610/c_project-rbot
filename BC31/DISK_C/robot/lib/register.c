@@ -31,12 +31,18 @@ int register_func(char *user,char *code,char *tel,char *vc,char *vc1)
     if (strcmp(vc,vc1)==0)
     {
         input_database(user,code,tel); //写入数据库
-        puthz(405,558,"注册成功",24,25,'H',BLACK);
+		bar(170,588,370,615,MISTY_ROSE);
+        puthz(255,588,"注册成功",24,25,'H',BLACK);
         Delaytime(2000);
         return 1;
     }
     else
-        return 0; 
+	{
+		bar(170,588,370,615,MISTY_ROSE);
+        puthz(170,588,"输入的验证码错误",24,25,'H',BLACK);
+		return 0; 
+	}
+        
 }
 
 int findback_func(char *user,char *code,char *tel)
@@ -95,7 +101,8 @@ void output_database(char *user,char *code,char *tel,int *f)
     }
     else
     {
-        puthz(230,535,"账号或手机号错误",24,25,'K',BLACK);
+        bar(230,510,450,590,MISTY_ROSE);
+		puthz(230,535,"账号或手机号错误",24,25,'K',BLACK);
         *f = 0;
     }
 }
