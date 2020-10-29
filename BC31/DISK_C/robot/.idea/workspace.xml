@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e8bf07af-9ed5-4541-a685-497427ace476" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/TC0000.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0001.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0002.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0003.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0004.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0005.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0006.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0007.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0008.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0009.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0010.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0011.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0012.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0013.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0014.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0015.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0016.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0017.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0018.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0019.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0020.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0021.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0022.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0023.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0024.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0025.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0026.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0027.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0028.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0029.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0030.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0031.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0032.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TC0033.SWP" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/BOARD.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/BOARD.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/CHAT.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/CHAT.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/COMFORT.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/COMFORT.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/DRAWBAS.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/DRAWBAS.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/DRAWMAP.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/DRAWMAP.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/DRAWROB.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/DRAWROB.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/ELECTR.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/ELECTR.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/HZK.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/HZK.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/INTERF.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/INTERF.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/LOGIN.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/LOGIN.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/MAIN.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/MAIN.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/MAINWIN.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/MAINWIN.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/MOUSE.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/MOUSE.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/MOVE.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/MOVE.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/MYSYS.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/MYSYS.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/PINYIN.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/PINYIN.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/PLAN.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/PLAN.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/REGISTER.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/REGISTER.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/ROBOT.EXE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/RUBBISH.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/RUBBISH.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output/SVGA.OBJ" beforeDir="false" afterPath="$PROJECT_DIR$/output/SVGA.OBJ" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../dosbox/stdout.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../dosbox/stdout.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="1jYLiPlErHJyxX6t1GQQK59WOeh" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e8bf07af-9ed5-4541-a685-497427ace476" name="Default Changelist" comment="" />
+      <created>1603976210211</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603976210211</updated>
+    </task>
+    <servers />
+  </component>
+</project>

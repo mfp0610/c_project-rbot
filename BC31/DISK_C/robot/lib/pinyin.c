@@ -267,7 +267,7 @@ void DeleteTab(Coordinate * current_en_position,CH* ch,EN* en,char *temp ,int * 
 }
 
 int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»ÖÃµÄ×óÉÏ½Ç*/, 
-    int show_size/*ÓÐ48£¬36£¬28*/,int *qhwh, HOUSE *house, ROBOT *robot)//7
+    int show_size/*ÓÐ48£¬36£¬28*/,int *qhwh)//7
 {
     union
     {
@@ -368,8 +368,6 @@ int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»Ö
             ClearKey();
             CursorWhite(current_show_position,show_size);
             return 1;
-
-
         }
 
 		
@@ -541,7 +539,7 @@ int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»Ö
 
         }
 
-        else if((u.c[1]==0x48/*UP*/||u.c[1]==0x4b/*LEFT*/)&& num_tab!=0)//¼üÈë ÏòÉÏ»òÏò×ó ·­Ò³
+        else if((u.c[1]==0x48/*UP*/||u.c[1]==0x4b||u.c[0]=='+'/*LEFT*/)&& num_tab!=0)//¼üÈë ÏòÉÏ»òÏò×ó ·­Ò³
         {
             ch_qhwh=ch_qhwh-5;		//ºº×Ö¿âÖÐÍùÇ°×ßÎå¸ö£¨¸ÕºÃ·­Ò³
   			bar(IX,IY+WIDTH1,IX+LENGTH,IY+WIDTH1+WIDTH2,LIGHT_GRAY);	
@@ -556,7 +554,7 @@ int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»Ö
 
         }
 
-        else if((u.c[1]==0x50/*DOWN*/||u.c[1]==0x4d/*RIGHT*/) && num_tab!=0)//¼üÈë ÏòÏÂ·­Ò³
+        else if((u.c[1]==0x50/*DOWN*/||u.c[1]==0x4d/*RIGHT*/||u.c[0]=='-') && num_tab!=0)//¼üÈë ÏòÏÂ·­Ò³
         {
             ch_qhwh=ch_qhwh+5;		//ºº×Ö¿âÖÐÍùºó×ßÎå¸ö£¨¸ÕºÃ·­Ò³
             
@@ -588,26 +586,8 @@ int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»Ö
 			bar(IX,IY+WIDTH1,IX+LENGTH,IY+WIDTH1+WIDTH2,LIGHT_GRAY);
 		}
 
-        if(kbhit())
-        {
-            Delaytime(50);
-            moveupdate(house,robot,u.key);   
-        }
-        get_conbot(house,robot);
-        if(mouse_press(15,24,735,744)==1)
-        {
-            nocombo();
-            poscode=getposition(MouseX, MouseY);
-            mto.x=poscode/18;
-            mto.y=poscode%18;
-            mp.x=(*robot).px;
-            mp.y=(*robot).py;
-            if(!Astarmove(mp,mto,robot,house))
-            {
-                bar(1000,750,1024,768,BLACK);
-            }
-        }
-
+        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
+            return 0;
     }
 }
 

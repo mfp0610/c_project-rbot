@@ -181,7 +181,7 @@ void draw_clean(USER *usr)
     draw_conbot();
 }
 
-void draw_react(USER *usr)
+void draw_react(USER *usr,int mode)
 {
     bar(LB,UB,1024,768,MARINE_BLUE);  
 
@@ -196,9 +196,11 @@ void draw_react(USER *usr)
 
     //画功能按钮
     fill_rect(LB+37,UB+410,LB+127,UB+450,MISTY_ROSE,MARINE_BLUE);
-    puthz(LB+47,UB+414,"聊天",32,35,'K',BLACK);
+    if(mode==1) puthz(LB+47,UB+414,"聊天",32,35,'K',STRONG_RED);
+    else puthz(LB+47,UB+414,"聊天",32,35,'K',BLACK);
     fill_rect(LB+147,UB+410,LB+237,UB+450,MISTY_ROSE,MARINE_BLUE);
-    puthz(LB+157,UB+414,"字谜",32,35,'K',BLACK);
+    if(mode==2) puthz(LB+157,UB+414,"字谜",32,35,'K',STRONG_RED);
+    else puthz(LB+157,UB+414,"字谜",32,35,'K',BLACK);
     fill_rect(LB+57,UB+470,LB+217,UB+510,MISTY_ROSE,MARINE_BLUE);
     puthz(LB+71,UB+474,"返回主页",32,32,'K',BLACK);
 

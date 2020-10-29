@@ -107,9 +107,9 @@ void mainWindow(USER *usr)
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //进入互动界面
         {
             clrmous(MouseX, MouseY);
-            draw_react(usr);
+            draw_react(usr,0);
             nocombo();
-            if(func_react(house,robot))
+            if(func_react(house,robot,usr))
                 return ;
             draw_control(usr);
             nocombo();
@@ -592,60 +592,6 @@ int func_move(HOUSE *house, ROBOT *robot)
         {
             nocombo();
             return 0;
-        }
-        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
-            return 1;
-    }
-}
-
-int func_react(HOUSE *house, ROBOT *robot)
-{
-    char value;
-    int poscode;
-    NODE mp,mto; //鼠标点击后行动坐标
-
-    draw_bactr(robot);
-    write_statu(house,robot,3);
-
-    while(1)
-    {
-        newmouse(&MouseX, &MouseY, &press);
-        timepass(house,robot,3);
-        if(mouse_press(LB+37,UB+410,LB+127,UB+450)==1) //进入电量界面
-        {
-            //bar(0,0,100,100,STRONG_RED);
-            c_chat1();
-            continue;
-        }
-        if(mouse_press(LB+147,UB+410,LB+237,UB+450)==1) //进入舒适度界面
-        {
-            
-            continue;
-        }
-        if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回控制面板
-        {
-            nocombo();
-            return 0;
-        }
-        if(kbhit())
-        {
-            Delaytime(50);
-            value=getch();
-            moveupdate(house,robot,value);   
-        }
-        get_conbot(house,robot);
-        if(mouse_press(15,24,735,744)==1)
-        {
-            nocombo();
-            poscode=getposition(MouseX, MouseY);
-            mto.x=poscode/18;
-            mto.y=poscode%18;
-            mp.x=(*robot).px;
-            mp.y=(*robot).py;
-            if(!Astarmove(mp,mto,robot,house))
-            {
-                bar(1000,750,1024,768,BLACK);
-            }
         }
         if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
             return 1;
