@@ -80,6 +80,7 @@ int login_func(USER *us)
 void user_register()
 {
     int f1=1, f2=1;
+    int len; //电话号码长度
     USER usr; //用户信息
     char ver_cod[5]; //输入验证码
     char ver_cod1[5]; //随机验证码
@@ -98,11 +99,37 @@ void user_register()
             input(220,450,500,500,usr.tel,15,0,1,WHITE);
         if(mouse_press(220,525,360,575)==1&&f2) //输入验证码
             input(220,525,360,575,ver_cod,15,0,1,WHITE);
+        len=strlen(usr.tel);
         if(mouse_press(360,525,500,575)==1&&f1&&f2)
         {
-            f1=0;
-            random_vc(ver_cod1); //生成随机数
-            outtextxy(370,575,ver_cod1,2,2,32,BLACK); //输出随机数
+            if(check_user(usr.user)!=1)
+            {
+                if(usr.code[0]!='\0')
+                {
+                    if(len==11)
+                    {
+                        f1=0;
+                        random_vc(ver_cod1); //生成随机数
+                        bar(170,588,370,615,MISTY_ROSE);
+                        outtextxy(370,575,ver_cod1,2,2,32,BLACK); //输出随机数
+                    }
+                    else
+                    {
+                        bar(170,588,370,615,MISTY_ROSE);
+                        puthz(170,588,"手机号码错误",24,25,'H',BLACK);
+                    }  
+                }
+                else
+                {
+                    bar(170,588,370,615,MISTY_ROSE);
+                    puthz(170,588,"请输入密码",24,25,'H',BLACK);
+                } 
+            }
+            else
+            {
+                bar(170,588,370,615,MISTY_ROSE);
+                puthz(170,588,"该账号已经注册",24,25,'H',BLACK);
+            }  
         }
         if(mouse_press(120,625,240,675)==1&&f2) //注册判断
         {

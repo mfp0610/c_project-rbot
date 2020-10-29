@@ -28,21 +28,49 @@ void random_vc(char *vc)
 
 int register_func(char *user,char *code,char *tel,char *vc,char *vc1)
 {
-    if (strcmp(vc,vc1)==0)
+	int len;
+	len=strlen(tel);
+	if(check_user(user)!=1)
     {
-        input_database(user,code,tel); //写入数据库
-		bar(170,588,370,615,MISTY_ROSE);
-        puthz(255,588,"注册成功",24,25,'H',BLACK);
-        Delaytime(2000);
-        return 1;
+        if(code[0]!='\0')
+        {
+            if(len==11)
+            {
+                if (strcmp(vc,vc1)==0)
+    			{
+        			input_database(user,code,tel); //写入数据库
+					bar(170,588,370,615,MISTY_ROSE);
+        			puthz(255,588,"注册成功",24,25,'H',BLACK);
+        			Delaytime(2000);
+        			return 1;
+    			}
+				else
+				{
+					bar(170,588,370,615,MISTY_ROSE);
+        			puthz(170,588,"输入的验证码错误",24,25,'H',BLACK);
+					return 0; 
+				}
+            }
+            else
+            {
+                bar(170,588,370,615,MISTY_ROSE);
+                puthz(170,588,"手机号码错误",24,25,'H',BLACK);
+				return 0;
+            }  
+        }
+        else
+        {
+            bar(170,588,370,615,MISTY_ROSE);
+            puthz(170,588,"请输入密码",24,25,'H',BLACK);
+			return 0;
+        } 
     }
     else
-	{
-		bar(170,588,370,615,MISTY_ROSE);
-        puthz(170,588,"输入的验证码错误",24,25,'H',BLACK);
-		return 0; 
-	}
-        
+    {
+        bar(170,588,370,615,MISTY_ROSE);
+        puthz(170,588,"该账号已经注册",24,25,'H',BLACK);
+		return 0;
+    }    
 }
 
 int findback_func(char *user,char *code,char *tel)
@@ -134,6 +162,62 @@ int check_data(char *user,char *code,char *tel)
         if (strcmp(u->user, user)==0&&strcmp(u->tel, tel)==0)
 		{
 			strcpy(code,u->code);
+            if (u != NULL)
+			{
+				free(u);
+				u = NULL;
+			}
+			if (fclose(fp) != 0)
+			{
+				printf("\n cannot close Database.");
+				Delaytime(3000);
+				exit(1);
+			}
+			return 1;
+		}
+		free(u);
+		u = NULL;
+	}
+	if (u != NULL)
+	{
+		free(u);
+		u = NULL;
+	}
+    if (fclose(fp) != 0)
+	{
+		printf("\n cannot close Database.");
+		Delaytime(3000);
+		exit(1);
+	}
+	return 0;
+}
+
+int check_user(char *user)
+{
+	int len;
+	int i;
+	FILE* fp;
+	USER* u = NULL;
+    if ((fp = fopen("data\\user.dat", "rb+")) == NULL)//建立数据库
+	{
+		printf("cannot open file UserData.dat");
+		Delaytime(3000);
+		exit(1);
+	}
+    fseek(fp, 0, SEEK_END);
+	len = ftell(fp) / sizeof(USER);
+	for (i = 0; i < len; i++)
+	{
+        if ((u = (USER*)malloc(sizeof(USER))) == NULL)
+		{
+			printf("memoryallocation runs wrong in lgfunc.c");
+			Delaytime(3000);
+			exit(1);
+		}
+		fseek(fp, i * sizeof(USER), SEEK_SET);
+		fread(u, sizeof(USER), 1, fp);
+        if (strcmp(u->user, user)==0)
+		{
             if (u != NULL)
 			{
 				free(u);
