@@ -267,7 +267,7 @@ void DeleteTab(Coordinate * current_en_position,CH* ch,EN* en,char *temp ,int * 
 }
 
 int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»ÖÃµÄ×óÉÏ½Ç*/, 
-    int show_size/*ÓĞ48£¬36£¬28*/,int *qhwh, USER *usr, int *mode)//7
+    int show_size/*ÓĞ48£¬36£¬28*/,int *qhwh, HOUSE *house, ROBOT *robot, USER *usr, int *mode)//7
 {
     union
     {
@@ -333,13 +333,78 @@ int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»Ö
 
     ClearKey();//Çå³ı¼üÅÌ»º´æ
 
+    draw_bactr(robot);
+    write_statu(house,robot,3);
     while(1)//½øÈë°´¼üÑ­»·
     {
         newmouse(&MouseX, &MouseY, &press);
+        timepass(house,robot,usr,3);
+        if(mouse_press(LB+37,UB+410,LB+127,UB+450)==1) //½øÈëÄ¬ÈÏÄ£Ê½
+        {
+            nocombo();
+            free(ch);
+            free(en);
+            fclose(hanzi);
+            fclose(fuhao);
+            ClearKey();
+            if(*mode!=1) *mode=1;
+            else *mode=0;
+            clrmous(MouseX, MouseY);
+            draw_react(usr,*mode);
+            return 2;
+        }
+        if(mouse_press(LB+147,UB+410,LB+237,UB+450)==1) //½øÈëÃÕÓïÄ£Ê½
+        {
+            nocombo();
+            free(ch);
+            free(en);
+            fclose(hanzi);
+            fclose(fuhao);
+            ClearKey();
+            if(*mode!=2) *mode=2;
+            else *mode=0;
+            clrmous(MouseX, MouseY);
+            draw_react(usr,*mode);
+            return 2;
+        }
+        if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //·µ»Ø¿ØÖÆÃæ°å
+        {
+            free(ch);
+            free(en);
+            fclose(hanzi);
+            fclose(fuhao);
+            ClearKey();
+            return 3;
+        }
+        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1) //·µ»ØÖ÷²Ëµ¥
+        {
+            free(ch);
+            free(en);
+            fclose(hanzi);
+            fclose(fuhao);
+            ClearKey();
+            return 0;
+        }
+
+        get_conbot(house,robot);
+        if(mouse_press(15,24,735,744)==1)
+        {
+            nocombo();
+            poscode=getposition(MouseX, MouseY);
+            mto.x=poscode/18;
+            mto.y=poscode%18;
+            mp.x=(*robot).px;
+            mp.y=(*robot).py;
+            if(!Astarmove(mp,mto,robot,house))
+            {
+                bar(1000,750,1024,768,BLACK);
+            }
+        }
+        
         if(!kbhit()) continue;
         u.key=bioskey(0);//»ñÈ¡°´¼üĞÅÏ¢£¬keyÊÇintĞÍ
 
-        if(u.c[1]==0x1) //¼üÈëescÍË³ö
+        /*if(u.c[1]==0x1) //¼üÈëescÍË³ö
         {
 			//¹éÎ»
             free(ch);
@@ -349,14 +414,14 @@ int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»Ö
             ClearKey();
             CursorWhite(current_show_position,show_size);//¹â±êÍ¿°×
             return 3;
-        }
+        }*/
 
 		/**********
 		µ±num_tab==0Ê±£¬
 		¾ù¶ÔÊäÈë¿ò²Ù×÷
 		ÒÔÏÂ
 		**********/
-        else if(u.c[1]==0x1c&& num_tab==0)//¼üÈë»Ø³µ·¢ËÍÏûÏ¢
+        if(u.c[1]==0x1c&& num_tab==0)//¼üÈë»Ø³µ·¢ËÍÏûÏ¢
         {
             //å½’ä½
             free(ch);
@@ -585,28 +650,6 @@ int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»Ö
 		{
 			bar(IX,IY+WIDTH1,IX+LENGTH,IY+WIDTH1+WIDTH2,LIGHT_GRAY);
 		}
-
-        if(mouse_press(LB+37,UB+410,LB+127,UB+450)==1) //½øÈëµçÁ¿½çÃæ
-        {
-            nocombo();
-            if(*mode!=1) *mode=1;
-            else *mode=0;
-            clrmous(MouseX, MouseY);
-            draw_react(usr,*mode);
-            return 2;
-        }
-        if(mouse_press(LB+147,UB+410,LB+237,UB+450)==1) //½øÈëÊæÊÊ¶È½çÃæ
-        {
-            nocombo();
-            if(*mode!=2) *mode=2;
-            else *mode=0;
-            clrmous(MouseX, MouseY);
-            draw_react(usr,*mode);
-            return 2;
-        }
-
-        if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
-            return 0;
     }
 }
 
@@ -640,37 +683,6 @@ int GetBit(int num,char ch)
         temp*=2;
     }
     return (temp&ch)&&1;
-}
-
-int reply_match(char * str,char *order,char *reply)
-{
-	FILE *fp; 	 /*¶¨ÒåÎÄ¼şÖ¸Õë*/
-	int i=0;	//×÷ÎªÅĞ¶ÏÒÀ¾İ£¬Æ¥Åä³É¹¦Ôò1£¬Ê§°ÜÔò0
-	fp = fopen("chat\\match.txt", "rt");
-	if (fp == NULL)
-	{
-		puthz(0,0,"Æ¥ÅäÎÄ¼ş´ò¿ª´íÎó",32,32,'H',STRONG_RED);
-		exit(1);
-	}
-	rewind(fp);
-	while (feof(fp) == 0)
-	{
-		//bar(1,1,50,50,LIGHT_GRAY);
-		fscanf(fp, "%s", order);
-		fscanf(fp, "%s", reply);	//fscanfÊ¹ÓÃÊ±ÎÄ¼şÖ¸Õë»á×Ô¶¯ÒÆ¶¯
-		if (strcmp( order, str) == 0)
-		{ 
-			//bar(1,1,50,50,LIGHT_GRAY);
-			i=1;
-			fclose(fp);
-			return;
-		}
-	}
-	if(i==0)
-	{
-		strcpy(reply,"±§Ç¸£¬ÎÒ²»Ã÷°×ÄãËµµÄÊÇÊ²Ã´");
-	}
-	fclose(fp);
 }
 
 void get_str(int *qhwh, char *incode)

@@ -24,5 +24,6 @@ void open_left_door(int x,int y);
 void open_right_door(int x,int y);
 void open_up_door(int x,int y);
 void open_down_door(int x,int y);
+void draw_rub(int x,int y);
 
 #endif

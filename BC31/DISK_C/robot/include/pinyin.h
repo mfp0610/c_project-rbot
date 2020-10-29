@@ -53,10 +53,9 @@ int ShowPerCharacter(int qhwh,Area show_area,Coordinate * current_position,int c
 int CheckArea(Area area,Coordinate *current_position,int size); //4
 void DeleteTab(Coordinate * current_en_position,CH* ch,EN* en,char *temp ,int * num_tab,int *ch_qhwh); //3
 int ShowChTab(Area show_area,Coordinate current_show_position/*文本输出的初始位置的左上角*/, 
-	int show_size/*有48，36，28*/,int *qhwh, USER *usr, int *mode);
+	int show_size/*有48，36，28*/,int *qhwh, HOUSE *house, ROBOT *robot, USER *usr, int *mode);
 void ShowWhite(Coordinate * current_show_position,int show_size);
 int GetBit(int num,char ch);
-int reply_match(char * str,char *order,char *reply);
 void get_str(int *qhwh, char *incode);
 void qhwh2incode(int qwh,char *incode);
 

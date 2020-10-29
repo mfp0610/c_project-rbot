@@ -131,7 +131,7 @@ void draw_move(USER *usr)
     puthz(LB+71,UB+354,"自动巡逻",32,32,'K',BLACK);
     
     //puthz(LB+47,UB+400,"门",24,24,'K',BLACK);
-    puthz(LB+47,UB+430,"门",24,24,'K',BLACK);
+    puthz(LB+47,UB+430,"门",24,24,'K',WHITE);
     
     /*fill_rect(LB+80,UB+400,LB+100,UB+420,MISTY_ROSE,MARINE_BLUE);
     fill_rect(LB+110,UB+400,LB+130,UB+420,MISTY_ROSE,MARINE_BLUE);

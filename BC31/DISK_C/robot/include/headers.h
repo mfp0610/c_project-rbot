@@ -59,6 +59,7 @@
 #define BRIGHT_GREEN 26592
 #define YELLOW 65504
 #define LIGHT_GRAY 54938
+#define DARK_RED 29186
 
 //必要的参数
 #define ROBOT_SIZE 20 //定义基础机器人大小

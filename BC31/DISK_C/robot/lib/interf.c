@@ -24,7 +24,7 @@ void start_page()
     Delaytime(1000);
     clearrobot(800,500,5);
     drawrobot_front_hello(800,500,5);
-    puthz(187,90,"欢迎使用居家机器人模拟系统",48,50,'H',BLACK);
+    puthz(187,90,"欢迎使用家居机器人模拟系统",48,50,'H',BLACK);
     puthz(120,500,"本程序由华中科技大学自动化学院",24,28,'K',BLACK);
     puthz(120,550,"一九零五班孟繁鹏，黄瀚文共同开发",24,28,'K',BLACK);
     puthz(200,300,"按任意键继续",32,35,'K',BLACK);
