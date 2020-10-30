@@ -60,7 +60,11 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
             }
             if(flag==1) 
                 c_reply1(qhwh,&show_y);
-            if(flag==2) continue ;
+            if(flag==2)
+            {
+                show_y=IY-245;
+                continue ;
+            }
             if(flag==3)
             {
                 nocombo();
@@ -100,7 +104,11 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
                     f1=check_answer(incode,answer);
                     continue;
                 }
-                if(flag==2) continue ;
+                if(flag==2)
+                {
+                    show_y=IY-245;
+                    continue ;
+                }
                 if(flag==3)
                 {
                     nocombo();
@@ -161,10 +169,10 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
         if(mouse_press(LB+37,UB+410,LB+127,UB+450)==1) //进入闲聊模式
         {
             nocombo();
+            show_y=IY-245;
             if(mode!=1)
             {
                 bar(IX,IY-WIDTH4,IX+LENGTH,IY,MISTY_ROSE); //聊天框显示区域
-                show_y=IY-245;
                 mode=1;
             }
             else mode=0;
@@ -173,17 +181,17 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
             draw_bactr(robot);
             write_statu(house,robot,3);
             fpde=fopen("debug\\debug.txt","a");
-            fprintf(fpde,"1 %s\n",(*usr).user);
+            fprintf(fpde,"1 %d\n",show_y);
             fclose(fpde);
             continue;
         }
         if(mouse_press(LB+147,UB+410,LB+237,UB+450)==1) //进入谜语模式
         {
             nocombo();
+            show_y=IY-245;
             if(mode!=2)
             {
                 bar(IX,IY-WIDTH4,IX+LENGTH,IY,MISTY_ROSE); //聊天框显示区域
-                show_y=IY-245;
                 mode=2;
             }
             else mode=0;
@@ -192,7 +200,7 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
             draw_bactr(robot);
             write_statu(house,robot,3);
             fpde=fopen("debug\\debug.txt","a");
-            fprintf(fpde,"2 %s\n",(*usr).user);
+            fprintf(fpde,"2 %d\n",show_y);
             fclose(fpde);
             continue;
         }
