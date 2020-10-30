@@ -133,6 +133,7 @@ int pd_pass(int mp)
     if(mp==24) return 1;
     if(mp==25) return 1;
     if(mp==26) return 1;
+    if(mp==36) return 1;
     return 0;
 }
 

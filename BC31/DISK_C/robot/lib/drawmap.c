@@ -44,7 +44,7 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1,cy1,cx2,cy2,WHEAT);
                 break;
             case 6:
-                draw_floor_ceramic(cx1,cy1);
+                bar(cx1,cy1,cx2,cy2,LIGHT_GRAY);
                 break;
             case 7:
                 bar(cx1,cy1,cx2,cy2,PINK);
@@ -178,6 +178,36 @@ void paintmp(HOUSE *house, ROBOT *robot)
                 bar(cx1,cy1,cx2-10,cy2-10,PINK);
                 bar(cx1,cy1,cx2,cy1+1,BLACK);
                 break;
+            case 35:
+                draw_floor_ceramic(cx1,cy1);
+                draw_toilet(cx1,cy1);
+                break;
+            case 36:
+                draw_floor_ceramic(cx1,cy1);
+                break;
+            case 37:
+                bar(cx1,cy1,cx2,cy2,LIGHT_GRAY);
+                draw_wash(cx1,cy1);
+                break;
+            case 38:
+                bar(cx1,cy1,cx2,cy2,WHEAT);
+                bar(cx1,cy1,cx1+10,cy2,DARK_GRAY);
+                bar(cx1+10,cy1,cx1+20,cy2,BLACK);
+                break;
+            case 39:
+                draw_scupper(cx1,cy1);
+                break;
+            case 40:
+                bar(cx1,cy1,cx2,cy2,LIGHT_GRAY);
+                draw_cooker(cx1,cy1);
+                break;
+            case 41:
+                bar(cx1,cy1,cx2,cy2,LIGHT_GRAY);
+                fill_circle(cx1+20,cy1+20,18,WHITE,BLACK);
+                fill_circle(cx1+20,cy1+15,10,LIGHT_GRAY,LIGHT_GRAY);
+                fill_rect(cx1,cy1,cx2,cy1+7,WHITE,BLACK);
+                fill_rect(cx1+16,cy1,cx2-16,cy1+20,DARK_GRAY,BLACK);
+                break;
             default: break;
         }
     }
@@ -206,7 +236,7 @@ void draw_floor_wood(int x,int y)
 
 void draw_floor_ceramic(int x,int y)
 {
-    bar(x,y,x+SIZE,y+SIZE,DARK_GRAY);
+    fill_rect(x,y,x+SIZE,y+SIZE,LIGHT_BLUE,BULE);
 }
 
 void draw_table(int x,int y)
@@ -294,4 +324,40 @@ void draw_rub(int x,int y)
     bar(x+12,y+2,x+27,y+2,MARINE_BLUE);
     bar(x+11,y+1,x+28,y+1,MARINE_BLUE);
     bar(x+10,y,x+29,y,MARINE_BLUE);
+}
+
+void draw_toilet(int x,int y)
+{
+    fill_circle(x+20,y+20,20,WHITE,BLACK);
+    fill_circle(x+20,y+15,10,LIGHT_GRAY,LIGHT_GRAY);
+    fill_rect(x,y,x+SIZE,y+10,WHITE,BLACK);
+}
+
+void draw_wash(int x,int y)
+{
+    fill_circle(x+20,y+20,20,WHITE,BLACK);
+    fill_circle(x+25,y+20,10,LIGHT_GRAY,LIGHT_GRAY);
+    fill_rect(x+SIZE-7,y,x+SIZE,y+SIZE,WHITE,BLACK);
+    fill_rect(x+20,y+16,x+SIZE,y+24,DARK_GRAY,BLACK);
+}
+
+void draw_scupper(int x,int y)
+{
+    bar(x,y,x+SIZE,y+SIZE,BLACK);
+    bar(x,y+8,x+SIZE,y+16,DARK_GRAY);
+    bar(x,y+24,x+SIZE,y+32,DARK_GRAY);
+    bar(x+8,y,x+16,y+SIZE,DARK_GRAY);
+    bar(x+24,y,x+32,y+SIZE,DARK_GRAY);
+}
+
+void draw_cooker(int x,int y)
+{
+    fill_circle(x+20,y+20,20,BLACK,BLACK);
+    fill_circle(x+20,y+20,17,DARK_GRAY,BLACK);
+    fill_circle(x+20,y+20,10,BLACK,BLACK);
+    fill_circle(x+20,y+20,7,STRONG_RED,BLACK);
+    bar(x,y+17,x+10,y+23,BLACK);
+    bar(x+SIZE-10,y+17,x+SIZE,y+23,BLACK);
+    bar(x+17,y,x+23,y+10,BLACK);
+    bar(x+17,y+SIZE-10,x+23,y+SIZE,BLACK);
 }
