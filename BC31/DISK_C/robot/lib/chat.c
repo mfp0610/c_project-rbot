@@ -230,18 +230,11 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
 
 void c_reply1(int *qhwh,int *show_y)
 {
-	char *order=(char *)malloc(30*sizeof(char)); //之后标记到文件中的问句部分
 	char *reply=(char *)malloc(30*sizeof(char)); //之后标记到文件中的答句部分
 	char *incode=(char *)malloc(30*sizeof(char)); //用户输入的内码序列
 	char str1[30];
 	char str2[30];
 
-	if(order==NULL)
-	{
-        puthz(0,0,"内存分配失败",16,16,'H',STRONG_RED);
-		getch();
-		exit(1);
-	}
 	if(reply==NULL)
 	{
         puthz(0,0,"内存分配失败",16,16,'H',STRONG_RED);
@@ -257,21 +250,23 @@ void c_reply1(int *qhwh,int *show_y)
 	
 	get_str(qhwh,incode); //将qhwh转换成文字存在incode里面
 	strcpy(str1,incode);
-	reply_match(incode,order,reply); //将用户的信息与文件里存储的信息进行对比并得到回复
+	reply_match(incode,reply); //将用户的信息与文件里存储的信息进行对比并得到回复
 	strcpy(str2,reply);
 	
 	show_incode(str1,show_y); //将用户输入的信息打印到聊天框
 	show_reply(str2,show_y); //将机器人回答的信息打印到聊天框
 
-	free(order), order=NULL;
 	free(reply), reply=NULL;
 	free(incode), incode=NULL; //释放空间
 }
 
-int reply_match(char *str,char *order,char *reply)
+int reply_match(char *str,char *reply)
 {
     FILE *fp; //定义文件指针
-    int f=0; //作为判断依据，匹配成功则1，失败则0
+    char *keyword=(char *)malloc(10*sizeof(char)); //关键词
+	char *reply1=(char *)malloc(40*sizeof(char)); //答句
+    int ti,cnt=0; //标记关键词出现的数量
+    
     fp=fopen("chat\\match.txt","rt");
     if(fp==NULL)
     {
@@ -281,18 +276,46 @@ int reply_match(char *str,char *order,char *reply)
     rewind(fp);
     while(feof(fp)==0)
     {
-        fscanf(fp,"%s",order);
-        fscanf(fp,"%s",reply);
-        if(strcmp(order,str)==0)
+        fscanf(fp,"%s",keyword);
+        fscanf(fp,"%s",reply1);
+        ti=count_str(str,keyword);
+        if(ti>cnt)
         {
-            f=1;
-            fclose(fp);
-            return;
+            strcpy(reply,reply1);
+            cnt=ti;
         }
     }
-    if(f==0)
+    if(cnt==0)
         strcpy(reply,"抱歉，我不懂你在说什么");
     fclose(fp);
+    free(keyword);
+    free(reply1);
+    return;
+}
+
+int count_str(char *str,char *tar)
+{
+    int num=0,ne[40]={0},l1,l2;
+    int i,j;
+    l1=strlen(str);
+    l2=strlen(tar);
+    str--;
+    tar--;
+    j=0,ne[0]=-1;
+    for(i=2;i<=l2;i++)
+	{
+       while(j&&tar[i]!=tar[j+1]) j=ne[j];
+       if(tar[j+1]==tar[i]) j++;
+       ne[i]=j;
+    }
+    j=0;
+    for(i=1;i<=l1;i++)
+	{
+        while(j>0&&tar[j+1]!=str[i]) j=ne[j];
+        if(tar[j+1]==str[i]) j++;
+        if(j==l2) num++;
+    }
+    return num;
 }
 
 int make_ques(char *question,char *answer)
@@ -333,7 +356,8 @@ void show_incode(char *incode,int *y)
     int len=strlen(incode), line=1;
     int IY1=IY-5, WIDTHI=WIDTH4-10;
     unsigned int back[260][90];
-    line=len/24+1;
+    line=len/24;
+    if(len%24!=0) line++;
     if(*y>=IY-5)
     {
         clrmous(MouseX, MouseY);
@@ -361,7 +385,8 @@ void show_reply(char *reply,int *y)
     int len=strlen(reply), line=1;
     int IY1=IY-5, WIDTHI=WIDTH4-10;
     unsigned int back[260][90];
-    line=len/24+1;
+    line=len/24;
+    if(len%24!=0) line++;
     if(*y>=IY-5)
     {
         get_image(IX,IY1-WIDTHI+line*20,IX+LENGTH,IY1-WIDTHI*2/3+line*20,*back);

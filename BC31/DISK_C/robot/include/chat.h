@@ -13,7 +13,8 @@
 
 int func_react(HOUSE *house, ROBOT *robot, USER *usr); //互动界面函数
 void c_reply1(int *qhwh,int *show_y);
-int reply_match(char * str,char *order,char *reply); //寻找匹配答案
+int reply_match(char * str,char *reply); //寻找匹配答案
+int count_str(char *str,char *tar);
 void show_incode(char *incode,int *y);
 void show_reply(char *reply,int *y);
 

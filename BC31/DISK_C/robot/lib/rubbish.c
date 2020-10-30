@@ -8,7 +8,6 @@
 
 #include "headers.h"
 
-FILE *fpde4;
 
 int func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot, USER *usr)
 {
@@ -18,7 +17,6 @@ int func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot, USER *usr)
     NODE mp,mto; //鼠标点击后行动坐标
     *f=1;
 
-    //fpde4=fopen("debug\\debug5.txt","w");
     draw_bactr(robot);
     write_statu(house,robot,6);
 
@@ -46,17 +44,14 @@ int func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot, USER *usr)
             {
                 if(house->rubnum>0&&(*f)==1)
                 {
-                    //fprintf(fpde4,"%d %d\n",*f,house->rubnum);
                     puthz(LB+37,UB+230,"正在拾取垃圾中。",24,25,'K',BLACK);
                     col_rub(f,rubbish,house,robot);
                     paintmp(house,robot);
                     bar(LB+35,UB+230,LB+250,UB+260,MISTY_ROSE);
-                    //fprintf(fpde4,"%d %d\n",*f,house->rubnum);
                 }
                 else
                     break;
             }
-            //fclose(fpde4);
             continue;
         }
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回主界面
@@ -118,7 +113,6 @@ void col_rub(int *f,NODE *rubbish,HOUSE *house,ROBOT *robot)
     int i,j;
     NODE mp;
     NODE trash_bin;
-    fpde4=fopen("debug\\debug4.txt","w");
     trash_bin.x=0;
     trash_bin.y=0;
     x=rubbish[house->rubnum].x;
@@ -126,7 +120,6 @@ void col_rub(int *f,NODE *rubbish,HOUSE *house,ROBOT *robot)
     mp.x=(*robot).px;
     mp.y=(*robot).py;
     *f=Astarmove(mp,rubbish[house->rubnum],robot,house);
-    fprintf(fpde4,"%d %d %d %d %d",mp.x,mp.y,x,y,*f);
     if(*f==1)
     {
         (*house).mp1[x][y]=0;
@@ -139,5 +132,4 @@ void col_rub(int *f,NODE *rubbish,HOUSE *house,ROBOT *robot)
         }
         (house->rubnum)--;
     }
-    fclose(fpde4);
 }

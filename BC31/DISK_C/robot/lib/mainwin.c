@@ -17,9 +17,6 @@
 #define setclean 20
 #define setwet 20
 
-/*FILE *fpde;
-FILE *fpde5;*/
-
 void mainWindow(USER *usr)
 {
     HOUSE *house;
@@ -36,21 +33,12 @@ void mainWindow(USER *usr)
     house=(HOUSE *)malloc(sizeof(HOUSE));
     robot=(ROBOT *)malloc(sizeof(ROBOT));
     maininit(house,robot); //定义并初始化房间和机器人
-
-    //fpde=fopen("debug\\debug.txt","w");
     
     paintmp(house,robot);
     draw_control(usr);
     draw_bactr(robot);
     write_statu(house,robot,1);
     house->rubnum=0;
-
-    /*fprintf(fpde,"\ninit\n");
-    fprintf(fpde,"time %lld\n",(*house).time); 
-    fprintf(fpde,"pm %d\n",(*house).pm25);
-    fprintf(fpde,"out %d\n",(*house).tempout);
-    fprintf(fpde,"in %d\n",(*house).temp);
-    fprintf(fpde,"dian %d\n",(*robot).electr);*/
 
     while(1)
     {

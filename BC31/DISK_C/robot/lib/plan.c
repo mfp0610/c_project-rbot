@@ -107,14 +107,9 @@ int Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
     
     char dir;
     int i,j;
-    FILE *fpde1;
 
-    fpde1=fopen("debug\\debug1.txt","w");
-    fprintf(fpde1,"aaaa\n");
     nd_sz=BFS(beg,end,node,0,house); //宽度优先搜索得到路径
     if(nd_sz==-1) return 0;
-    fprintf(fpde1,"%d\n",nd_sz);
-    fclose(fpde1);
     get_path(road,&rd_sz,node,nd_sz); //规范化路径
     for(i=2;i<=rd_sz;i++)
     {
@@ -125,7 +120,6 @@ int Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
         if(road[i].x-road[i-1].x==-1) dir='w';
         if(road[i].y-road[i-1].y==1) dir='d';
         if(road[i].y-road[i-1].y==-1) dir='a';
-        fprintf(fpde1,"1 %d %d %c\n",road[i].x,road[i].y,dir);
         Delaytime(100);
         moveupdate(house,robot,dir);
     }

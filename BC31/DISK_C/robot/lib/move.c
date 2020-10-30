@@ -69,7 +69,6 @@ void move(HOUSE *house, ROBOT *robot,char dir) //ÒÆ¶¯»úÆ÷ÈË
         default: break;
     }
     nx=(*robot).px+dx, ny=(*robot).py+dy;
-    //fprintf(fpde,"1 %d %d\n",nx,ny);
     if(nx>=0 && nx<N && ny>=0 && ny<N && 
         pd_pass((*house).mp1[nx][ny]))
     {
@@ -142,9 +141,7 @@ void free_hang(HOUSE *house, ROBOT *robot)
     NODE pos[8];
     int n=8, beg=0, des=1;
     int flag=0;
-    FILE *fpde3;
 
-    fpde3=fopen("debug\\debug3.txt","w");
     pos[0].x=(*robot).px, pos[0].y=(*robot).py;
     pos[1].x=1, pos[1].y=0;
     pos[2].x=7, pos[2].y=2;
@@ -170,7 +167,6 @@ void free_hang(HOUSE *house, ROBOT *robot)
     }
     write_statu(house,robot,3);
     fill_rect(LB+37,UB+160,LB+240,UB+190,MISTY_ROSE,MISTY_ROSE);
-    fclose(fpde3);
     return ;
 }
 

@@ -7,8 +7,6 @@
 */
 #include "headers.h"
 
-FILE *fpde3;
-
 int func_electr(HOUSE *house, ROBOT *robot, USER *usr)
 {
     char value;
