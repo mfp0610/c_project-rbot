@@ -24,8 +24,11 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
     int mode=0;
     int show_y=IY-245;
 
+    FILE *fpde;
+
     draw_bactr(robot);
     write_statu(house,robot,3);
+    draw_react(usr,mode);
     clrmous(MouseX, MouseY);
 
     while(1)
@@ -169,6 +172,9 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
             draw_react(usr,mode);
             draw_bactr(robot);
             write_statu(house,robot,3);
+            fpde=fopen("debug\\debug.txt","a");
+            fprintf(fpde,"1 %s\n",(*usr).user);
+            fclose(fpde);
             continue;
         }
         if(mouse_press(LB+147,UB+410,LB+237,UB+450)==1) //进入谜语模式
@@ -185,6 +191,9 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
             draw_react(usr,mode);
             draw_bactr(robot);
             write_statu(house,robot,3);
+            fpde=fopen("debug\\debug.txt","a");
+            fprintf(fpde,"2 %s\n",(*usr).user);
+            fclose(fpde);
             continue;
         }
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回控制面板
@@ -195,6 +204,10 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
             free(answer);
             free(incode);
             clrmous(MouseX, MouseY);
+            draw_react(usr,mode);
+            fpde=fopen("debug\\debug.txt","a");
+            fprintf(fpde,"0 %s\n",(*usr).user);
+            fclose(fpde);
             return 0;
         }
         if(kbhit())
