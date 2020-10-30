@@ -3,7 +3,7 @@
     
     Initial version: 2020.7.13
     Lastest update: 2020.7.13
-    Author: mfp & hhw
+    Author: mfp
 */
 #include "headers.h"
 

@@ -14,14 +14,22 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
     int poscode;
     NODE mp,mto; //鼠标点击后行动坐标
     
-    int mode=0;
     Coordinate currentlu={IX+5,IY+WIDTH1+WIDTH2+5}; //文本输出的左上角坐标
-	Area txt_area={{IX+5,IY+WIDTH1+WIDTH2+5},{IX+LENGTH-5,IY+WIDTH1+WIDTH2+WIDTH3-5}}; //文本输出的区域
-	int *qhwh=(int*)malloc(sizeof(int)*MAXTXT); //区号位号
-    int flag;
+    Area txt_area={{IX+5,IY+WIDTH1+WIDTH2+5},{IX+LENGTH-5,IY+WIDTH1+WIDTH2+WIDTH3-5}}; //文本输出的区域
+    int *qhwh=(int*)malloc(sizeof(int)*MAXTXT); //区号位号
+    char *incode=(char *)malloc(30*sizeof(char)); //标记输入内容
+    char *quest=(char *)malloc(30*sizeof(char)); //标记谜语答案
+    char *answer=(char *)malloc(30*sizeof(char)); //标记谜语答案
+    int flag, f1=2;
+    int mode=0;
+    int show_y=IY-245;
+
+    FILE *fpde5;
+    //fpde5=fopen("debug\\debug5.txt","w");
 
     draw_bactr(robot);
     write_statu(house,robot,3);
+    clrmous(MouseX, MouseY);
 
     while(1)
     {
@@ -35,52 +43,133 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
         }
         else if(mode==1)
         {
-            flag=0;
             bar(IX,IY,IX+LENGTH,IY+WIDTH1,LIGHT_GRAY); //拼音显示框
             bar(IX,IY+WIDTH1,IX+LENGTH,IY+WIDTH1+WIDTH2,LIGHT_GRAY); //输入法汉字显示框
             bar(IX,IY+WIDTH1+WIDTH2,IX+LENGTH,IY+WIDTH1+WIDTH2+WIDTH3,LIGHT_GRAY); //文本输出框
+            //bar(IX,IY-WIDTH4,IX+LENGTH,IY,MISTY_ROSE); //聊天框显示区域
+
             Init_qhwh(qhwh);
             flag=ShowChTab(txt_area,currentlu,16,qhwh,house,robot,usr,&mode);
             if(flag==0) 
             {
                 free(qhwh);
+                free(quest);
+                free(answer);
+                free(incode);
                 return 1;
             }
-            if(flag==1) c_reply1(qhwh);
+            if(flag==1) 
+                c_reply1(qhwh,&show_y);
             if(flag==2) continue ;
             if(flag==3)
             {
                 nocombo();
                 free(qhwh);
+                free(quest);
+                free(answer);
+                free(incode);
+                clrmous(MouseX, MouseY);
                 return 0;
             }
         }
         else if(mode==2)
         {
-            flag=0;
             bar(IX,IY,IX+LENGTH,IY+WIDTH1,LIGHT_GRAY); //拼音显示框
             bar(IX,IY+WIDTH1,IX+LENGTH,IY+WIDTH1+WIDTH2,LIGHT_GRAY); //输入法汉字显示框
             bar(IX,IY+WIDTH1+WIDTH2,IX+LENGTH,IY+WIDTH1+WIDTH2+WIDTH3,LIGHT_GRAY); //文本输出框
-            Init_qhwh(qhwh);
-            flag=ShowChTab(txt_area,currentlu,16,qhwh,house,robot,usr,&mode);
-            if(flag==0)
+            //bar(IX,IY-WIDTH4,IX+LENGTH,IY,MISTY_ROSE); //聊天框显示区域
+            
+            if(f1==2)
             {
-                free(qhwh);
-                return 1;
+                fpde5=fopen("debug\\debug5.txt","w");
+                make_ques(quest,answer);
+                fprintf(fpde5,"%s\n%s\n",quest,answer);
+                fclose(fpde5);
+                show_reply(quest,&show_y);
+                Init_qhwh(qhwh);
+                flag=ShowChTab(txt_area,currentlu,16,qhwh,house,robot,usr,&mode);
+                if(flag==0)
+                {
+                    free(qhwh);
+                    free(quest);
+                    free(answer);
+                    free(incode);
+                    return 1;
+                }
+                if(flag==1)
+                {
+                    get_str(qhwh,incode);
+                    show_incode(incode,&show_y);
+                    f1=check_answer(incode,answer);
+                    continue;
+                }
+                if(flag==2) continue ;
+                if(flag==3)
+                {
+                    nocombo();
+                    free(qhwh);
+                    free(quest);
+                    free(answer);
+                    free(incode);
+                    clrmous(MouseX, MouseY);
+                    return 0;
+                }
             }
-            if(flag==1) c_reply1(qhwh);
-            if(flag==2) continue ;
-            if(flag==3)
+            else if(f1==1)
             {
-                nocombo();
-                free(qhwh);
-                return 0;
+                show_reply("恭喜你，答对啦！",&show_y);
+                f1=2;
+                Delaytime(1000);
+                continue;
+            }
+            else
+            {
+                show_reply("别灰心，再试一次！",&show_y);
+                show_reply("也可输入“放弃”换一题",&show_y);
+                Init_qhwh(qhwh);
+                flag=ShowChTab(txt_area,currentlu,16,qhwh,house,robot,usr,&mode);
+                if(flag==0)
+                {
+                    free(qhwh);
+                    free(quest);
+                    free(answer);
+                    free(incode);
+                    return 1;
+                }
+                if(flag==1)
+                {
+                    get_str(qhwh,incode);
+                    show_incode(incode,&show_y);
+                    if(check_answer(incode,"放弃"))
+                    {
+                        f1=2;
+                        continue;
+                    }
+                    f1=check_answer(incode,answer);
+                    continue;
+                }
+                if(flag==2) continue ;
+                if(flag==3)
+                {
+                    nocombo();
+                    free(qhwh);
+                    free(quest);
+                    free(answer);
+                    free(incode);
+                    clrmous(MouseX, MouseY);
+                    return 0;
+                }
             }
         }
         if(mouse_press(LB+37,UB+410,LB+127,UB+450)==1) //进入闲聊模式
         {
             nocombo();
-            if(mode!=1) mode=1;
+            if(mode!=1)
+            {
+                bar(IX,IY-WIDTH4,IX+LENGTH,IY,MISTY_ROSE); //聊天框显示区域
+                show_y=IY-245;
+                mode=1;
+            }
             else mode=0;
             clrmous(MouseX, MouseY);
             draw_react(usr,mode);
@@ -91,7 +180,12 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
         if(mouse_press(LB+147,UB+410,LB+237,UB+450)==1) //进入谜语模式
         {
             nocombo();
-            if(mode!=2) mode=2;
+            if(mode!=2)
+            {
+                bar(IX,IY-WIDTH4,IX+LENGTH,IY,MISTY_ROSE); //聊天框显示区域
+                show_y=IY-245;
+                mode=2;
+            }
             else mode=0;
             clrmous(MouseX, MouseY);
             draw_react(usr,mode);
@@ -103,6 +197,10 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
         {
             nocombo();
             free(qhwh);
+            free(quest);
+            free(answer);
+            free(incode);
+            clrmous(MouseX, MouseY);
             return 0;
         }
         if(kbhit())
@@ -122,20 +220,22 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
             mp.y=(*robot).py;
             if(!Astarmove(mp,mto,robot,house))
             {
-                bar(1000,750,1024,768,BLACK);
+                draw_cantgo();
             }
         }
         if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
         {
             free(qhwh);
+            free(quest);
+            free(answer);
+            free(incode);
             return 1;
         }
     }
 }
 
-void c_reply1(int *qhwh/*,int */)
+void c_reply1(int *qhwh,int *show_y)
 {
-	int show_y;
 	char *order=(char *)malloc(30*sizeof(char)); //之后标记到文件中的问句部分
 	char *reply=(char *)malloc(30*sizeof(char)); //之后标记到文件中的答句部分
 	char *incode=(char *)malloc(30*sizeof(char)); //用户输入的内码序列
@@ -165,10 +265,9 @@ void c_reply1(int *qhwh/*,int */)
 	strcpy(str1,incode);
 	reply_match(incode,order,reply); //将用户的信息与文件里存储的信息进行对比并得到回复
 	strcpy(str2,reply);
-	bar(IX,IY-WIDTH4,IX+LENGTH,IY,MISTY_ROSE); //聊天框显示区域
-
-	show_incode(str1,&show_y); //将用户输入的信息打印到聊天框
-	show_reply(str2,show_y);
+	
+	show_incode(str1,show_y); //将用户输入的信息打印到聊天框
+	show_reply(str2,show_y); //将机器人回答的信息打印到聊天框
 
 	free(order), order=NULL;
 	free(reply), reply=NULL;
@@ -198,22 +297,23 @@ int reply_match(char *str,char *order,char *reply)
         }
     }
     if(f==0)
-        strcpy(reply,"抱歉，我不明白你说的是什么");
+        strcpy(reply,"抱歉，我不懂你在说什么");
     fclose(fp);
 }
 
-/*int make_ques(char *question,char *answer)
+int make_ques(char *question,char *answer)
 {
     FILE *game;
     int tm; //用来确定最终选择的题号
     int i=0; //标记暂时选择的题号
 
-    srand((unsigned)(time(NULL))); //种随机数种子
-    tm=rand()%10;
-    game=fopen("BGI\\game.txt","r");
+    srand((unsigned)(time(NULL)));
+    tm=rand()%100;
+    game=fopen("chat\\zimi.txt","r");
     if(game==NULL)
     {
-        printf("the file cant open \n");
+        puthz(0,0,"文件打开错误",32,32,'H',STRONG_RED);
+        getch();
         exit(1);
     }
     rewind(game); //使指针指向文件流的开头
@@ -234,18 +334,57 @@ int check_answer(char *incode,char *answer)
     return 0;
 }
 
-*/
-
 void show_incode(char *incode,int *y)
 {
-	puthz(IX,IY-WIDTH4,"用户：",16,16,'K',BLACK);
-	puthz(IX+48,IY-WIDTH4,incode,16,16,'K',BLACK);
-	*y=IY-WIDTH4;
-	*y=*y+20;
+    int len=strlen(incode), line=1;
+    int IY1=IY-5, WIDTHI=WIDTH4-10;
+    unsigned int back[260][90];
+    line=len/24+1;
+    if(*y>=IY-5)
+    {
+        clrmous(MouseX, MouseY);
+        get_image(IX,IY1-WIDTHI+line*20,IX+LENGTH,IY1-WIDTHI*2/3+line*20,*back);
+        put_image(IX,IY1-WIDTHI,IX+LENGTH,IY1-WIDTHI*2/3,*back);
+        get_image(IX,IY1-WIDTHI*2/3+line*20,IX+LENGTH,IY1-WIDTHI/3+line*20,*back);
+        put_image(IX,IY1-WIDTHI*2/3,IX+LENGTH,IY1-WIDTHI/3,*back);
+        get_image(IX,IY1-WIDTHI/3+line*20,IX+LENGTH,IY1,*back);
+        put_image(IX,IY1-WIDTHI/3,IX+LENGTH,IY1-line*20,*back);
+        bar(IX,IY1-line*20,IX+LENGTH,IY1,MISTY_ROSE);
+
+        puthz1(IX,*y-line*20,"用户：");
+	    puthz1(IX+48,*y-line*20,incode);
+    }
+    else
+    {
+        puthz1(IX,*y,"用户：");
+	    puthz1(IX+48,*y,incode);
+        *y+=(line*20);
+    }
 }
 
-void show_reply(char *reply,int y)
+void show_reply(char *reply,int *y)
 {
-	puthz(IX,y,"小科：",16,16,'K',BLACK);
-	puthz(IX+48,y,reply,16,16,'K',BLACK);
+    int len=strlen(reply), line=1;
+    int IY1=IY-5, WIDTHI=WIDTH4-10;
+    unsigned int back[260][90];
+    line=len/24+1;
+    if(*y>=IY-5)
+    {
+        get_image(IX,IY1-WIDTHI+line*20,IX+LENGTH,IY1-WIDTHI*2/3+line*20,*back);
+        put_image(IX,IY1-WIDTHI,IX+LENGTH,IY1-WIDTHI*2/3,*back);
+        get_image(IX,IY1-WIDTHI*2/3+line*20,IX+LENGTH,IY1-WIDTHI/3+line*20,*back);
+        put_image(IX,IY1-WIDTHI*2/3,IX+LENGTH,IY1-WIDTHI/3,*back);
+        get_image(IX,IY1-WIDTHI/3+line*20,IX+LENGTH,IY1,*back);
+        put_image(IX,IY1-WIDTHI/3,IX+LENGTH,IY1-line*20,*back);
+        bar(IX,IY1-line*20,IX+LENGTH,IY1,MISTY_ROSE);
+
+        puthz1(IX,*y-line*20,"小科：");
+	    puthz1(IX+48,*y-line*20,reply);
+    }
+    else
+    {
+        puthz1(IX,*y,"小科：");
+	    puthz1(IX+48,*y,reply);
+        *y+=(line*20);
+    }
 }

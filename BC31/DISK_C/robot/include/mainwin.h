@@ -28,7 +28,6 @@ typedef struct{
     int mp1[N][N]; //储存地图
     int mpinit[N][N]; //储存初始地图 
     int dor[5];
-    int win[5];
     int rubnum;
 } HOUSE;
 
@@ -38,7 +37,6 @@ typedef struct {
 
 void mainWindow(USER *usr); //程序主界面
 void drawbasic(); //程序主界面画图
-void paintmp(HOUSE *house, ROBOT *robot); //画出地图
 void maininit(HOUSE *house, ROBOT *robot);
 void timepass(HOUSE *house, ROBOT *robot, USER *usr, int st); //时间流逝函数
 

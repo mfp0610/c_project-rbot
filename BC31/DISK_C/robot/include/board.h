@@ -19,5 +19,6 @@ void draw_react(USER *usr,int mode); //画出互动面板
 void draw_conbot(); //画出遥控按钮
 void draw_bactr(ROBOT *robot); //画电池函数
 void write_statu(HOUSE *house, ROBOT *robot, int st); //写状态函数
+void draw_cantgo();
 
 #endif

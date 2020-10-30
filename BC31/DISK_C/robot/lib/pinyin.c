@@ -397,7 +397,7 @@ int ShowChTab(Area show_area,Coordinate current_show_position/*ÎÄ±¾Êä³öµÄ³õÊ¼Î»Ö
             mp.y=(*robot).py;
             if(!Astarmove(mp,mto,robot,house))
             {
-                bar(1000,750,1024,768,BLACK);
+                draw_cantgo();
             }
         }
         

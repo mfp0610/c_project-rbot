@@ -76,7 +76,7 @@ int func_comfort(HOUSE *house, ROBOT *robot, USER *usr)
             mp.y=(*robot).py;
             if(!Astarmove(mp,mto,robot,house))
             {
-                bar(1000,750,1024,768,BLACK);
+                draw_cantgo();
             }
         }
         if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)

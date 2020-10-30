@@ -15,18 +15,18 @@ int func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot, USER *usr)
     char value;
     int *f;
     int poscode;
-    NODE mp,mto; //Èº†Ê†áÁÇπÂáªÂêéË°åÂä®ÂùêÊ†á
+    NODE mp,mto; // Û±Íµ„ª˜∫Û––∂Ø◊¯±Í
     *f=1;
 
     //fpde4=fopen("debug\\debug5.txt","w");
     draw_bactr(robot);
-    write_statu(house,robot,3);
+    write_statu(house,robot,6);
 
     while(1)
     {
         newmouse(&MouseX, &MouseY, &press);
-        timepass(house,robot,usr,3);
-        if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //ÁîüÊàêÂûÉÂúæ
+        timepass(house,robot,usr,6);
+        if(mouse_press(LB+57,UB+350,LB+217,UB+390)==1) //…˙≥…¿¨ª¯
         {
             nocombo();
             nocombo();
@@ -38,7 +38,7 @@ int func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot, USER *usr)
             }
             continue;
         }
-        if(mouse_press(LB+57,UB+410,LB+217,UB+450)==1) //ÊãæÂÄíÂûÉÂúæ
+        if(mouse_press(LB+57,UB+410,LB+217,UB+450)==1) // ∞µπ¿¨ª¯
         {
             nocombo();
             nocombo();
@@ -47,8 +47,10 @@ int func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot, USER *usr)
                 if(house->rubnum>0&&(*f)==1)
                 {
                     //fprintf(fpde4,"%d %d\n",*f,house->rubnum);
+                    puthz(LB+37,UB+230,"’˝‘⁄ ∞»°¿¨ª¯÷–°£",24,25,'K',BLACK);
                     col_rub(f,rubbish,house,robot);
                     paintmp(house,robot);
+                    bar(LB+35,UB+230,LB+250,UB+260,MISTY_ROSE);
                     //fprintf(fpde4,"%d %d\n",*f,house->rubnum);
                 }
                 else
@@ -57,7 +59,7 @@ int func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot, USER *usr)
             //fclose(fpde4);
             continue;
         }
-        if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //ËøîÂõû‰∏ªÁïåÈù¢
+        if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //∑µªÿ÷˜ΩÁ√Ê
         {
             nocombo();
             return 0;
@@ -79,7 +81,7 @@ int func_clean(NODE *rubbish,HOUSE *house, ROBOT *robot, USER *usr)
             mp.y=(*robot).py;
             if(!Astarmove(mp,mto,robot,house))
             {
-                bar(1000,750,1024,768,BLACK);
+                draw_cantgo();
             }
         }
         if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)

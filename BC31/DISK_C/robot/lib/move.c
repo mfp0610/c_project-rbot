@@ -44,7 +44,7 @@ int func_move(HOUSE *house, ROBOT *robot, USER *usr)
             mp.y=(*robot).py;
             if(!Astarmove(mp,mto,robot,house))
             {
-                bar(1000,750,1024,768,BLACK);
+                draw_cantgo();
             }
         }
         if(mouse_press(LB+57,UB+470,LB+217,UB+510)==1) //返回主界面

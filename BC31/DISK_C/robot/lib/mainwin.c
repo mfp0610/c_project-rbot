@@ -135,7 +135,7 @@ void mainWindow(USER *usr)
             mp.y=(*robot).py;
             if(!Astarmove(mp,mto,robot,house))
             {
-                bar(1000,750,1024,768,BLACK);
+                draw_cantgo();
             }
         }
         if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
@@ -149,192 +149,6 @@ void drawbasic()
     setbkcol(MISTY_ROSE);
     bar(750,0,1024,768,MARINE_BLUE);
     bar(800,200,900,300,MISTY_ROSE);
-}
-
-void paintmp(HOUSE *house, ROBOT *robot)
-{
-    int i,j;
-    int flag_bed=0;
-    int tx=24,ty=15,sz=40;
-    int cx1,cy1,cx2,cy2;
-    
-    for(i=0;i<N;i++)    
-    for(j=0;j<N;j++)
-    {
-        cy1=tx+i*sz, cx1=ty+j*sz;
-        cy2=cy1+sz, cx2=cx1+sz;
-        
-        switch((*house).mp1[i][j])
-        {
-            case 0:
-                draw_floor_wood(cx1,cy1);
-                break;
-            case 2:
-                bar(cx1,cy1,cx2,cy2,BLACK);
-                break;
-            case 3:
-                draw_bin(cx1,cy1);
-                break;
-            case 4:
-                draw_floor_wood(cx1,cy1);
-                fill_circle((cx1+cx2)/2,(cy1+cy2)/2,20,PEACH_PUFF,BLACK);
-                bar(cx1,cy1,cx2,cy1+8,DARK_GRAY);
-                break;
-            case 5:
-                bar(cx1,cy1,cx2,cy2,WHEAT);
-                break;
-            case 6:
-                draw_floor_ceramic(cx1,cy1);
-                break;
-            case 7:
-                bar(cx1,cy1,cx2,cy2,PINK);
-                break;
-            case 8:
-                bar(cx1,cy1,cx1+2,cy2,BLACK);
-                bar(cx1+2,cy1,cx2,cy2,PINK);
-                break;
-            case 9:
-                draw_floor_wood(cx1,cy1);
-                draw_door_vertical(cx1,cy1,1);
-                break;
-            case 10:
-                draw_door_left(cx1,cy1);
-                break;
-            case 11:
-                draw_door_right(cx1,cy1);
-                break;
-            case 12:
-                bar(cx1,cy1,cx2,cy2,PINK);
-                bar(cx1,cy1+8,cx2-8,cy2,WHEAT);
-                break;
-            case 13:
-                bar(cx1,cy1,cx2,cy2,PINK);
-                bar(cx1,cy1,cx2-8,cy1+12,WHEAT);
-                bar(cx1,cy1+28,cx2-8,cy2,WHEAT);
-                break;
-            case 14:
-                bar(cx1,cy1,cx2,cy2,PINK);
-                bar(cx1,cy1,cx2-8,cy2-8,WHEAT);
-                break;
-            case 15:
-                bar(cx1,cy1,cx2,cy2,PINK);
-                bar(cx1,cy1+19,cx2,cy2-19,BLACK);
-                bar(cx1,cy1,cx1+2,cy2,BLACK);
-                break;
-            case 16:
-                bar(cx1,cy1,cx2,cy2,PINK);
-                bar(cx1+21,cy1,cx2,cy2,WHEAT);
-                bar(cx1,cy1+19,cx2,cy2-19,BLACK);
-                bar(cx1+19,cy1,cx2-19,cy2,BLACK);
-                break;
-            case 17:
-                bar(cx1,cy1,cx2,cy2,PINK);
-                bar(cx1+19,cy1,cx2-19,cy2,BLACK);
-                bar(cx1+21,cy1,cx2,cy2,WHEAT);
-                break;
-            case 18:
-                bar(cx1,cy1,cx2,cy2,WHEAT);
-                bar(cx1,cy1+8,cx2-8,cy1+10,BLACK);
-                bar(cx2-10,cy1+10,cx2-8,cy2,BLACK);
-                bar(cx1,cy1+10,cx2-10,cy2,PINK);
-                bar(cx1,cy1,cx1+2,cy2,BLACK);
-                break;
-            case 19:
-                bar(cx1,cy1,cx2,cy2,WHEAT);
-                bar(cx2-10,cy1,cx2-8,cy2-8,BLACK);
-                bar(cx1,cy2-10,cx2-10,cy2-8,BLACK);
-                bar(cx1,cy1,cx2-10,cy2-10,PINK);
-                bar(cx1,cy1,cx1+2,cy2,BLACK);
-                break;
-            case 20:
-                bar(cx1,cy1,cx2,cy2,PINK);
-                bar(cx1,cy1,cx1+2,cy2,BLACK);
-                break;
-            case 21:
-                draw_charge(cx1,cy1);    
-                break;
-            case 22:
-                draw_floor_wood(cx1,cy1);
-                draw_rub(cx1,cy1);
-                break;
-            case 23:
-                draw_floor_wood(cx1,cy1);
-                open_up_door(cx1,cy1);
-                break;
-            case 24:
-                draw_floor_wood(cx1,cy1);
-                open_down_door(cx1,cy1);
-                break;
-            case 25:
-                draw_floor_wood(cx1,cy1);
-                open_left_door(cx1,cy1);
-                break;
-            case 26:
-                draw_floor_wood(cx1,cy1);
-                open_right_door(cx1,cy1);
-                break;
-            case 27:
-                draw_floor_wood(cx1,cy1);
-                fill_circle(cx1+20,cy1+20,20,WHEAT,BLACK);
-                break;
-            case 28:
-                draw_floor_wood(cx1,cy1);
-                bar(cx1,cy1,cx1+10,cy2,DARK_GRAY);
-                bar(cx1+10,cy1,cx1+20,cy2,BLACK);
-                break;
-            case 29:
-                bar(cx1,cy1,cx2,cy2,WHEAT);
-                break;
-            case 30:
-                draw_floor_wood(cx1,cy1);
-                fill_circle((cx1+cx2)/2,(cy1+cy2)/2,20,PEACH_PUFF,BLACK);
-                bar(cx1,cy2-8,cx2,cy2,DARK_GRAY);
-                break;
-            case 31:
-                bar(cx1,cy1,cx2,cy2,WHEAT);
-                bar(cx1+8,cy1+8,cx1+10,cy2,BLACK);
-                bar(cx1+10,cy1+8,cx2,cy1+10,BLACK);
-                bar(cx1+10,cy1+10,cx2,cy2,PINK);
-                bar(cx1,cy2-1,cx2,cy2,BLACK);
-                break;
-            case 32:
-                bar(cx1,cy1,cx2,cy2,WHEAT);
-                bar(cx1,cy1+8,cx2-8,cy1+10,BLACK);
-                bar(cx2-10,cy1+8,cx2-8,cy2,BLACK);
-                bar(cx1,cy1+10,cx2-10,cy2,PINK);
-                bar(cx1,cy2-1,cx2,cy2,BLACK);
-                break;
-            case 33:
-                bar(cx1,cy1,cx2,cy2,WHEAT);
-                bar(cx1+8,cy1,cx1+10,cy2-8,BLACK);
-                bar(cx1+8,cy2-10,cx2,cy2-8,BLACK);
-                bar(cx1+10,cy1,cx2,cy2-10,PINK);
-                bar(cx1,cy1,cx2,cy1+1,BLACK);
-                break;
-            case 34:
-                bar(cx1,cy1,cx2,cy2,WHEAT);
-                bar(cx1,cy2-10,cx2-8,cy2-8,BLACK);
-                bar(cx2-10,cy1,cx2-8,cy2-10,BLACK);
-                bar(cx1,cy1,cx2-10,cy2-10,PINK);
-                bar(cx1,cy1,cx2,cy1+1,BLACK);
-                break;
-            default: break;
-        }
-    }
-    bar(0,0,15,768,MISTY_ROSE);
-    bar(735,0,750,768,MISTY_ROSE);
-    bar(0,0,750,24,MISTY_ROSE);
-    bar(0,744,750,768,MISTY_ROSE);
-    cy1=tx+(*robot).px*sz, cx1=ty+(*robot).py*sz;
-    cy2=cy1+sz, cx2=cx1+sz;
-    switch((*robot).rt)
-    {
-        case 'u': drawrobot_back((cx1+cx2)/2,(cy1+cy2)/2,1); break;
-        case 'd': drawrobot_front((cx1+cx2)/2,(cy1+cy2)/2,1); break;
-        case 'l': drawrobot_left((cx1+cx2)/2,(cy1+cy2)/2,1); break;
-        case 'r': drawrobot_right((cx1+cx2)/2,(cy1+cy2)/2,1); break;
-        default: break;
-    }
 }
 
 void maininit(HOUSE *house, ROBOT *robot)
@@ -381,10 +195,7 @@ void maininit(HOUSE *house, ROBOT *robot)
     (*house).pm25=50; 
     
     for(i=0;i<5;i++)
-    {
         (*house).dor[i]=1;
-        (*house).win[i]=1;
-    }   
     //初始化房间信息
 
     for(i=0;i<N;i++)

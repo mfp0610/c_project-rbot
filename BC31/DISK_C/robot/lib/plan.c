@@ -1,5 +1,4 @@
 #include "headers.h"
-FILE *fpde1;
 
 /***heap实现优先队列部分***/
 void swapnode(NODE1 *a, NODE1 *b)
@@ -108,7 +107,8 @@ int Astarmove(NODE beg, NODE end, ROBOT *robot, HOUSE *house)
     
     char dir;
     int i,j;
-    
+    FILE *fpde1;
+
     fpde1=fopen("debug\\debug1.txt","w");
     fprintf(fpde1,"aaaa\n");
     nd_sz=BFS(beg,end,node,0,house); //宽度优先搜索得到路径

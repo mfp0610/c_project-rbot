@@ -10,6 +10,7 @@
 
 #include "headers.h"
 
+void paintmp(HOUSE *house, ROBOT *robot); //画出地图
 void draw_floor_wood(int x,int y);
 void draw_floor_ceramic(int x,int y);
 void draw_table(int x,int y);

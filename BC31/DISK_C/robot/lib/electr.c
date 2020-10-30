@@ -50,7 +50,7 @@ int func_electr(HOUSE *house, ROBOT *robot, USER *usr)
             mp.y=(*robot).py;
             if(!Astarmove(mp,mto,robot,house))
             {
-                bar(1000,750,1024,768,BLACK);
+                draw_cantgo();
             }
         }
         if(mouse_press(LB+140,UB+10,LB+250,UB+40)==1)
@@ -78,11 +78,12 @@ void charge(HOUSE *house, ROBOT *robot, USER *usr)
     {
         newmouse(&MouseX, &MouseY, &press);
         Delaytime(1);
-        if(i%t==0) (*robot).electr++;
-        if(i%100==0)
+        if(i%t==0)
         {
-            draw_bactr(robot);
+            (*robot).electr++;
+            if((*robot).electr>100) (*robot).electr=100;
         }
+        if(i%100==0) draw_bactr(robot);
         if(i%500==0)
         {
             bar(LB+77,UB+200,LB+197,UB+300,WHITE);

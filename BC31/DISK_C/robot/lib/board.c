@@ -172,7 +172,7 @@ void draw_clean(USER *usr)
     outtextxy(LB+145,UB+95,(*usr).user,2,2,16,BLACK);
     
     puthz(LB+37,UB+160,"地面垃圾：",24,25,'K',BLACK);
-    puthz(LB+37,UB+195,"桶内垃圾：",24,25,'K',BLACK);
+    //puthz(LB+37,UB+195,"桶内垃圾：",24,25,'K',BLACK);
 
     //画功能按钮
     fill_rect(LB+57,UB+350,LB+217,UB+390,MISTY_ROSE,MARINE_BLUE);
@@ -196,8 +196,11 @@ void draw_react(USER *usr,int mode)
     
     //画状态显示栏
     fill_rect(LB+17,UB+60,LB+257,UB+380,MISTY_ROSE,MISTY_ROSE);
-    puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
-    outtextxy(LB+145,UB+95,(*usr).user,2,2,16,BLACK);
+    if(mode==0)
+    {
+        puthz(LB+27,UB+95,"欢迎用户",32,32,'H',BLACK);
+        outtextxy(LB+145,UB+95,(*usr).user,2,2,16,BLACK);
+    }
 
     //画功能按钮
     fill_rect(LB+37,UB+410,LB+127,UB+450,MISTY_ROSE,MARINE_BLUE);
@@ -284,9 +287,10 @@ void write_statu(HOUSE *house, ROBOT *robot,int st)
 {
     int LBx=LB+110, LBy=UB+355;
     int color;
+    char s1[5];
     if(st==1||st==2)
     {
-        char s1[5],s2[5],s3[5],s4[8];
+        char s2[5],s3[5],s4[8];
         itoa((*house).temp,s1,10);
         itoa((*house).tempout,s2,10);
         itoa((*house).wet,s3,10);
@@ -353,4 +357,21 @@ void write_statu(HOUSE *house, ROBOT *robot,int st)
         if((*robot).electr>=50) fill_rect(LB+87,UB+252,LB+187,UB+272,BRIGHT_GREEN,WHITE);
         if((*robot).electr>=75) fill_rect(LB+87,UB+276,LB+187,UB+296,BRIGHT_GREEN,WHITE);
     }
+    if(st==6)
+    {
+        bar(LB+150,UB+155,LB+185,UB+190,MISTY_ROSE);
+        itoa((*house).rubnum,s1,10);
+        outtextxy(LB+150,UB+155,s1,2,2,16,BLACK);
+    }
+}
+
+void draw_cantgo()
+{
+    unsigned int *back1[250][40];
+    get_image(LB+17,UB+90,LB+257,UB+130,*back1);
+    fill_rect(LB+17,UB+90,LB+257,UB+130,MISTY_ROSE,MISTY_ROSE);
+    puthz(LB+67,UB+94,"此路不通",32,35,'K',STRONG_RED);
+    Delaytime(3000);
+    put_image(LB+17,UB+90,LB+257,UB+130,*back1);
+    return ;
 }
