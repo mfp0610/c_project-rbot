@@ -139,37 +139,39 @@ int pd_pass(int mp)
 
 void free_hang(HOUSE *house, ROBOT *robot)
 {
-    NODE pos0, pos1, pos2, pos3, pos4, pos5, pos6, pos7;
+    NODE pos[8];
+    int n=8, beg=0, des=1;
+    int flag=0;
     FILE *fpde3;
+
     fpde3=fopen("debug\\debug3.txt","w");
-    pos0.x=(*robot).px, pos0.y=(*robot).py;
-    pos1.x=1, pos1.y=0;
-    pos2.x=7, pos2.y=2;
-    pos3.x=15, pos3.y=2;
-    pos4.x=3, pos4.y=6;
-    pos5.x=5, pos5.y=10;
-    pos6.x=1, pos6.y=16;
-    pos7.x=15, pos7.y=10;
+    pos[0].x=(*robot).px, pos[0].y=(*robot).py;
+    pos[1].x=1, pos[1].y=0;
+    pos[2].x=7, pos[2].y=2;
+    pos[3].x=15, pos[3].y=2;
+    pos[4].x=3, pos[4].y=6;
+    pos[5].x=7, pos[5].y=10;
+    pos[6].x=1, pos[6].y=16;
+    pos[7].x=15, pos[7].y=10;
     fill_rect(LB+17,UB+150,LB+257,UB+320,MISTY_ROSE,MISTY_ROSE);
     puthz(LB+37,UB+160,"×Ô¶¯Ñ²ÂßÖÐ¡£¡£¡£",24,25,'K',BLACK);
-    Astarmove(pos0,pos1,robot,house);
-    Delaytime(1000);
-    Astarmove(pos1,pos2,robot,house);
-    Delaytime(1000);
-    Astarmove(pos2,pos3,robot,house);
-    Delaytime(1000);
-    Astarmove(pos3,pos4,robot,house);
-    Delaytime(1000);
-    Astarmove(pos4,pos5,robot,house);
-    Delaytime(1000);
-    Astarmove(pos5,pos6,robot,house);
-    Delaytime(1000);
-    Astarmove(pos6,pos7,robot,house);
-    Delaytime(1000);
-    Astarmove(pos7,pos0,robot,house);
-    Delaytime(1000);
-    fill_rect(LB+32,UB+60,LB+257,UB+320,MISTY_ROSE,MISTY_ROSE);
+    while(1)
+    {
+        if(des==1&&flag) break;
+        if(!Astarmove(pos[beg],pos[des],robot,house))
+        {
+            des++;
+            des%=n;
+            continue;
+        }
+        Delaytime(1000);
+        beg++, des++;
+        flag=1;
+    }
+    write_statu(house,robot,3);
+    fill_rect(LB+37,UB+160,LB+240,UB+190,MISTY_ROSE,MISTY_ROSE);
     fclose(fpde3);
+    return ;
 }
 
 void get_conbot(HOUSE *house, ROBOT *robot)

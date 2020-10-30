@@ -11,5 +11,6 @@ int main()
 {
     SetSVGA64k();
     start_func();
+    nocombo();
     return 0;
 }

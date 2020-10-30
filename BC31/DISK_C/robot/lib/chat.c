@@ -24,9 +24,6 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
     int mode=0;
     int show_y=IY-245;
 
-    FILE *fpde5;
-    //fpde5=fopen("debug\\debug5.txt","w");
-
     draw_bactr(robot);
     write_statu(house,robot,3);
     clrmous(MouseX, MouseY);
@@ -81,10 +78,7 @@ int func_react(HOUSE *house, ROBOT *robot, USER *usr)
             
             if(f1==2)
             {
-                fpde5=fopen("debug\\debug5.txt","w");
                 make_ques(quest,answer);
-                fprintf(fpde5,"%s\n%s\n",quest,answer);
-                fclose(fpde5);
                 show_reply(quest,&show_y);
                 Init_qhwh(qhwh);
                 flag=ShowChTab(txt_area,currentlu,16,qhwh,house,robot,usr,&mode);
