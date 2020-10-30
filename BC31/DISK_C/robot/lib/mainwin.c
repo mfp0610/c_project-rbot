@@ -17,8 +17,8 @@
 #define setclean 20
 #define setwet 20
 
-FILE *fpde;
-FILE *fpde5;
+/*FILE *fpde;
+FILE *fpde5;*/
 
 void mainWindow(USER *usr)
 {
@@ -115,7 +115,6 @@ void mainWindow(USER *usr)
             nocombo();
             draw_bactr(robot);
             write_statu(house,robot,1);
-            fclose(fpde);
             continue;
         }
         if(kbhit())
@@ -209,18 +208,13 @@ void maininit(HOUSE *house, ROBOT *robot)
 void timepass(HOUSE *house, ROBOT *robot, USER *usr, int st)
 {
     char *s;
+    unsigned int *back[240][90];
+    FILE *fpsv;
+
     if((*house).time%timeupdate==0)
     {
         draw_bactr(robot); //画电池电量
         write_statu(house,robot,st); //画出状态栏
-        /*fprintf(fpde,"\naaaa\n");
-        fprintf(fpde,"time %lld\n",(*house).time); 
-        
-        fprintf(fpde,"flag %d\n",(*house).set);
-        fprintf(fpde,"out %d\n",(*house).tempout);
-        fprintf(fpde,"in %d\n",(*house).temp);
-        fprintf(fpde,"set %d\n",(*house).tempset);*/
-        
     }
     if((*house).time%timeset==0)
     {
@@ -252,8 +246,40 @@ void timepass(HOUSE *house, ROBOT *robot, USER *usr, int st)
         (*robot).electr--;
     if((*robot).electr<=10) //触发自动充电模块
     {
+        fin(fpsv,"data\\mpsv.txt",LB+17,UB+60,LB+257,UB+510);
+        
+        draw_electr(usr);
+        write_statu(house,robot,5);
         charge(house,robot,usr);
+
+        fout(fpsv,"data\\mpsv.txt",LB+17,UB+60,LB+257,UB+510);
     }
     (*house).time%=timecut;
     ((*house).time)++; 
+}
+
+void fin(FILE *fp, char *rd, int x1,int y1,int x2,int y2)
+{
+    int i,j;
+    fp=fopen(rd,"w");
+    for(i=x1;i<=x2;i++)
+    for(j=y1;j<=y2;j++)
+        fprintf(fp,"%u\n",Getpixel64k(i,j));
+    fclose(fp);
+    return ;
+}
+
+void fout(FILE *fp, char *rd, int x1,int y1,int x2,int y2)
+{
+    int i,j;
+    unsigned int px;
+    fp=fopen(rd,"r");
+    for(i=x1;i<=x2;i++)
+    for(j=y1;j<=y2;j++)
+    {
+        fscanf(fp,"%u",&px);
+        Putpixel64k(i,j,px);
+    }
+    fclose(fp);
+    return ;
 }

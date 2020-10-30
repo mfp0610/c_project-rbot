@@ -39,5 +39,7 @@ void mainWindow(USER *usr); //程序主界面
 void drawbasic(); //程序主界面画图
 void maininit(HOUSE *house, ROBOT *robot);
 void timepass(HOUSE *house, ROBOT *robot, USER *usr, int st); //时间流逝函数
+void fin(FILE *fp, char *rd, int x1,int y1,int x2,int y2);
+void fout(FILE *fp, char *rd, int x1,int y1,int x2,int y2);
 
 #endif
