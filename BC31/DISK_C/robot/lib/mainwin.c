@@ -213,7 +213,7 @@ void timepass(HOUSE *house, ROBOT *robot, USER *usr, int st)
         else if((*house).time%timedirt==0)
         {
             (*house).setc=0;
-            (*house).pm25++;
+            if((*house).pm25<100) (*house).pm25++;
         }
         //ʪ�ȱ仯
         if((*house).wet>=setwet&&(*house).setd)
@@ -221,7 +221,7 @@ void timepass(HOUSE *house, ROBOT *robot, USER *usr, int st)
         else if((*house).time%timedirt==0)
         {
             (*house).setd=0;
-            (*house).wet++;
+            if((*house).wet<100) (*house).wet++;
         }
     }
     if((*house).time%timetmpset==0)

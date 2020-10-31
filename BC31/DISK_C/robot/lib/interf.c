@@ -10,7 +10,7 @@
 void start_func()
 {
     USER *usr;
-    //start_page();//画出开始界面
+    start_page();//画出开始界面
     
     while(1)
     {

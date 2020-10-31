@@ -352,9 +352,9 @@ void write_statu(HOUSE *house, ROBOT *robot,int st)
         bar(LB+77,UB+200,LB+197,UB+300,WHITE);
         bar(LB+107,UB+180,LB+167,UB+200,WHITE);
         
-        if((*robot).electr>=25) fill_rect(LB+87,UB+204,LB+187,UB+224,BRIGHT_GREEN,WHITE);
+        if((*robot).electr>=75) fill_rect(LB+87,UB+204,LB+187,UB+224,BRIGHT_GREEN,WHITE);
         if((*robot).electr>=50) fill_rect(LB+87,UB+228,LB+187,UB+248,BRIGHT_GREEN,WHITE);
-        if((*robot).electr>=75) fill_rect(LB+87,UB+252,LB+187,UB+272,BRIGHT_GREEN,WHITE);
+        if((*robot).electr>=25) fill_rect(LB+87,UB+252,LB+187,UB+272,BRIGHT_GREEN,WHITE);
         if((*robot).electr<25) fill_rect(LB+87,UB+276,LB+187,UB+296,STRONG_RED,WHITE);
         else fill_rect(LB+87,UB+276,LB+187,UB+296,BRIGHT_GREEN,WHITE);
         

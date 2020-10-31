@@ -142,12 +142,14 @@ void free_hang(HOUSE *house, ROBOT *robot)
     NODE pos[8];
     int n=8, beg=0, des=1;
     int flag=0;
+    FILE *fpde1;
+    fpde1=fopen("debug\\debug1.txt","w");
 
     pos[0].x=(*robot).px, pos[0].y=(*robot).py;
     pos[1].x=1, pos[1].y=0;
     pos[2].x=7, pos[2].y=2;
     pos[3].x=15, pos[3].y=2;
-    pos[4].x=3, pos[4].y=6;
+    pos[4].x=3, pos[4].y=4;
     pos[5].x=7, pos[5].y=10;
     pos[6].x=1, pos[6].y=16;
     pos[7].x=15, pos[7].y=10;
@@ -155,7 +157,12 @@ void free_hang(HOUSE *house, ROBOT *robot)
     puthz(LB+37,UB+160,"×Ô¶¯Ñ²ÂßÖÐ¡£¡£¡£",24,25,'K',BLACK);
     while(1)
     {
-        if(des==1&&flag) break;
+        fprintf(fpde1,"%d %d\n",beg,des);
+        if(des==0)
+        {
+            Astarmove(pos[beg],pos[des],robot,house);
+            break;
+        }
         if(!Astarmove(pos[beg],pos[des],robot,house))
         {
             des++;
@@ -163,11 +170,12 @@ void free_hang(HOUSE *house, ROBOT *robot)
             continue;
         }
         Delaytime(1000);
-        beg++, des++;
+        beg=des, des++;
         flag=1;
     }
     write_statu(house,robot,3);
     fill_rect(LB+37,UB+160,LB+240,UB+190,MISTY_ROSE,MISTY_ROSE);
+    fclose(fpde1);
     return ;
 }
 
