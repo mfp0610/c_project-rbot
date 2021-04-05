@@ -1,2 +1,5 @@
-# C_project-robot
-自动化1905孟繁鹏 黄瀚文C语言课程设计项目：家居机器人模拟系统
+# Domestic Robot Simulation System
+
+Domestic Robot Simulation System
+
+HUST AIA Course Project for C Programming. Powered by Fanpeng Meng and Hanwen Huang. 
