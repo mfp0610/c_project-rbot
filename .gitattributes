@@ -1,0 +1,6 @@
+BC31/DISK_C/BORLANDC/** linguist-vendored
+BC31/dosbox/** linguist-vendored
+*.vbs linguist-vendored
+
+*.CPP linguist-language=C
+*.H linguist-language=C
